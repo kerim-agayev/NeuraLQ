@@ -13,26 +13,34 @@ class AnswerFeedback extends StatelessWidget {
         ? (isDark ? CyberpunkColors.success : CleanColors.success)
         : (isDark ? CyberpunkColors.error : CleanColors.error);
 
-    return Container(
-      color: color.withValues(alpha: 0.15),
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              isCorrect ? '\u{2705}' : '\u{274C}',
-              style: const TextStyle(fontSize: 56),
-            ),
-            const SizedBox(height: 12),
-            Text(
-              isCorrect ? 'Correct!' : 'Wrong!',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: color,
+    return ClipRect(
+      child: Container(
+        color: color.withValues(alpha: 0.15),
+        child: Center(
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    isCorrect ? '\u{2705}' : '\u{274C}',
+                    style: const TextStyle(fontSize: 48),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    isCorrect ? 'Correct!' : 'Wrong!',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: color,
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
+          ),
         ),
       ),
     );

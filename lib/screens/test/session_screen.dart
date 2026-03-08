@@ -27,6 +27,7 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
   bool _showFeedback = false;
   bool? _lastAnswerCorrect;
   int? _correctAnswer;
+  int? _selectedAnswer; // Track locally for immediate UI feedback
   bool _isSubmitting = false;
   bool _isCompleting = false;
 
@@ -68,10 +69,17 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
     _isSubmitting = true;
     _timer?.cancel();
 
+    // Immediately highlight the selected option
+    setState(() {
+      _selectedAnswer = selectedAnswer;
+    });
+
     await ref.read(testProvider.notifier).submitAnswer(
           selectedAnswer: selectedAnswer,
           responseTimeMs: _elapsedMs,
         );
+
+    if (!mounted) return;
 
     final state = ref.read(testProvider);
     if (state.error != null) {
@@ -80,6 +88,9 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
         backgroundColor: Colors.red,
         textColor: Colors.white,
       );
+      setState(() {
+        _selectedAnswer = null;
+      });
       _isSubmitting = false;
       _startTimer();
       return;
@@ -93,7 +104,6 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
     setState(() {
       _showFeedback = true;
       _lastAnswerCorrect = isCorrect;
-      // Find correctAnswer from answerResults - we show correct as the selected if correct
       _correctAnswer = selectedAnswer != null && isCorrect ? selectedAnswer : null;
     });
 
@@ -113,6 +123,7 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
         _showFeedback = false;
         _lastAnswerCorrect = null;
         _correctAnswer = null;
+        _selectedAnswer = null;
         _isSubmitting = false;
       });
       _startTimer();
@@ -121,7 +132,19 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
 
   Future<void> _completeTest() async {
     setState(() => _isCompleting = true);
-    await ref.read(testProvider.notifier).completeTest();
+
+    try {
+      await ref.read(testProvider.notifier).completeTest();
+    } catch (e) {
+      if (!mounted) return;
+      Fluttertoast.showToast(
+        msg: 'Failed to load results: $e',
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+      );
+      setState(() => _isCompleting = false);
+      return;
+    }
 
     if (!mounted) return;
 
@@ -138,6 +161,14 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
 
     if (state.result != null) {
       context.go('/test/result');
+    } else {
+      // Result is null but no error — shouldn't happen, navigate anyway
+      Fluttertoast.showToast(
+        msg: 'Could not load result',
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+      );
+      setState(() => _isCompleting = false);
     }
   }
 
@@ -340,7 +371,7 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
                           // Options
                           QuestionOptions(
                             options: question.options,
-                            selectedAnswer: test.answers[question.id],
+                            selectedAnswer: _selectedAnswer,
                             correctAnswer: _correctAnswer,
                             showFeedback: _showFeedback,
                             enabled: !_isSubmitting && !_showFeedback,

@@ -167,6 +167,11 @@ class TestNotifier extends StateNotifier<TestState> {
         isLoading: false,
         error: _extractError(e),
       );
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        error: 'Failed to parse results: $e',
+      );
     }
   }
 
