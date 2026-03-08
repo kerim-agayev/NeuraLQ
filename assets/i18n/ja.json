@@ -13,6 +13,11 @@
     "goBack": "戻る",
     "noData": "データが見つかりません"
   },
+  "nav": {
+    "home": "ホーム",
+    "ranks": "ランキング",
+    "profile": "プロフィール"
+  },
   "auth": {
     "login": "ログイン",
     "register": "新規登録",
@@ -44,6 +49,7 @@
   "home": {
     "welcome": "おかえりなさい、{}",
     "startTest": "IQテストを開始",
+    "discoverPotential": "あなたの認知能力を発見しよう",
     "lastResult": "前回の結果",
     "noResults": "まだテストを受けていません",
     "streak": "連続日数",

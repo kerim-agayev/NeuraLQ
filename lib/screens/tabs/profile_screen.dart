@@ -550,8 +550,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       children: items.map((item) {
         final celebrity = getCelebrityByKey(item.celebrityMatch);
         final modeLabel = item.mode == 'FULL_ANALYSIS'
-            ? '\u{1F9E0} Full Analysis'
-            : '\u{26A1} Arcade';
+            ? '\u{1F9E0} ${'test.fullAnalysis'.tr()}'
+            : '\u{26A1} ${'test.arcade'.tr()}';
 
         return GestureDetector(
           onTap: () => context.push('/history/${item.testSessionId}'),

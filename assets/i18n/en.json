@@ -41,9 +41,15 @@
     "slide3Desc": "Select your preferred language to get started",
     "getStarted": "Get Started"
   },
+  "nav": {
+    "home": "Home",
+    "ranks": "Ranks",
+    "profile": "Profile"
+  },
   "home": {
     "welcome": "Welcome back, {}",
     "startTest": "START IQ TEST",
+    "discoverPotential": "Discover your cognitive potential",
     "lastResult": "Last Result",
     "noResults": "No tests taken yet",
     "streak": "Day Streak",

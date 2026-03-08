@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,7 +8,6 @@ import '../../config/theme.dart';
 import '../../constants/countries.dart';
 import '../../models/user.dart';
 import '../../providers/auth_provider.dart';
-import '../../widgets/ui/neon_button.dart';
 import '../country_picker_sheet.dart';
 
 class EditProfileModal extends ConsumerStatefulWidget {
@@ -105,8 +105,6 @@ class _EditProfileModalState extends ConsumerState<EditProfileModal> {
         isDark ? CyberpunkColors.textSecondary : CleanColors.textSecondary;
     final primaryColor =
         isDark ? CyberpunkColors.primary : CleanColors.primary;
-    final secondaryColor =
-        isDark ? CyberpunkColors.secondary : CleanColors.secondary;
     final borderColor =
         isDark ? CyberpunkColors.border : CleanColors.border;
     final auth = ref.watch(authProvider);
@@ -132,16 +130,44 @@ class _EditProfileModalState extends ConsumerState<EditProfileModal> {
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
-            const SizedBox(height: 16),
-            Text(
-              'profile.editProfile'.tr(),
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: textColor,
-              ),
+            const SizedBox(height: 12),
+            // Header row: Cancel | Title | Save
+            Row(
+              children: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: AutoSizeText(
+                    'common.cancel'.tr(),
+                    maxLines: 1,
+                    minFontSize: 10,
+                    style: TextStyle(color: textSecondary),
+                  ),
+                ),
+                Expanded(
+                  child: AutoSizeText(
+                    'profile.editProfile'.tr(),
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    minFontSize: 12,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: textColor,
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: auth.isLoading ? null : _save,
+                  child: AutoSizeText(
+                    'common.save'.tr(),
+                    maxLines: 1,
+                    minFontSize: 10,
+                    style: TextStyle(color: primaryColor),
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 16),
 
             // Display Name
             TextField(
@@ -248,19 +274,7 @@ class _EditProfileModalState extends ConsumerState<EditProfileModal> {
                 ),
               ),
             ),
-            const SizedBox(height: 24),
-
-            // Save button
-            SizedBox(
-              width: double.infinity,
-              child: NeonButton(
-                text: 'common.save'.tr(),
-                onPressed: _save,
-                isLoading: auth.isLoading,
-                primary: primaryColor,
-                secondary: secondaryColor,
-              ),
-            ),
+            const SizedBox(height: 16),
           ],
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../config/theme.dart';
 import '../../widgets/ui/skeleton_loader.dart';
@@ -32,7 +33,7 @@ class StatsRow extends StatelessWidget {
       children: [
         _StatCard(
           emoji: '\u{1F4B0}',
-          label: 'Coins',
+          label: 'stats.nc'.tr(),
           value: neuralCoins?.toString() ?? '0',
           isLoading: isLoading,
           surfaceColor: surfaceColor,
@@ -43,7 +44,7 @@ class StatsRow extends StatelessWidget {
         const SizedBox(width: 8),
         _StatCard(
           emoji: '\u{1F9E0}',
-          label: 'Brain Pts',
+          label: 'stats.bp'.tr(),
           value: brainPoints?.toString() ?? '0',
           isLoading: isLoading,
           surfaceColor: surfaceColor,
@@ -54,7 +55,7 @@ class StatsRow extends StatelessWidget {
         const SizedBox(width: 8),
         _StatCard(
           emoji: '\u{1F525}',
-          label: 'Streak',
+          label: 'stats.streak'.tr(),
           value: currentStreak?.toString() ?? '0',
           isLoading: isLoading,
           surfaceColor: surfaceColor,

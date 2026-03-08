@@ -11,12 +11,14 @@ class TimerBar extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final bgColor = isDark ? CyberpunkColors.border : CleanColors.border;
 
-    // Color changes based on remaining time
+    // Color: green(100-60%) → yellow(60-30%) → orange(30-10%) → red(10-0%)
     final Color barColor;
-    if (progress > 0.5) {
-      barColor = isDark ? CyberpunkColors.primary : CleanColors.primary;
-    } else if (progress > 0.25) {
+    if (progress > 0.6) {
+      barColor = isDark ? CyberpunkColors.success : CleanColors.success;
+    } else if (progress > 0.3) {
       barColor = isDark ? CyberpunkColors.warning : CleanColors.warning;
+    } else if (progress > 0.1) {
+      barColor = const Color(0xFFFF8C00); // orange
     } else {
       barColor = isDark ? CyberpunkColors.error : CleanColors.error;
     }

@@ -13,6 +13,11 @@
     "goBack": "Geri Dön",
     "noData": "Veri bulunamadı"
   },
+  "nav": {
+    "home": "Ana Sayfa",
+    "ranks": "Sıralama",
+    "profile": "Profil"
+  },
   "auth": {
     "login": "Giriş Yap",
     "register": "Kayıt Ol",
@@ -44,6 +49,7 @@
   "home": {
     "welcome": "Tekrar hoş geldin, {}",
     "startTest": "IQ TESTİNİ BAŞLAT",
+    "discoverPotential": "Bilişsel potansiyelini keşfet",
     "lastResult": "Son Sonuç",
     "noResults": "Henüz test yapılmadı",
     "streak": "Günlük Seri",

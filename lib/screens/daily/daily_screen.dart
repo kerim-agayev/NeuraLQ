@@ -705,8 +705,10 @@ class _RewardCard extends StatelessWidget {
           Text(icon, style: const TextStyle(fontSize: 22)),
           const SizedBox(width: 12),
           Expanded(
-            child: Text(
+            child: AutoSizeText(
               label,
+              maxLines: 1,
+              minFontSize: 10,
               style: TextStyle(
                 fontSize: 14,
                 color:

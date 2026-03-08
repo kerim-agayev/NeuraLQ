@@ -86,7 +86,7 @@ class _LanguagePickerModalState extends ConsumerState<LanguagePickerModal> {
             ),
           ),
           Text(
-            'Select Language',
+            'profile.selectLanguage'.tr(),
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -102,7 +102,7 @@ class _LanguagePickerModalState extends ConsumerState<LanguagePickerModal> {
               controller: _searchController,
               style: TextStyle(color: textColor),
               decoration: InputDecoration(
-                hintText: 'Search language...',
+                hintText: 'profile.searchLanguage'.tr(),
                 hintStyle: TextStyle(color: textSecondary),
                 prefixIcon: Icon(Icons.search, color: textSecondary),
                 filled: true,

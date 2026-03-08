@@ -1,3 +1,5 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../config/theme.dart';
 
@@ -67,9 +69,11 @@ class _QuickTestButtonState extends State<QuickTestButton>
             children: [
               const Text('\u{1F9E0}', style: TextStyle(fontSize: 36)),
               const SizedBox(height: 8),
-              const Text(
-                'Start IQ Test',
-                style: TextStyle(
+              AutoSizeText(
+                'home.startTest'.tr(),
+                maxLines: 1,
+                minFontSize: 14,
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -77,8 +81,10 @@ class _QuickTestButtonState extends State<QuickTestButton>
                 ),
               ),
               const SizedBox(height: 4),
-              Text(
-                'Discover your cognitive potential',
+              AutoSizeText(
+                'home.discoverPotential'.tr(),
+                maxLines: 1,
+                minFontSize: 10,
                 style: TextStyle(
                   color: Colors.white.withValues(alpha: 0.8),
                   fontSize: 13,

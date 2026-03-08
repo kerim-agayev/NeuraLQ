@@ -13,6 +13,11 @@
     "goBack": "Kembali",
     "noData": "Data tidak ditemukan"
   },
+  "nav": {
+    "home": "Beranda",
+    "ranks": "Peringkat",
+    "profile": "Profil"
+  },
   "auth": {
     "login": "Masuk",
     "register": "Daftar",
@@ -44,6 +49,7 @@
   "home": {
     "welcome": "Selamat datang kembali, {}",
     "startTest": "MULAI TES IQ",
+    "discoverPotential": "Temukan potensi kognitif Anda",
     "lastResult": "Hasil terakhir",
     "noResults": "Belum ada tes yang diambil",
     "streak": "Hari berturut-turut",

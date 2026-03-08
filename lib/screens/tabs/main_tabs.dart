@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../config/theme.dart';
 import 'home_screen.dart';
@@ -57,7 +58,7 @@ class _MainTabsState extends State<MainTabs> {
               children: [
                 _NavItem(
                   icon: Icons.home_rounded,
-                  label: 'Home',
+                  label: 'nav.home'.tr(),
                   isSelected: _currentIndex == 0,
                   selectedColor: primaryColor,
                   unselectedColor: unselectedColor,
@@ -65,7 +66,7 @@ class _MainTabsState extends State<MainTabs> {
                 ),
                 _NavItem(
                   icon: Icons.leaderboard_rounded,
-                  label: 'Ranks',
+                  label: 'nav.ranks'.tr(),
                   isSelected: _currentIndex == 1,
                   selectedColor: primaryColor,
                   unselectedColor: unselectedColor,
@@ -73,7 +74,7 @@ class _MainTabsState extends State<MainTabs> {
                 ),
                 _NavItem(
                   icon: Icons.person_rounded,
-                  label: 'Profile',
+                  label: 'nav.profile'.tr(),
                   isSelected: _currentIndex == 2,
                   selectedColor: primaryColor,
                   unselectedColor: unselectedColor,

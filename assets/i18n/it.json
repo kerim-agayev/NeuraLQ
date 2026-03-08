@@ -13,6 +13,11 @@
     "goBack": "Torna indietro",
     "noData": "Nessun dato trovato"
   },
+  "nav": {
+    "home": "Home",
+    "ranks": "Classifica",
+    "profile": "Profilo"
+  },
   "auth": {
     "login": "Accedi",
     "register": "Registrati",
@@ -44,6 +49,7 @@
   "home": {
     "welcome": "Bentornato, {}",
     "startTest": "INIZIA TEST QI",
+    "discoverPotential": "Scopri il tuo potenziale cognitivo",
     "lastResult": "Ultimo risultato",
     "noResults": "Nessun test effettuato",
     "streak": "Giorni consecutivi",

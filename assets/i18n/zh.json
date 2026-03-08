@@ -13,6 +13,11 @@
     "goBack": "返回",
     "noData": "未找到数据"
   },
+  "nav": {
+    "home": "首页",
+    "ranks": "排名",
+    "profile": "个人"
+  },
   "auth": {
     "login": "登录",
     "register": "注册",
@@ -44,6 +49,7 @@
   "home": {
     "welcome": "欢迎回来，{}",
     "startTest": "开始 IQ 测试",
+    "discoverPotential": "发现你的认知潜力",
     "lastResult": "上次成绩",
     "noResults": "尚未参加测试",
     "streak": "连续天数",

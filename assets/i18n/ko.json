@@ -13,6 +13,11 @@
     "goBack": "돌아가기",
     "noData": "데이터를 찾을 수 없습니다"
   },
+  "nav": {
+    "home": "홈",
+    "ranks": "순위",
+    "profile": "프로필"
+  },
   "auth": {
     "login": "로그인",
     "register": "회원가입",
@@ -44,6 +49,7 @@
   "home": {
     "welcome": "다시 오신 걸 환영합니다, {}",
     "startTest": "IQ 테스트 시작",
+    "discoverPotential": "당신의 인지 잠재력을 발견하세요",
     "lastResult": "최근 결과",
     "noResults": "아직 테스트를 받지 않았습니다",
     "streak": "연속 일수",

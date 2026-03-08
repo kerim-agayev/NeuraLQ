@@ -13,6 +13,11 @@
     "goBack": "Geri Qayıt",
     "noData": "Məlumat tapılmadı"
   },
+  "nav": {
+    "home": "Ana Səhifə",
+    "ranks": "Reytinq",
+    "profile": "Profil"
+  },
   "auth": {
     "login": "Daxil Ol",
     "register": "Qeydiyyat",
@@ -44,6 +49,7 @@
   "home": {
     "welcome": "Xoş gəldiniz, {}",
     "startTest": "IQ TESTİNƏ BAŞLA",
+    "discoverPotential": "Koqnitiv potensialınızı kəşf edin",
     "lastResult": "Son Nəticə",
     "noResults": "Hələ test verilməyib",
     "streak": "Günlük Seriya",

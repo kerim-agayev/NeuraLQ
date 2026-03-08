@@ -13,6 +13,11 @@
     "goBack": "Zurück",
     "noData": "Keine Daten gefunden"
   },
+  "nav": {
+    "home": "Start",
+    "ranks": "Rangliste",
+    "profile": "Profil"
+  },
   "auth": {
     "login": "Anmelden",
     "register": "Registrieren",
@@ -44,6 +49,7 @@
   "home": {
     "welcome": "Willkommen zurück, {}",
     "startTest": "IQ-TEST STARTEN",
+    "discoverPotential": "Entdecke dein kognitives Potenzial",
     "lastResult": "Letztes Ergebnis",
     "noResults": "Noch keine Tests absolviert",
     "streak": "Tage in Folge",
