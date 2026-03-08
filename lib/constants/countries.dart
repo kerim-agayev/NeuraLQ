@@ -1,0 +1,60 @@
+class Country {
+  final String code;
+  final String name;
+  final String flag;
+
+  const Country({
+    required this.code,
+    required this.name,
+    required this.flag,
+  });
+}
+
+const List<Country> countries = [
+  Country(code: 'US', name: 'United States', flag: '\u{1F1FA}\u{1F1F8}'),
+  Country(code: 'GB', name: 'United Kingdom', flag: '\u{1F1EC}\u{1F1E7}'),
+  Country(code: 'TR', name: 'Turkey', flag: '\u{1F1F9}\u{1F1F7}'),
+  Country(code: 'AZ', name: 'Azerbaijan', flag: '\u{1F1E6}\u{1F1FF}'),
+  Country(code: 'RU', name: 'Russia', flag: '\u{1F1F7}\u{1F1FA}'),
+  Country(code: 'DE', name: 'Germany', flag: '\u{1F1E9}\u{1F1EA}'),
+  Country(code: 'FR', name: 'France', flag: '\u{1F1EB}\u{1F1F7}'),
+  Country(code: 'ES', name: 'Spain', flag: '\u{1F1EA}\u{1F1F8}'),
+  Country(code: 'IT', name: 'Italy', flag: '\u{1F1EE}\u{1F1F9}'),
+  Country(code: 'PT', name: 'Portugal', flag: '\u{1F1F5}\u{1F1F9}'),
+  Country(code: 'BR', name: 'Brazil', flag: '\u{1F1E7}\u{1F1F7}'),
+  Country(code: 'MX', name: 'Mexico', flag: '\u{1F1F2}\u{1F1FD}'),
+  Country(code: 'AR', name: 'Argentina', flag: '\u{1F1E6}\u{1F1F7}'),
+  Country(code: 'CN', name: 'China', flag: '\u{1F1E8}\u{1F1F3}'),
+  Country(code: 'JP', name: 'Japan', flag: '\u{1F1EF}\u{1F1F5}'),
+  Country(code: 'KR', name: 'South Korea', flag: '\u{1F1F0}\u{1F1F7}'),
+  Country(code: 'IN', name: 'India', flag: '\u{1F1EE}\u{1F1F3}'),
+  Country(code: 'PK', name: 'Pakistan', flag: '\u{1F1F5}\u{1F1F0}'),
+  Country(code: 'SA', name: 'Saudi Arabia', flag: '\u{1F1F8}\u{1F1E6}'),
+  Country(code: 'AE', name: 'UAE', flag: '\u{1F1E6}\u{1F1EA}'),
+  Country(code: 'EG', name: 'Egypt', flag: '\u{1F1EA}\u{1F1EC}'),
+  Country(code: 'NG', name: 'Nigeria', flag: '\u{1F1F3}\u{1F1EC}'),
+  Country(code: 'ZA', name: 'South Africa', flag: '\u{1F1FF}\u{1F1E6}'),
+  Country(code: 'AU', name: 'Australia', flag: '\u{1F1E6}\u{1F1FA}'),
+  Country(code: 'CA', name: 'Canada', flag: '\u{1F1E8}\u{1F1E6}'),
+  Country(code: 'NL', name: 'Netherlands', flag: '\u{1F1F3}\u{1F1F1}'),
+  Country(code: 'PL', name: 'Poland', flag: '\u{1F1F5}\u{1F1F1}'),
+  Country(code: 'SE', name: 'Sweden', flag: '\u{1F1F8}\u{1F1EA}'),
+  Country(code: 'ID', name: 'Indonesia', flag: '\u{1F1EE}\u{1F1E9}'),
+  Country(code: 'TH', name: 'Thailand', flag: '\u{1F1F9}\u{1F1ED}'),
+  Country(code: 'VN', name: 'Vietnam', flag: '\u{1F1FB}\u{1F1F3}'),
+  Country(code: 'PH', name: 'Philippines', flag: '\u{1F1F5}\u{1F1ED}'),
+  Country(code: 'UA', name: 'Ukraine', flag: '\u{1F1FA}\u{1F1E6}'),
+  Country(code: 'RO', name: 'Romania', flag: '\u{1F1F7}\u{1F1F4}'),
+  Country(code: 'GR', name: 'Greece', flag: '\u{1F1EC}\u{1F1F7}'),
+  Country(code: 'CZ', name: 'Czech Republic', flag: '\u{1F1E8}\u{1F1FF}'),
+  Country(code: 'HU', name: 'Hungary', flag: '\u{1F1ED}\u{1F1FA}'),
+  Country(code: 'IL', name: 'Israel', flag: '\u{1F1EE}\u{1F1F1}'),
+  Country(code: 'GE', name: 'Georgia', flag: '\u{1F1EC}\u{1F1EA}'),
+  Country(code: 'KZ', name: 'Kazakhstan', flag: '\u{1F1F0}\u{1F1FF}'),
+  Country(code: 'UZ', name: 'Uzbekistan', flag: '\u{1F1FA}\u{1F1FF}'),
+  Country(code: 'MY', name: 'Malaysia', flag: '\u{1F1F2}\u{1F1FE}'),
+  Country(code: 'BD', name: 'Bangladesh', flag: '\u{1F1E7}\u{1F1E9}'),
+  Country(code: 'CL', name: 'Chile', flag: '\u{1F1E8}\u{1F1F1}'),
+  Country(code: 'CO', name: 'Colombia', flag: '\u{1F1E8}\u{1F1F4}'),
+  Country(code: 'PE', name: 'Peru', flag: '\u{1F1F5}\u{1F1EA}'),
+];
