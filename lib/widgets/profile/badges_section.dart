@@ -13,20 +13,20 @@ class BadgesSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final earnedKeys = earnedBadges.map((b) => b.name).toSet();
 
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        childAspectRatio: 0.95,
-      ),
-      itemCount: allBadges.length,
-      itemBuilder: (context, index) {
-        final badge = allBadges[index];
-        final isEarned = earnedKeys.contains(badge.key);
-        return _BadgeCell(badge: badge, isEarned: isEarned);
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final cellWidth = (constraints.maxWidth - 20) / 3; // 3 cols, 10px gap×2
+        return Wrap(
+          spacing: 10,
+          runSpacing: 10,
+          children: allBadges.map((badge) {
+            final isEarned = earnedKeys.contains(badge.key);
+            return SizedBox(
+              width: cellWidth,
+              child: _BadgeCell(badge: badge, isEarned: isEarned),
+            );
+          }).toList(),
+        );
       },
     );
   }
@@ -54,7 +54,7 @@ class _BadgeCell extends StatelessWidget {
     return Opacity(
       opacity: isEarned ? 1.0 : 0.4,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
         decoration: BoxDecoration(
           color: surfaceColor,
           borderRadius: BorderRadius.circular(12),
@@ -69,15 +69,15 @@ class _BadgeCell extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(badge.emoji, style: const TextStyle(fontSize: 24)),
+                  Text(badge.emoji, style: const TextStyle(fontSize: 22)),
                   const SizedBox(height: 2),
                   AutoSizeText(
                     badge.title,
                     maxLines: 2,
-                    minFontSize: 8,
+                    minFontSize: 7,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 11,
+                      fontSize: 10,
                       fontWeight:
                           isEarned ? FontWeight.w600 : FontWeight.normal,
                       color: isEarned ? textColor : textSecondary,
@@ -88,10 +88,10 @@ class _BadgeCell extends StatelessWidget {
             ),
             if (!isEarned)
               Positioned(
-                right: 2,
-                bottom: 2,
+                right: 0,
+                bottom: 0,
                 child: Icon(Icons.lock_rounded,
-                    size: 14, color: textSecondary),
+                    size: 12, color: textSecondary),
               ),
           ],
         ),

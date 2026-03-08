@@ -44,11 +44,11 @@ class LeaderboardResponse {
 
   factory LeaderboardResponse.fromJson(Map<String, dynamic> json) {
     return LeaderboardResponse(
-      entries: (json['entries'] as List?)
+      entries: (json['data'] as List?)
               ?.map((e) => LeaderboardEntry.fromJson(e))
               .toList() ??
           [],
-      total: json['total'] ?? 0,
+      total: (json['meta'] as Map?)?['total'] ?? 0,
     );
   }
 }

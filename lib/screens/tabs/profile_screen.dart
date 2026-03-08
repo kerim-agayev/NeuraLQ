@@ -426,32 +426,36 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     Color textSecondary,
   ) {
     if (_isLoadingStats) {
-      return GridView.count(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        crossAxisCount: 2,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        childAspectRatio: 2.6,
-        children: List.generate(
-          4,
-          (_) => Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: surfaceColor,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: borderColor),
-            ),
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SkeletonLoader(height: 16, width: 40),
-                SizedBox(height: 6),
-                SkeletonLoader(height: 10, width: 60),
-              ],
-            ),
-          ),
-        ),
+      return Column(
+        children: [
+          Row(children: [
+            Expanded(child: Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(color: surfaceColor, borderRadius: BorderRadius.circular(12), border: Border.all(color: borderColor)),
+              child: const Column(mainAxisSize: MainAxisSize.min, children: [SkeletonLoader(height: 14, width: 40), SizedBox(height: 4), SkeletonLoader(height: 10, width: 60)]),
+            )),
+            const SizedBox(width: 10),
+            Expanded(child: Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(color: surfaceColor, borderRadius: BorderRadius.circular(12), border: Border.all(color: borderColor)),
+              child: const Column(mainAxisSize: MainAxisSize.min, children: [SkeletonLoader(height: 14, width: 40), SizedBox(height: 4), SkeletonLoader(height: 10, width: 60)]),
+            )),
+          ]),
+          const SizedBox(height: 10),
+          Row(children: [
+            Expanded(child: Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(color: surfaceColor, borderRadius: BorderRadius.circular(12), border: Border.all(color: borderColor)),
+              child: const Column(mainAxisSize: MainAxisSize.min, children: [SkeletonLoader(height: 14, width: 40), SizedBox(height: 4), SkeletonLoader(height: 10, width: 60)]),
+            )),
+            const SizedBox(width: 10),
+            Expanded(child: Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(color: surfaceColor, borderRadius: BorderRadius.circular(12), border: Border.all(color: borderColor)),
+              child: const Column(mainAxisSize: MainAxisSize.min, children: [SkeletonLoader(height: 14, width: 40), SizedBox(height: 4), SkeletonLoader(height: 10, width: 60)]),
+            )),
+          ]),
+        ],
       );
     }
 
@@ -462,50 +466,31 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       );
     }
 
-    return GridView.count(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      crossAxisCount: 2,
-      mainAxisSpacing: 10,
-      crossAxisSpacing: 10,
-      childAspectRatio: 2.6,
+    return Column(
       children: [
-        _DailyStatCard(
-          emoji: '\u{1F525}',
-          label: 'Streak',
-          value: '${_dailyStats!.currentStreak}',
-          surfaceColor: surfaceColor,
-          borderColor: borderColor,
-          textColor: textColor,
-          textSecondary: textSecondary,
-        ),
-        _DailyStatCard(
-          emoji: '\u{26A1}',
-          label: 'Best Streak',
-          value: '${_dailyStats!.longestStreak}',
-          surfaceColor: surfaceColor,
-          borderColor: borderColor,
-          textColor: textColor,
-          textSecondary: textSecondary,
-        ),
-        _DailyStatCard(
-          emoji: '\u{1F3AF}',
-          label: 'Accuracy',
-          value: '${_dailyStats!.accuracy}%',
-          surfaceColor: surfaceColor,
-          borderColor: borderColor,
-          textColor: textColor,
-          textSecondary: textSecondary,
-        ),
-        _DailyStatCard(
-          emoji: '\u{1F4C5}',
-          label: 'Total Days',
-          value: '${_dailyStats!.totalAttempts}',
-          surfaceColor: surfaceColor,
-          borderColor: borderColor,
-          textColor: textColor,
-          textSecondary: textSecondary,
-        ),
+        Row(children: [
+          Expanded(child: _DailyStatCard(
+            emoji: '\u{1F525}', label: 'Streak', value: '${_dailyStats!.currentStreak}',
+            surfaceColor: surfaceColor, borderColor: borderColor, textColor: textColor, textSecondary: textSecondary,
+          )),
+          const SizedBox(width: 10),
+          Expanded(child: _DailyStatCard(
+            emoji: '\u{26A1}', label: 'Best Streak', value: '${_dailyStats!.longestStreak}',
+            surfaceColor: surfaceColor, borderColor: borderColor, textColor: textColor, textSecondary: textSecondary,
+          )),
+        ]),
+        const SizedBox(height: 10),
+        Row(children: [
+          Expanded(child: _DailyStatCard(
+            emoji: '\u{1F3AF}', label: 'Accuracy', value: '${_dailyStats!.accuracy}%',
+            surfaceColor: surfaceColor, borderColor: borderColor, textColor: textColor, textSecondary: textSecondary,
+          )),
+          const SizedBox(width: 10),
+          Expanded(child: _DailyStatCard(
+            emoji: '\u{1F4C5}', label: 'Total Days', value: '${_dailyStats!.totalAttempts}',
+            surfaceColor: surfaceColor, borderColor: borderColor, textColor: textColor, textSecondary: textSecondary,
+          )),
+        ]),
       ],
     );
   }
@@ -663,7 +648,7 @@ class _DailyStatCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
         color: surfaceColor,
         borderRadius: BorderRadius.circular(12),
@@ -671,8 +656,8 @@ class _DailyStatCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Text(emoji, style: const TextStyle(fontSize: 20)),
-          const SizedBox(width: 8),
+          Text(emoji, style: const TextStyle(fontSize: 18)),
+          const SizedBox(width: 6),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

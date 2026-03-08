@@ -8,33 +8,46 @@ class LeaderboardState {
   final LeaderboardResponse? global;
   final LeaderboardResponse? country;
   final UserRankInfo? userRank;
-  final bool isLoading;
-  final String? error;
+  final bool isLoadingGlobal;
+  final bool isLoadingCountry;
+  final String? globalError;
+  final String? countryError;
 
   const LeaderboardState({
     this.global,
     this.country,
     this.userRank,
-    this.isLoading = false,
-    this.error,
+    this.isLoadingGlobal = false,
+    this.isLoadingCountry = false,
+    this.globalError,
+    this.countryError,
   });
 
   LeaderboardState copyWith({
     LeaderboardResponse? global,
     LeaderboardResponse? country,
     UserRankInfo? userRank,
-    bool? isLoading,
-    String? error,
-    bool clearError = false,
+    bool? isLoadingGlobal,
+    bool? isLoadingCountry,
+    String? globalError,
+    String? countryError,
+    bool clearGlobalError = false,
+    bool clearCountryError = false,
   }) {
     return LeaderboardState(
       global: global ?? this.global,
       country: country ?? this.country,
       userRank: userRank ?? this.userRank,
-      isLoading: isLoading ?? this.isLoading,
-      error: clearError ? null : (error ?? this.error),
+      isLoadingGlobal: isLoadingGlobal ?? this.isLoadingGlobal,
+      isLoadingCountry: isLoadingCountry ?? this.isLoadingCountry,
+      globalError: clearGlobalError ? null : (globalError ?? this.globalError),
+      countryError:
+          clearCountryError ? null : (countryError ?? this.countryError),
     );
   }
+
+  // Backwards-compatible getter
+  bool get isLoading => isLoadingGlobal || isLoadingCountry;
 }
 
 // ── Notifier ──
@@ -42,39 +55,39 @@ class LeaderboardNotifier extends StateNotifier<LeaderboardState> {
   LeaderboardNotifier() : super(const LeaderboardState());
 
   Future<void> loadGlobal() async {
-    state = state.copyWith(isLoading: true, clearError: true);
+    state = state.copyWith(isLoadingGlobal: true, clearGlobalError: true);
     try {
       final global = await LeaderboardService.getGlobal();
-      state = state.copyWith(global: global, isLoading: false);
+      state = state.copyWith(global: global, isLoadingGlobal: false);
     } on DioException catch (e) {
       state = state.copyWith(
-        isLoading: false,
-        error: _extractError(e),
+        isLoadingGlobal: false,
+        globalError: _extractError(e),
       );
     } catch (e) {
       state = state.copyWith(
-        isLoading: false,
-        error: 'Failed to load leaderboard',
+        isLoadingGlobal: false,
+        globalError: e.toString(),
       );
     }
   }
 
   Future<void> loadCountry(String countryCode) async {
-    state = state.copyWith(isLoading: true, clearError: true);
+    state = state.copyWith(isLoadingCountry: true, clearCountryError: true);
     try {
       final country = await LeaderboardService.getCountry(
         countryCode: countryCode,
       );
-      state = state.copyWith(country: country, isLoading: false);
+      state = state.copyWith(country: country, isLoadingCountry: false);
     } on DioException catch (e) {
       state = state.copyWith(
-        isLoading: false,
-        error: _extractError(e),
+        isLoadingCountry: false,
+        countryError: _extractError(e),
       );
     } catch (e) {
       state = state.copyWith(
-        isLoading: false,
-        error: 'Failed to load leaderboard',
+        isLoadingCountry: false,
+        countryError: e.toString(),
       );
     }
   }

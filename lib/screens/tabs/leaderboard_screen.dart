@@ -23,7 +23,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
-    _loadData();
+    Future.microtask(() => _loadData());
   }
 
   @override
@@ -33,11 +33,12 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
   }
 
   Future<void> _loadData() async {
-    ref.read(leaderboardProvider.notifier).loadGlobal();
-    ref.read(leaderboardProvider.notifier).loadUserRank();
+    final notifier = ref.read(leaderboardProvider.notifier);
+    notifier.loadGlobal();
+    notifier.loadUserRank();
     final user = ref.read(authProvider).user;
     if (user?.country != null) {
-      ref.read(leaderboardProvider.notifier).loadCountry(user!.country!);
+      notifier.loadCountry(user!.country!);
     }
   }
 
@@ -102,7 +103,8 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
             children: [
               _LeaderboardTab(
                 entries: leaderboard.global?.entries,
-                isLoading: leaderboard.isLoading && leaderboard.global == null,
+                isLoading: leaderboard.isLoadingGlobal,
+                error: leaderboard.globalError,
                 currentUserId: auth.user?.id,
                 onRefresh: () async {
                   await ref.read(leaderboardProvider.notifier).loadGlobal();
@@ -110,8 +112,8 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
               ),
               _LeaderboardTab(
                 entries: leaderboard.country?.entries,
-                isLoading:
-                    leaderboard.isLoading && leaderboard.country == null,
+                isLoading: leaderboard.isLoadingCountry,
+                error: leaderboard.countryError,
                 currentUserId: auth.user?.id,
                 onRefresh: () async {
                   final user = ref.read(authProvider).user;
@@ -129,7 +131,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
         // Sticky rank footer
         _UserRankFooter(
           userRank: leaderboard.userRank,
-          isLoading: leaderboard.userRank == null,
+          isLoading: leaderboard.userRank == null && leaderboard.isLoading,
         ),
       ],
     );
@@ -140,19 +142,27 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
 class _LeaderboardTab extends StatelessWidget {
   final List<LeaderboardEntry>? entries;
   final bool isLoading;
+  final String? error;
   final String? currentUserId;
   final Future<void> Function() onRefresh;
 
   const _LeaderboardTab({
     required this.entries,
     required this.isLoading,
+    this.error,
     this.currentUserId,
     required this.onRefresh,
   });
 
   @override
   Widget build(BuildContext context) {
-    if (isLoading) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final textSecondary =
+        isDark ? CyberpunkColors.textSecondary : CleanColors.textSecondary;
+    final primaryColor =
+        isDark ? CyberpunkColors.primary : CleanColors.primary;
+
+    if (isLoading && entries == null) {
       return ListView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         itemCount: 10,
@@ -160,19 +170,51 @@ class _LeaderboardTab extends StatelessWidget {
       );
     }
 
-    if (entries == null || entries!.isEmpty) {
-      final isDark = Theme.of(context).brightness == Brightness.dark;
-      final textSecondary =
-          isDark ? CyberpunkColors.textSecondary : CleanColors.textSecondary;
+    if (error != null && entries == null) {
       return Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text('\u{26A0}\u{FE0F}', style: TextStyle(fontSize: 48)),
+              const SizedBox(height: 12),
+              Text(
+                error!,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 14, color: textSecondary),
+              ),
+              const SizedBox(height: 16),
+              TextButton.icon(
+                onPressed: onRefresh,
+                icon: const Icon(Icons.refresh),
+                label: const Text('Retry'),
+                style: TextButton.styleFrom(foregroundColor: primaryColor),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    if (entries == null || entries!.isEmpty) {
+      return RefreshIndicator(
+        onRefresh: onRefresh,
+        child: ListView(
           children: [
-            const Text('\u{1F3C6}', style: TextStyle(fontSize: 48)),
-            const SizedBox(height: 12),
-            Text(
-              'No rankings yet',
-              style: TextStyle(fontSize: 16, color: textSecondary),
+            const SizedBox(height: 100),
+            Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text('\u{1F3C6}', style: TextStyle(fontSize: 48)),
+                  const SizedBox(height: 12),
+                  Text(
+                    'No rankings yet',
+                    style: TextStyle(fontSize: 16, color: textSecondary),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -397,7 +439,7 @@ class _UserRankFooter extends StatelessWidget {
               label: '\u{1F30D}',
               value: userRank?.globalRank != null
                   ? '#${userRank!.globalRank}'
-                  : '—',
+                  : '\u{2014}',
               color: primaryColor,
             ),
             const SizedBox(width: 8),
@@ -405,7 +447,7 @@ class _UserRankFooter extends StatelessWidget {
               label: '\u{1F3C1}',
               value: userRank?.countryRank != null
                   ? '#${userRank!.countryRank}'
-                  : '—',
+                  : '\u{2014}',
               color: primaryColor,
             ),
           ],

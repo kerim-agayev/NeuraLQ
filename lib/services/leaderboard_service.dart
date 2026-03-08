@@ -13,7 +13,7 @@ class LeaderboardService {
       'limit': limit,
       'offset': offset,
     });
-    return LeaderboardResponse.fromJson(res.data['data']);
+    return LeaderboardResponse.fromJson(res.data);
   }
 
   static Future<LeaderboardResponse> getCountry({
@@ -26,7 +26,7 @@ class LeaderboardService {
       'limit': limit,
       'offset': offset,
     });
-    return LeaderboardResponse.fromJson(res.data['data']);
+    return LeaderboardResponse.fromJson(res.data);
   }
 
   static Future<UserRankInfo> getUserRank() async {
