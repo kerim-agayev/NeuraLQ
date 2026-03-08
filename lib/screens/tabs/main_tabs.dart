@@ -1,30 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../config/theme.dart';
 import 'home_screen.dart';
-
-// Placeholder for future screens
-class _PlaceholderTab extends StatelessWidget {
-  final String title;
-  final String emoji;
-  const _PlaceholderTab(this.title, this.emoji);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(emoji, style: const TextStyle(fontSize: 48)),
-          const SizedBox(height: 12),
-          Text(
-            title,
-            style: Theme.of(context).textTheme.headlineSmall,
-          ),
-        ],
-      ),
-    );
-  }
-}
+import 'leaderboard_screen.dart';
+import 'profile_screen.dart';
 
 class MainTabs extends StatefulWidget {
   const MainTabs({super.key});
@@ -38,8 +16,8 @@ class _MainTabsState extends State<MainTabs> {
 
   final List<Widget> _screens = const [
     HomeScreen(),
-    _PlaceholderTab('Leaderboard', '\u{1F3C6}'),
-    _PlaceholderTab('Profile', '\u{1F464}'),
+    LeaderboardScreen(),
+    ProfileScreen(),
   ];
 
   @override
