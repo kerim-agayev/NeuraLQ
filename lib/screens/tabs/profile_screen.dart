@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -126,19 +127,19 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: bgColor,
-        title: Text('Logout?', style: TextStyle(color: textColor)),
+        title: Text('auth.logout'.tr(), style: TextStyle(color: textColor)),
         content: Text(
-          'Are you sure you want to logout?',
+          'auth.logoutConfirm'.tr(),
           style: TextStyle(color: textColor),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, false),
-            child: Text('Cancel', style: TextStyle(color: primaryColor)),
+            child: Text('common.cancel'.tr(), style: TextStyle(color: primaryColor)),
           ),
           TextButton(
             onPressed: () => Navigator.pop(ctx, true),
-            child: Text('Logout', style: TextStyle(color: errorColor)),
+            child: Text('auth.logout'.tr(), style: TextStyle(color: errorColor)),
           ),
         ],
       ),
@@ -245,7 +246,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       style: TextStyle(fontSize: 13, color: textSecondary),
                     ),
                   Text(
-                    '${(user.country != null || user.age != null) ? '  \u{2022}  ' : ''}Joined ${_formatJoinDate(user.createdAt)}',
+                    '${(user.country != null || user.age != null) ? '  \u{2022}  ' : ''}${'profile.joinedOn'.tr(args: [_formatJoinDate(user.createdAt)])}',
                     style: TextStyle(fontSize: 13, color: textSecondary),
                   ),
                 ],
@@ -273,7 +274,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   builder: (_) => EditProfileModal(user: user),
                 ),
                 icon: const Icon(Icons.edit_rounded, size: 18),
-                label: const Text('Edit Profile'),
+                label: Text('profile.editProfile'.tr()),
                 style: OutlinedButton.styleFrom(
                   foregroundColor: primaryColor,
                   side: BorderSide(color: primaryColor),
@@ -290,7 +291,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Badges',
+                'badges.title'.tr(),
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -306,7 +307,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Daily Stats',
+                'profile.dailyStats'.tr(),
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -323,7 +324,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Recent Tests',
+                  'profile.testHistory'.tr(),
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -341,7 +342,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Settings',
+                'profile.settings'.tr(),
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -367,8 +368,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       color: primaryColor,
                     ),
                     title: settings.isCyberpunk
-                        ? 'Cyberpunk Mode'
-                        : 'Clean Mode',
+                        ? 'profile.cyberpunk'.tr()
+                        : 'profile.clean'.tr(),
                     titleColor: textColor,
                     trailing: Switch(
                       value: settings.isCyberpunk,
@@ -385,7 +386,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   _SettingsTile(
                     leading: Text(currentLang?.flag ?? '',
                         style: const TextStyle(fontSize: 20)),
-                    title: 'Language',
+                    title: 'profile.language'.tr(),
                     titleColor: textColor,
                     subtitle: currentLang?.name,
                     subtitleColor: textSecondary,
@@ -405,7 +406,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   // Logout
                   _SettingsTile(
                     leading: Icon(Icons.logout_rounded, color: errorColor),
-                    title: 'Logout',
+                    title: 'auth.logout'.tr(),
                     titleColor: errorColor,
                     borderColor: borderColor,
                     onTap: _confirmLogout,
@@ -461,7 +462,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
     if (_dailyStats == null) {
       return Text(
-        'No daily stats yet',
+        'profile.noDailyStats'.tr(),
         style: TextStyle(color: textSecondary, fontSize: 14),
       );
     }
@@ -470,24 +471,24 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       children: [
         Row(children: [
           Expanded(child: _DailyStatCard(
-            emoji: '\u{1F525}', label: 'Streak', value: '${_dailyStats!.currentStreak}',
+            emoji: '\u{1F525}', label: 'profile.currentStreak'.tr(), value: '${_dailyStats!.currentStreak}',
             surfaceColor: surfaceColor, borderColor: borderColor, textColor: textColor, textSecondary: textSecondary,
           )),
           const SizedBox(width: 10),
           Expanded(child: _DailyStatCard(
-            emoji: '\u{26A1}', label: 'Best Streak', value: '${_dailyStats!.longestStreak}',
+            emoji: '\u{26A1}', label: 'profile.bestStreak'.tr(), value: '${_dailyStats!.longestStreak}',
             surfaceColor: surfaceColor, borderColor: borderColor, textColor: textColor, textSecondary: textSecondary,
           )),
         ]),
         const SizedBox(height: 10),
         Row(children: [
           Expanded(child: _DailyStatCard(
-            emoji: '\u{1F3AF}', label: 'Accuracy', value: '${_dailyStats!.accuracy}%',
+            emoji: '\u{1F3AF}', label: 'profile.accuracy'.tr(), value: '${_dailyStats!.accuracy}%',
             surfaceColor: surfaceColor, borderColor: borderColor, textColor: textColor, textSecondary: textSecondary,
           )),
           const SizedBox(width: 10),
           Expanded(child: _DailyStatCard(
-            emoji: '\u{1F4C5}', label: 'Total Days', value: '${_dailyStats!.totalAttempts}',
+            emoji: '\u{1F4C5}', label: 'profile.totalDays'.tr(), value: '${_dailyStats!.totalAttempts}',
             surfaceColor: surfaceColor, borderColor: borderColor, textColor: textColor, textSecondary: textSecondary,
           )),
         ]),
@@ -540,7 +541,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     final items = _historyResponse?.items ?? [];
     if (items.isEmpty) {
       return Text(
-        'No tests yet',
+        'profile.noTests'.tr(),
         style: TextStyle(color: textSecondary, fontSize: 14),
       );
     }

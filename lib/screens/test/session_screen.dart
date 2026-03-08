@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -164,7 +165,7 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
     } else {
       // Result is null but no error — shouldn't happen, navigate anyway
       Fluttertoast.showToast(
-        msg: 'Could not load result',
+        msg: 'result.failedToLoad'.tr(),
         backgroundColor: Colors.red,
         textColor: Colors.white,
       );
@@ -189,19 +190,19 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
 
         return AlertDialog(
           backgroundColor: bgColor,
-          title: Text('Quit Test?', style: TextStyle(color: textColor)),
+          title: Text('test.quitTitle'.tr(), style: TextStyle(color: textColor)),
           content: Text(
-            'Your progress will be lost. Are you sure?',
+            'test.quitMessage'.tr(),
             style: TextStyle(color: textColor),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context, false),
-              child: Text('Cancel', style: TextStyle(color: primaryColor)),
+              child: Text('common.cancel'.tr(), style: TextStyle(color: primaryColor)),
             ),
             TextButton(
               onPressed: () => Navigator.pop(context, true),
-              child: Text('Quit', style: TextStyle(color: errorColor)),
+              child: Text('test.quit'.tr(), style: TextStyle(color: errorColor)),
             ),
           ],
         );
@@ -239,14 +240,14 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
     if (_isCompleting) {
       return Scaffold(
         backgroundColor: bgColor,
-        body: const BrainLoader(message: 'Calculating your results...'),
+        body: BrainLoader(message: 'test.submitting'.tr()),
       );
     }
 
     if (question == null) {
       return Scaffold(
         backgroundColor: bgColor,
-        body: const BrainLoader(message: 'Loading...'),
+        body: BrainLoader(message: 'common.loading'.tr()),
       );
     }
 
@@ -254,15 +255,15 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
     String categoryLabel = question.category;
     switch (question.category.toUpperCase()) {
       case 'SPATIAL':
-        categoryLabel = '\u{1F4D0} Spatial';
+        categoryLabel = '\u{1F4D0} ${'result.spatial'.tr()}';
       case 'LOGIC':
-        categoryLabel = '\u{1F9E9} Logic';
+        categoryLabel = '\u{1F9E9} ${'result.logic'.tr()}';
       case 'VERBAL':
-        categoryLabel = '\u{1F4DD} Verbal';
+        categoryLabel = '\u{1F4DD} ${'result.verbal'.tr()}';
       case 'MEMORY':
-        categoryLabel = '\u{1F9E0} Memory';
+        categoryLabel = '\u{1F9E0} ${'result.memory'.tr()}';
       case 'SPEED':
-        categoryLabel = '\u{26A1} Speed';
+        categoryLabel = '\u{26A1} ${'result.speed'.tr()}';
     }
 
     return PopScope(

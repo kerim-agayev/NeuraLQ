@@ -589,9 +589,9 @@ Row(
 
 ```
 # Flutter'da environment variable yok, constants.dart kullan:
-const String googleWebClientId = 'xxxx.apps.googleusercontent.com';
+const String googleWebClientId = '790107378278-eoa9v5o8biuffc7ks4i5dge305v86nho.apps.googleusercontent.com';
 # VEYA --dart-define ile:
-# flutter run --dart-define=GOOGLE_CLIENT_ID=xxxx
+# flutter run --dart-define=GOOGLE_CLIENT_ID=790107378278-eoa9v5o8biuffc7ks4i5dge305v86nho.apps.googleusercontent.com
 ```
 
 ```dart

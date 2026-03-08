@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../config/theme.dart';
@@ -63,7 +64,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
           child: NeonText(
-            'Rankings',
+            'leaderboard.title'.tr(),
             fontSize: 24,
             color: primaryColor,
             glow: isDark,
@@ -89,9 +90,9 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
               fontSize: 14,
               fontWeight: FontWeight.w600,
             ),
-            tabs: const [
-              Tab(text: '\u{1F30D}  Global'),
-              Tab(text: '\u{1F3C1}  Country'),
+            tabs: [
+              Tab(text: '\u{1F30D}  ${'leaderboard.global'.tr()}'),
+              Tab(text: '\u{1F3C1}  ${'leaderboard.country'.tr()}'),
             ],
           ),
         ),
@@ -188,7 +189,7 @@ class _LeaderboardTab extends StatelessWidget {
               TextButton.icon(
                 onPressed: onRefresh,
                 icon: const Icon(Icons.refresh),
-                label: const Text('Retry'),
+                label: Text('common.retry'.tr()),
                 style: TextButton.styleFrom(foregroundColor: primaryColor),
               ),
             ],
@@ -210,7 +211,7 @@ class _LeaderboardTab extends StatelessWidget {
                   const Text('\u{1F3C6}', style: TextStyle(fontSize: 48)),
                   const SizedBox(height: 12),
                   Text(
-                    'No rankings yet',
+                    'leaderboard.noRankings'.tr(),
                     style: TextStyle(fontSize: 16, color: textSecondary),
                   ),
                 ],
@@ -424,7 +425,7 @@ class _UserRankFooter extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            'Your Rank',
+            'leaderboard.yourRank'.tr(),
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,

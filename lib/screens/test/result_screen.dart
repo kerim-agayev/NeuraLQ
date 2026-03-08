@@ -1,9 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../config/theme.dart';
-import '../../constants/badges.dart';
 import '../../providers/test_provider.dart';
+import '../../widgets/ui/badge_unlock_modal.dart';
 import '../../widgets/results/iq_reveal.dart';
 import '../../widgets/results/spider_chart.dart';
 import '../../widgets/results/celebrity_match.dart';
@@ -37,87 +38,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
     if (result == null || result.newBadges.isEmpty) return;
 
     _badgeShown = true;
-    showDialog(
-      context: context,
-      barrierDismissible: true,
-      builder: (ctx) {
-        final isDark = Theme.of(ctx).brightness == Brightness.dark;
-        final bgColor =
-            isDark ? CyberpunkColors.surface : CleanColors.surface;
-        final textColor =
-            isDark ? CyberpunkColors.text : CleanColors.text;
-        final primaryColor =
-            isDark ? CyberpunkColors.primary : CleanColors.primary;
-
-        return AlertDialog(
-          backgroundColor: bgColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          title: Column(
-            children: [
-              const Text('\u{1F3C6}', style: TextStyle(fontSize: 48)),
-              const SizedBox(height: 8),
-              Text(
-                result.newBadges.length == 1
-                    ? 'New Badge Unlocked!'
-                    : '${result.newBadges.length} Badges Unlocked!',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: textColor,
-                ),
-              ),
-            ],
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: result.newBadges.map((badge) {
-              final info = getBadgeInfo(badge.name);
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 6),
-                child: Row(
-                  children: [
-                    Text(info.emoji, style: const TextStyle(fontSize: 28)),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            info.title,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: textColor,
-                              fontSize: 15,
-                            ),
-                          ),
-                          Text(
-                            info.description,
-                            style: TextStyle(
-                              color: textColor.withValues(alpha: 0.7),
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            }).toList(),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(ctx),
-              child: Text('Awesome!',
-                  style: TextStyle(color: primaryColor, fontSize: 16)),
-            ),
-          ],
-        );
-      },
-    );
+    showBadgeUnlockModal(context, result.newBadges);
   }
 
   void _goHome() {
@@ -137,7 +58,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
     if (result == null) {
       return Scaffold(
         backgroundColor: bgColor,
-        body: const BrainLoader(message: 'Loading results...'),
+        body: BrainLoader(message: 'result.loadingResult'.tr()),
       );
     }
 
@@ -155,7 +76,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
               children: [
                 // Title
                 Text(
-                  'Test Complete!',
+                  'result.testComplete'.tr(),
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,

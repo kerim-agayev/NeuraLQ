@@ -85,9 +85,16 @@ class DailyAttemptResponse {
       neuralCoinsEarned: json['neuralCoinsEarned'] ?? 0,
       streakBonus: json['streakBonus'] ?? 0,
       streak: json['streak'] ?? 0,
-      newBadges: (json['newBadges'] as List?)
-              ?.map((b) => Badge.fromJson(b))
-              .toList() ??
+      newBadges: (json['newBadges'] as List?)?.map((b) {
+              if (b is Map<String, dynamic>) {
+                return Badge.fromJson(b);
+              }
+              return Badge(
+                id: b.toString(),
+                name: b.toString(),
+                awardedAt: DateTime.now().toIso8601String(),
+              );
+            }).toList() ??
           [],
     );
   }

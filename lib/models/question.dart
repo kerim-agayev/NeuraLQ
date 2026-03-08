@@ -38,9 +38,12 @@ class TestQuestion {
       category: json['category'],
       content: json['content'] ?? '',
       imageUrl: json['imageUrl'],
-      options: (json['options'] as List)
-          .map((o) => QuestionOption.fromJson(o))
-          .toList(),
+      options: (json['options'] as List).map((o) {
+        if (o is Map<String, dynamic>) {
+          return QuestionOption.fromJson(o);
+        }
+        return QuestionOption(text: o.toString());
+      }).toList(),
       timeLimit: json['timeLimit'] ?? 30,
     );
   }

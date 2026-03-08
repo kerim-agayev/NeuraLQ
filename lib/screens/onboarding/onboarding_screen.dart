@@ -21,23 +21,21 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   int _currentPage = 0;
   String _selectedLanguage = 'en';
 
-  final List<_OnboardingSlide> _slides = const [
+  List<_OnboardingSlide> get _slides => [
     _OnboardingSlide(
       emoji: '\u{1F9E0}',
-      title: 'Discover Your IQ',
-      description:
-          'Take a scientifically designed test and uncover your cognitive potential',
+      title: 'onboarding.slide1Title'.tr(),
+      description: 'onboarding.slide1Desc'.tr(),
     ),
     _OnboardingSlide(
       emoji: '\u{1F30D}',
-      title: 'Compete Globally',
-      description:
-          'Rank among millions worldwide and challenge your friends',
+      title: 'onboarding.slide2Title'.tr(),
+      description: 'onboarding.slide2Desc'.tr(),
     ),
     _OnboardingSlide(
       emoji: '\u{1F310}',
-      title: 'Choose Your Language',
-      description: 'Select your preferred language to get started',
+      title: 'onboarding.slide3Title'.tr(),
+      description: 'onboarding.slide3Desc'.tr(),
     ),
   ];
 
@@ -183,7 +181,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                     width: double.infinity,
                     child: _currentPage == _slides.length - 1
                         ? NeonButton(
-                            text: 'Get Started',
+                            text: 'onboarding.getStarted'.tr(),
                             onPressed: _getStarted,
                             primary: isDark
                                 ? CyberpunkColors.primary
@@ -193,7 +191,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                                 : CleanColors.secondary,
                           )
                         : NeonButton(
-                            text: 'Next',
+                            text: 'common.next'.tr(),
                             onPressed: _nextPage,
                             primary: isDark
                                 ? CyberpunkColors.primary

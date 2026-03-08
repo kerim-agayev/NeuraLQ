@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../config/theme.dart';
 import '../../widgets/ui/skeleton_loader.dart';
@@ -82,7 +83,7 @@ class DailyChallengeCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         AutoSizeText(
-                          'Daily Challenge',
+                          'daily.title'.tr(),
                           maxLines: 1,
                           minFontSize: 13,
                           style: TextStyle(
@@ -94,8 +95,8 @@ class DailyChallengeCard extends StatelessWidget {
                         const SizedBox(height: 2),
                         AutoSizeText(
                           alreadyDone
-                              ? 'Completed! Come back tomorrow'
-                              : 'Test your brain daily and earn coins',
+                              ? 'daily.completed'.tr()
+                              : 'daily.testBrainDaily'.tr(),
                           maxLines: 1,
                           minFontSize: 10,
                           style: TextStyle(

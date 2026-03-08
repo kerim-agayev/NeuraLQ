@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -6,6 +7,8 @@ import '../../config/theme.dart';
 import '../../models/result.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/daily_provider.dart';
+import '../../providers/test_provider.dart';
+import '../../services/storage_service.dart';
 import '../../services/test_service.dart';
 import '../../widgets/home/daily_challenge_card.dart';
 import '../../widgets/home/last_result_card.dart';
@@ -33,6 +36,57 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Future<void> _loadData() async {
     ref.read(dailyProvider.notifier).loadToday();
     _loadHistory();
+    _checkTestBackup();
+  }
+
+  Future<void> _checkTestBackup() async {
+    final hasBackup =
+        await ref.read(testProvider.notifier).restoreFromBackup();
+    if (hasBackup && mounted) {
+      _showResumeTestDialog();
+    }
+  }
+
+  void _showResumeTestDialog() {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final bgColor =
+        isDark ? CyberpunkColors.surface : CleanColors.surface;
+    final textColor = isDark ? CyberpunkColors.text : CleanColors.text;
+    final primaryColor =
+        isDark ? CyberpunkColors.primary : CleanColors.primary;
+    final errorColor =
+        isDark ? CyberpunkColors.error : CleanColors.error;
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: bgColor,
+        title: Text('test.incompleteTitle'.tr(),
+            style: TextStyle(color: textColor)),
+        content: Text(
+          'test.incompleteMessage'.tr(),
+          style: TextStyle(color: textColor),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () async {
+              Navigator.pop(ctx);
+              ref.read(testProvider.notifier).reset();
+              await StorageService.clearTestBackup();
+            },
+            child: Text('test.discard'.tr(), style: TextStyle(color: errorColor)),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(ctx);
+              context.push('/test/session');
+            },
+            child: Text('test.resume'.tr(), style: TextStyle(color: primaryColor)),
+          ),
+        ],
+      ),
+    );
   }
 
   Future<void> _loadHistory() async {
@@ -89,7 +143,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
             // Welcome message
             AutoSizeText(
-              'Welcome back, ${user?.username ?? 'Explorer'}',
+              'home.welcome'.tr(args: [user?.username ?? 'Explorer']),
               maxLines: 1,
               minFontSize: 13,
               style: TextStyle(
@@ -116,7 +170,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
             // Section title
             Text(
-              'Activity',
+              'home.activity'.tr(),
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,

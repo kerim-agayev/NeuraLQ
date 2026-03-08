@@ -7,6 +7,7 @@ import '../screens/tabs/main_tabs.dart';
 import '../screens/test/select_mode_screen.dart';
 import '../screens/test/session_screen.dart';
 import '../screens/test/result_screen.dart';
+import '../screens/daily/daily_screen.dart';
 import '../screens/test/history_detail_screen.dart';
 
 final GoRouter appRouter = GoRouter(
@@ -46,7 +47,12 @@ final GoRouter appRouter = GoRouter(
       path: '/test/result',
       builder: (_, _) => const ResultScreen(),
     ),
-    // Daily & History
+    // Daily
+    GoRoute(
+      path: '/daily',
+      builder: (_, _) => const DailyScreen(),
+    ),
+    // History
     GoRoute(
       path: '/history/:id',
       builder: (_, state) => HistoryDetailScreen(

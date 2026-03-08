@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -128,7 +129,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
                     // Title
                     NeonText(
-                      'Create Account',
+                      'auth.register'.tr(),
                       fontSize: screenHeight * 0.028,
                       color: primaryColor,
                       glow: isDark,
@@ -136,7 +137,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     SizedBox(height: screenHeight * 0.005),
 
                     AutoSizeText(
-                      'Join millions of IQ testers worldwide',
+                      'auth.register'.tr(),
                       maxLines: 1,
                       minFontSize: 11,
                       style: TextStyle(
@@ -149,7 +150,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     // Username
                     _buildTextField(
                       controller: _usernameController,
-                      hint: 'Username',
+                      hint: 'auth.username'.tr(),
                       icon: Icons.person_outline,
                       textColor: textColor,
                       hintColor: textSecondary,
@@ -171,7 +172,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     // Email
                     _buildTextField(
                       controller: _emailController,
-                      hint: 'Email',
+                      hint: 'auth.email'.tr(),
                       icon: Icons.email_outlined,
                       keyboardType: TextInputType.emailAddress,
                       textColor: textColor,
@@ -197,7 +198,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       obscureText: _obscurePassword,
                       style: TextStyle(color: textColor),
                       decoration: InputDecoration(
-                        hintText: 'Password',
+                        hintText: 'auth.password'.tr(),
                         hintStyle: TextStyle(color: textSecondary),
                         prefixIcon: Icon(Icons.lock_outline,
                             color: textSecondary, size: 20),
@@ -250,7 +251,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           width: 100,
                           child: _buildTextField(
                             controller: _ageController,
-                            hint: 'Age',
+                            hint: 'auth.age'.tr(),
                             icon: Icons.cake_outlined,
                             keyboardType: TextInputType.number,
                             textColor: textColor,
@@ -282,7 +283,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                                   Expanded(
                                     child: AutoSizeText(
                                       _selectedCountry?.name ??
-                                          'Select Country',
+                                          'auth.selectCountry'.tr(),
                                       maxLines: 1,
                                       minFontSize: 10,
                                       style: TextStyle(
@@ -315,7 +316,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     SizedBox(
                       width: double.infinity,
                       child: NeonButton(
-                        text: 'Create Account',
+                        text: 'auth.register'.tr(),
                         onPressed: _register,
                         isLoading: auth.isLoading,
                         primary: primaryColor,
@@ -350,7 +351,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         onPressed: auth.isLoading ? null : _googleRegister,
                         icon: Text('\u{1F310}',
                             style: const TextStyle(fontSize: 20)),
-                        label: const Text('Continue with Google'),
+                        label: Text('auth.continueWithGoogle'.tr()),
                         style: OutlinedButton.styleFrom(
                           foregroundColor: textColor,
                           side: BorderSide(color: borderColor),
@@ -374,14 +375,14 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Already have an account? ',
+                            '${'auth.alreadyHaveAccount'.tr()} ',
                             style: TextStyle(
                                 color: textSecondary, fontSize: 14),
                           ),
                           GestureDetector(
                             onTap: () => context.go('/login'),
                             child: Text(
-                              'Sign In',
+                              'auth.login'.tr(),
                               style: TextStyle(
                                 color: primaryColor,
                                 fontSize: 14,

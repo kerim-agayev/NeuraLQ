@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -107,7 +108,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     SizedBox(height: screenHeight * 0.008),
 
                     AutoSizeText(
-                      'Sign in to continue',
+                      'auth.login'.tr(),
                       maxLines: 1,
                       minFontSize: 12,
                       style: TextStyle(
@@ -123,7 +124,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       keyboardType: TextInputType.emailAddress,
                       style: TextStyle(color: textColor),
                       decoration: InputDecoration(
-                        hintText: 'Email',
+                        hintText: 'auth.email'.tr(),
                         hintStyle: TextStyle(color: textSecondary),
                         prefixIcon: Icon(Icons.email_outlined,
                             color: textSecondary, size: 20),
@@ -163,7 +164,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       obscureText: _obscurePassword,
                       style: TextStyle(color: textColor),
                       decoration: InputDecoration(
-                        hintText: 'Password',
+                        hintText: 'auth.password'.tr(),
                         hintStyle: TextStyle(color: textSecondary),
                         prefixIcon: Icon(Icons.lock_outline,
                             color: textSecondary, size: 20),
@@ -212,7 +213,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     SizedBox(
                       width: double.infinity,
                       child: NeonButton(
-                        text: 'Sign In',
+                        text: 'auth.login'.tr(),
                         onPressed: _login,
                         isLoading: auth.isLoading,
                         primary: primaryColor,
@@ -247,7 +248,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         onPressed: auth.isLoading ? null : _googleLogin,
                         icon: Text('\u{1F310}',
                             style: const TextStyle(fontSize: 20)),
-                        label: const Text('Continue with Google'),
+                        label: Text('auth.continueWithGoogle'.tr()),
                         style: OutlinedButton.styleFrom(
                           foregroundColor: textColor,
                           side: BorderSide(color: borderColor),
@@ -269,7 +270,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         AutoSizeText(
-                          "Don't have an account? ",
+                          '${'auth.dontHaveAccount'.tr()} ',
                           maxLines: 1,
                           minFontSize: 11,
                           style: TextStyle(color: textSecondary, fontSize: 14),
@@ -277,7 +278,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         GestureDetector(
                           onTap: () => context.go('/register'),
                           child: AutoSizeText(
-                            'Sign Up',
+                            'auth.register'.tr(),
                             maxLines: 1,
                             minFontSize: 11,
                             style: TextStyle(

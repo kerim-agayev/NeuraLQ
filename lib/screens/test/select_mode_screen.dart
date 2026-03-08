@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -65,7 +66,7 @@ class SelectModeScreen extends ConsumerWidget {
           icon: Icon(Icons.arrow_back, color: textColor),
           onPressed: () => context.pop(),
         ),
-        title: Text('Select Mode',
+        title: Text('test.selectMode'.tr(),
             style: TextStyle(color: textColor, fontSize: 18)),
         centerTitle: true,
       ),
@@ -85,7 +86,7 @@ class SelectModeScreen extends ConsumerWidget {
                   const SizedBox(height: 16),
                   Center(
                     child: AutoSizeText(
-                      'Choose your test mode',
+                      'test.selectMode'.tr(),
                       maxLines: 1,
                       minFontSize: 14,
                       style: TextStyle(
@@ -112,9 +113,9 @@ class SelectModeScreen extends ConsumerWidget {
 
                   // Arcade mode
                   _ModeCard(
-                    title: 'Arcade',
+                    title: 'test.arcade'.tr(),
                     emoji: '\u{26A1}',
-                    description: '15 questions • ~5 min',
+                    description: 'test.arcadeDesc'.tr(),
                     detail: 'Quick test with core categories',
                     gradient: [primaryColor, secondaryColor],
                     surfaceColor: surfaceColor,
@@ -127,9 +128,9 @@ class SelectModeScreen extends ConsumerWidget {
 
                   // Full Analysis mode
                   _ModeCard(
-                    title: 'Full Analysis',
+                    title: 'test.fullAnalysis'.tr(),
                     emoji: '\u{1F4CA}',
-                    description: '40 questions • ~15 min',
+                    description: 'test.fullAnalysisDesc'.tr(),
                     detail:
                         'Complete cognitive analysis with all categories',
                     gradient: [secondaryColor, primaryColor],
@@ -145,9 +146,9 @@ class SelectModeScreen extends ConsumerWidget {
             ),
           ),
           if (test.isLoading)
-            const Positioned.fill(
+            Positioned.fill(
               child: BrainLoader(
-                message: 'Preparing your test...',
+                message: 'test.preparingQuestions'.tr(),
                 overlay: true,
               ),
             ),

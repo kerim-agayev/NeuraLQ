@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -133,7 +134,7 @@ class _EditProfileModalState extends ConsumerState<EditProfileModal> {
             ),
             const SizedBox(height: 16),
             Text(
-              'Edit Profile',
+              'profile.editProfile'.tr(),
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -147,7 +148,7 @@ class _EditProfileModalState extends ConsumerState<EditProfileModal> {
               controller: _displayNameController,
               style: TextStyle(color: textColor),
               decoration: InputDecoration(
-                labelText: 'Display Name',
+                labelText: 'profile.displayName'.tr(),
                 labelStyle: TextStyle(color: textSecondary),
                 filled: true,
                 fillColor: isDark
@@ -201,7 +202,7 @@ class _EditProfileModalState extends ConsumerState<EditProfileModal> {
                       child: Text(
                         _selectedCountry != null
                             ? '${_selectedCountry!.flag}  ${_selectedCountry!.name}'
-                            : 'Select Country',
+                            : 'auth.selectCountry'.tr(),
                         style: TextStyle(
                           color: _selectedCountry != null
                               ? textColor
@@ -227,7 +228,7 @@ class _EditProfileModalState extends ConsumerState<EditProfileModal> {
               ],
               style: TextStyle(color: textColor),
               decoration: InputDecoration(
-                labelText: 'Age',
+                labelText: 'auth.age'.tr(),
                 labelStyle: TextStyle(color: textSecondary),
                 filled: true,
                 fillColor: isDark
@@ -253,7 +254,7 @@ class _EditProfileModalState extends ConsumerState<EditProfileModal> {
             SizedBox(
               width: double.infinity,
               child: NeonButton(
-                text: 'Save Changes',
+                text: 'common.save'.tr(),
                 onPressed: _save,
                 isLoading: auth.isLoading,
                 primary: primaryColor,

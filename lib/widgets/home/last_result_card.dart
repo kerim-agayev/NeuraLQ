@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../config/theme.dart';
 import '../../constants/celebrities.dart';
@@ -87,7 +88,7 @@ class LastResultCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         AutoSizeText(
-                          'Last Result',
+                          'home.lastResult'.tr(),
                           maxLines: 1,
                           minFontSize: 13,
                           style: TextStyle(

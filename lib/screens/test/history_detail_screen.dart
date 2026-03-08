@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../config/theme.dart';
 import '../../models/result.dart';
 import '../../services/test_service.dart';
@@ -47,7 +49,7 @@ class _HistoryDetailScreenState extends State<HistoryDetailScreen> {
     } catch (e) {
       if (mounted) {
         setState(() {
-          _error = 'Failed to load result';
+          _error = 'result.failedToLoad'.tr();
           _isLoading = false;
         });
       }
@@ -90,14 +92,14 @@ class _HistoryDetailScreenState extends State<HistoryDetailScreen> {
           onPressed: () => context.pop(),
         ),
         title: Text(
-          'Test Result',
+          'result.testResult'.tr(),
           style: TextStyle(color: textColor, fontSize: 18),
         ),
         centerTitle: true,
       ),
       body: SafeArea(
         child: _isLoading
-            ? const BrainLoader(message: 'Loading result...')
+            ? BrainLoader(message: 'result.loadingResult'.tr())
             : _error != null
                 ? Center(
                     child: Column(
@@ -112,7 +114,7 @@ class _HistoryDetailScreenState extends State<HistoryDetailScreen> {
                         const SizedBox(height: 16),
                         TextButton(
                           onPressed: _loadResult,
-                          child: const Text('Retry'),
+                          child: Text('common.retry'.tr()),
                         ),
                       ],
                     ),
@@ -139,8 +141,8 @@ class _HistoryDetailScreenState extends State<HistoryDetailScreen> {
                                 if (_result!.mode != null) ...[
                                   Text(
                                     _result!.mode == 'FULL_ANALYSIS'
-                                        ? '\u{1F9E0} Full Analysis'
-                                        : '\u{26A1} Arcade',
+                                        ? '\u{1F9E0} ${'test.fullAnalysis'.tr()}'
+                                        : '\u{26A1} ${'test.arcade'.tr()}',
                                     style: TextStyle(
                                       fontSize: 13,
                                       fontWeight: FontWeight.w600,
@@ -200,6 +202,36 @@ class _HistoryDetailScreenState extends State<HistoryDetailScreen> {
                           memoryPct: _result!.memoryPercentile,
                           speedPct: _result!.speedPercentile,
                         ),
+
+                        // Certificate button
+                        if (_result!.certificateUrl != null) ...[
+                          const SizedBox(height: 24),
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton.icon(
+                              onPressed: () async {
+                                final url = Uri.parse(_result!.certificateUrl!);
+                                if (await canLaunchUrl(url)) {
+                                  await launchUrl(url,
+                                      mode: LaunchMode.externalApplication);
+                                }
+                              },
+                              icon: const Icon(Icons.download_rounded),
+                              label: Text('result.downloadCertificate'.tr()),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: isDark
+                                    ? CyberpunkColors.primary
+                                    : CleanColors.primary,
+                                foregroundColor: Colors.white,
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 14),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ],
                     ),
                   ),
