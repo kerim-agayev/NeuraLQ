@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../screens/auth/login_screen.dart';
+import '../screens/auth/register_screen.dart';
 import '../screens/splash/splash_screen.dart';
 import '../screens/onboarding/onboarding_screen.dart';
 
@@ -31,11 +33,11 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       path: '/login',
-      builder: (_, _) => const _PlaceholderScreen('Login'),
+      builder: (_, _) => const LoginScreen(),
     ),
     GoRoute(
       path: '/register',
-      builder: (_, _) => const _PlaceholderScreen('Register'),
+      builder: (_, _) => const RegisterScreen(),
     ),
     // Tab routes - will be replaced with ShellRoute in ADIM 6
     GoRoute(
