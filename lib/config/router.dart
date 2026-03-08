@@ -4,6 +4,7 @@ import '../screens/auth/login_screen.dart';
 import '../screens/auth/register_screen.dart';
 import '../screens/splash/splash_screen.dart';
 import '../screens/onboarding/onboarding_screen.dart';
+import '../screens/tabs/main_tabs.dart';
 
 // Placeholder screens for future steps
 class _PlaceholderScreen extends StatelessWidget {
@@ -39,18 +40,10 @@ final GoRouter appRouter = GoRouter(
       path: '/register',
       builder: (_, _) => const RegisterScreen(),
     ),
-    // Tab routes - will be replaced with ShellRoute in ADIM 6
+    // Main tabs (Home, Ranks, Profile)
     GoRoute(
       path: '/home',
-      builder: (_, _) => const _PlaceholderScreen('Home'),
-    ),
-    GoRoute(
-      path: '/leaderboard',
-      builder: (_, _) => const _PlaceholderScreen('Leaderboard'),
-    ),
-    GoRoute(
-      path: '/profile',
-      builder: (_, _) => const _PlaceholderScreen('Profile'),
+      builder: (_, _) => const MainTabs(),
     ),
     // Test routes
     GoRoute(
