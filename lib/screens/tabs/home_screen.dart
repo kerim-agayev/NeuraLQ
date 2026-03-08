@@ -139,7 +139,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               lastResult: _lastResult,
               isLoading: _isLoadingHistory,
               onTap: _lastResult != null
-                  ? () => context.push('/history/${_lastResult!.id}')
+                  ? () => context.push('/history/${_lastResult!.testSessionId}')
                   : null,
             ),
           ],

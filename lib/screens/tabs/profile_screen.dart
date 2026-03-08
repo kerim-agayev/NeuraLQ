@@ -432,7 +432,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         crossAxisCount: 2,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
-        childAspectRatio: 2.2,
+        childAspectRatio: 2.6,
         children: List.generate(
           4,
           (_) => Container(
@@ -468,7 +468,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       crossAxisCount: 2,
       mainAxisSpacing: 10,
       crossAxisSpacing: 10,
-      childAspectRatio: 2.2,
+      childAspectRatio: 2.6,
       children: [
         _DailyStatCard(
           emoji: '\u{1F525}',

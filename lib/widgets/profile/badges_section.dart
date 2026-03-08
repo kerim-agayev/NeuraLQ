@@ -20,7 +20,7 @@ class BadgesSection extends StatelessWidget {
         crossAxisCount: 3,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
-        childAspectRatio: 0.85,
+        childAspectRatio: 0.95,
       ),
       itemCount: allBadges.length,
       itemBuilder: (context, index) {
@@ -54,7 +54,7 @@ class _BadgeCell extends StatelessWidget {
     return Opacity(
       opacity: isEarned ? 1.0 : 0.4,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
+        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
         decoration: BoxDecoration(
           color: surfaceColor,
           borderRadius: BorderRadius.circular(12),
@@ -69,8 +69,8 @@ class _BadgeCell extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(badge.emoji, style: const TextStyle(fontSize: 28)),
-                  const SizedBox(height: 4),
+                  Text(badge.emoji, style: const TextStyle(fontSize: 24)),
+                  const SizedBox(height: 2),
                   AutoSizeText(
                     badge.title,
                     maxLines: 2,

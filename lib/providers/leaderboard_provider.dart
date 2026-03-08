@@ -51,6 +51,11 @@ class LeaderboardNotifier extends StateNotifier<LeaderboardState> {
         isLoading: false,
         error: _extractError(e),
       );
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        error: 'Failed to load leaderboard',
+      );
     }
   }
 
@@ -65,6 +70,11 @@ class LeaderboardNotifier extends StateNotifier<LeaderboardState> {
       state = state.copyWith(
         isLoading: false,
         error: _extractError(e),
+      );
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        error: 'Failed to load leaderboard',
       );
     }
   }
