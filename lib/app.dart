@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'config/router.dart';
 import 'config/theme.dart';
 import 'providers/settings_provider.dart';
 
@@ -25,7 +26,7 @@ class _NeuralQAppState extends ConsumerState<NeuralQApp> {
   Widget build(BuildContext context) {
     final settings = ref.watch(settingsProvider);
 
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'NeuralQ',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.clean,
@@ -34,32 +35,7 @@ class _NeuralQAppState extends ConsumerState<NeuralQApp> {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      home: const _PlaceholderHome(),
-    );
-  }
-}
-
-// Temporary placeholder - will be replaced by GoRouter in ADIM 4
-class _PlaceholderHome extends StatelessWidget {
-  const _PlaceholderHome();
-
-  @override
-  Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final primaryColor =
-        isDark ? CyberpunkColors.primary : CleanColors.primary;
-
-    return Scaffold(
-      body: Center(
-        child: Text(
-          'NeuralQ',
-          style: TextStyle(
-            fontSize: 32,
-            fontWeight: FontWeight.bold,
-            color: primaryColor,
-          ),
-        ),
-      ),
+      routerConfig: appRouter,
     );
   }
 }
