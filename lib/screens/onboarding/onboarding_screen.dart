@@ -223,7 +223,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
         padding: const EdgeInsets.only(top: 8),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 4,
-          childAspectRatio: 1.1,
+          childAspectRatio: 0.95,
           crossAxisSpacing: 8,
           mainAxisSpacing: 8,
         ),
@@ -251,23 +251,27 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                   width: isSelected ? 2 : 1,
                 ),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(lang.flag, style: const TextStyle(fontSize: 20)),
-                  const SizedBox(height: 2),
-                  AutoSizeText(
-                    lang.code.toUpperCase(),
-                    maxLines: 1,
-                    minFontSize: 8,
-                    style: TextStyle(
-                      fontSize: 11,
-                      fontWeight:
-                          isSelected ? FontWeight.bold : FontWeight.normal,
-                      color: isSelected ? primaryColor : textColor,
-                    ),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 6),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(lang.flag, style: const TextStyle(fontSize: 20)),
+                      const SizedBox(height: 2),
+                      Text(
+                        lang.code.toUpperCase(),
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight:
+                              isSelected ? FontWeight.bold : FontWeight.normal,
+                          color: isSelected ? primaryColor : textColor,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           );

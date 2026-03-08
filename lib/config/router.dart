@@ -5,6 +5,9 @@ import '../screens/auth/register_screen.dart';
 import '../screens/splash/splash_screen.dart';
 import '../screens/onboarding/onboarding_screen.dart';
 import '../screens/tabs/main_tabs.dart';
+import '../screens/test/select_mode_screen.dart';
+import '../screens/test/session_screen.dart';
+import '../screens/test/result_screen.dart';
 
 // Placeholder screens for future steps
 class _PlaceholderScreen extends StatelessWidget {
@@ -48,15 +51,15 @@ final GoRouter appRouter = GoRouter(
     // Test routes
     GoRoute(
       path: '/test/select-mode',
-      builder: (_, _) => const _PlaceholderScreen('Select Mode'),
+      builder: (_, _) => const SelectModeScreen(),
     ),
     GoRoute(
       path: '/test/session',
-      builder: (_, _) => const _PlaceholderScreen('Test Session'),
+      builder: (_, _) => const SessionScreen(),
     ),
     GoRoute(
       path: '/test/result',
-      builder: (_, _) => const _PlaceholderScreen('Result'),
+      builder: (_, _) => const ResultScreen(),
     ),
     // Daily & History
     GoRoute(
