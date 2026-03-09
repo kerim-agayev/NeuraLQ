@@ -70,31 +70,36 @@ class _MainTabsState extends ConsumerState<MainTabs> {
           child: SizedBox(
             height: 60,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _NavItem(
-                  icon: Icons.home_rounded,
-                  label: 'nav.home'.tr(),
-                  isSelected: _currentIndex == 0,
-                  selectedColor: primaryColor,
-                  unselectedColor: unselectedColor,
-                  onTap: () => _onTabTap(0),
+                Expanded(
+                  child: _NavItem(
+                    icon: Icons.home_rounded,
+                    label: 'nav.home'.tr(),
+                    isSelected: _currentIndex == 0,
+                    selectedColor: primaryColor,
+                    unselectedColor: unselectedColor,
+                    onTap: () => _onTabTap(0),
+                  ),
                 ),
-                _NavItem(
-                  icon: Icons.leaderboard_rounded,
-                  label: 'nav.ranks'.tr(),
-                  isSelected: _currentIndex == 1,
-                  selectedColor: primaryColor,
-                  unselectedColor: unselectedColor,
-                  onTap: () => _onTabTap(1),
+                Expanded(
+                  child: _NavItem(
+                    icon: Icons.leaderboard_rounded,
+                    label: 'nav.ranks'.tr(),
+                    isSelected: _currentIndex == 1,
+                    selectedColor: primaryColor,
+                    unselectedColor: unselectedColor,
+                    onTap: () => _onTabTap(1),
+                  ),
                 ),
-                _NavItem(
-                  icon: Icons.person_rounded,
-                  label: 'nav.profile'.tr(),
-                  isSelected: _currentIndex == 2,
-                  selectedColor: primaryColor,
-                  unselectedColor: unselectedColor,
-                  onTap: () => _onTabTap(2),
+                Expanded(
+                  child: _NavItem(
+                    icon: Icons.person_rounded,
+                    label: 'nav.profile'.tr(),
+                    isSelected: _currentIndex == 2,
+                    selectedColor: primaryColor,
+                    unselectedColor: unselectedColor,
+                    onTap: () => _onTabTap(2),
+                  ),
                 ),
               ],
             ),
@@ -129,23 +134,22 @@ class _NavItem extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       behavior: HitTestBehavior.opaque,
-      child: SizedBox(
-        width: 64,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, color: color, size: 24),
-            const SizedBox(height: 4),
-            Text(
-              label,
-              style: TextStyle(
-                color: color,
-                fontSize: 11,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-              ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, color: color, size: 24),
+          const SizedBox(height: 4),
+          Text(
+            label,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              color: color,
+              fontSize: 11,
+              fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

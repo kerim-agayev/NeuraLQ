@@ -247,8 +247,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     Row(
                       children: [
                         // Age field
-                        SizedBox(
-                          width: 100,
+                        Expanded(
+                          flex: 1,
                           child: _buildTextField(
                             controller: _ageController,
                             hint: 'auth.age'.tr(),
@@ -264,6 +264,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         const SizedBox(width: 12),
                         // Country picker
                         Expanded(
+                          flex: 2,
                           child: GestureDetector(
                             onTap: _showCountryPicker,
                             child: Container(

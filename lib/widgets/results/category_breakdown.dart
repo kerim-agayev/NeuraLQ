@@ -118,10 +118,12 @@ class _Bar extends StatelessWidget {
           child: AutoSizeText(
             label,
             maxLines: 1,
-            minFontSize: 9,
+            minFontSize: 8,
+            overflow: TextOverflow.ellipsis,
             style: TextStyle(fontSize: 12, color: textColor),
           ),
         ),
+        const SizedBox(width: 6),
         Expanded(
           child: Container(
             height: 8,
@@ -145,7 +147,7 @@ class _Bar extends StatelessWidget {
         ),
         const SizedBox(width: 8),
         SizedBox(
-          width: 36,
+          width: 40,
           child: Text(
             isNA ? 'N/A' : '${pct!.toInt()}%',
             textAlign: TextAlign.right,
