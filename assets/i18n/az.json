@@ -116,7 +116,10 @@
     "testResult": "Test Nəticəsi",
     "loadingResult": "Nəticə yüklənir...",
     "failedToLoad": "Nəticə yüklənmədi",
-    "goHome": "Ana Səhifəyə Qayıt"
+    "goHome": "Ana Səhifəyə Qayıt",
+    "sharePdf": "PDF olaraq paylaş",
+    "shareText": "Mətn olaraq paylaş",
+    "takeAnother": "Başqa test et"
   },
   "leaderboard": {
     "title": "Sıralama",

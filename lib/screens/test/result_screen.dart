@@ -128,6 +128,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
                   celebrityKey: result.celebrityMatch,
                   certificateUrl: result.certificateUrl,
                   onGoHome: _goHome,
+                  result: result,
                 ),
               ],
             ),

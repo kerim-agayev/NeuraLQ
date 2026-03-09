@@ -116,7 +116,10 @@
     "testResult": "Testergebnis",
     "loadingResult": "Ergebnis wird geladen...",
     "failedToLoad": "Ergebnis konnte nicht geladen werden",
-    "goHome": "Zur Startseite"
+    "goHome": "Zur Startseite",
+    "sharePdf": "Als PDF teilen",
+    "shareText": "Als Text teilen",
+    "takeAnother": "Weiteren Test machen"
   },
   "leaderboard": {
     "title": "Rangliste",

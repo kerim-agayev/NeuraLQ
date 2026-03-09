@@ -116,7 +116,10 @@
     "testResult": "测试结果",
     "loadingResult": "正在加载结果...",
     "failedToLoad": "加载结果失败",
-    "goHome": "返回首页"
+    "goHome": "返回首页",
+    "sharePdf": "分享为PDF",
+    "shareText": "分享为文本",
+    "takeAnother": "再做一次测试"
   },
   "leaderboard": {
     "title": "排行榜",

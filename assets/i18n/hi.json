@@ -116,7 +116,10 @@
     "testResult": "टेस्ट परिणाम",
     "loadingResult": "परिणाम लोड हो रहा है...",
     "failedToLoad": "परिणाम लोड करने में विफल",
-    "goHome": "होम पर जाएं"
+    "goHome": "होम पर जाएं",
+    "sharePdf": "PDF के रूप में साझा करें",
+    "shareText": "टेक्स्ट के रूप में साझा करें",
+    "takeAnother": "एक और टेस्ट लें"
   },
   "leaderboard": {
     "title": "रैंकिंग",

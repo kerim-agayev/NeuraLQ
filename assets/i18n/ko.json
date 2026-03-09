@@ -116,7 +116,10 @@
     "testResult": "테스트 결과",
     "loadingResult": "결과 불러오는 중...",
     "failedToLoad": "결과를 불러오지 못했습니다",
-    "goHome": "홈으로 돌아가기"
+    "goHome": "홈으로 돌아가기",
+    "sharePdf": "PDF로 공유",
+    "shareText": "텍스트로 공유",
+    "takeAnother": "다른 테스트 하기"
   },
   "leaderboard": {
     "title": "순위표",

@@ -116,7 +116,10 @@
     "testResult": "Test Result",
     "loadingResult": "Loading result...",
     "failedToLoad": "Failed to load result",
-    "goHome": "Go Home"
+    "goHome": "Go Home",
+    "sharePdf": "Share as PDF",
+    "shareText": "Share as Text",
+    "takeAnother": "Take Another Test"
   },
   "leaderboard": {
     "title": "Rankings",

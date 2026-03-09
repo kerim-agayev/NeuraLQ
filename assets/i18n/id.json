@@ -116,7 +116,10 @@
     "testResult": "Hasil tes",
     "loadingResult": "Memuat hasil...",
     "failedToLoad": "Gagal memuat hasil",
-    "goHome": "Kembali ke beranda"
+    "goHome": "Kembali ke beranda",
+    "sharePdf": "Bagikan sebagai PDF",
+    "shareText": "Bagikan sebagai teks",
+    "takeAnother": "Ambil tes lain"
   },
   "leaderboard": {
     "title": "Peringkat",

@@ -116,7 +116,10 @@
     "testResult": "Результат теста",
     "loadingResult": "Загрузка результата...",
     "failedToLoad": "Не удалось загрузить результат",
-    "goHome": "На главную"
+    "goHome": "На главную",
+    "sharePdf": "Поделиться PDF",
+    "shareText": "Поделиться текстом",
+    "takeAnother": "Пройти ещё тест"
   },
   "leaderboard": {
     "title": "Рейтинг",

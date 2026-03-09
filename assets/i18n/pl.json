@@ -116,7 +116,10 @@
     "testResult": "Wynik testu",
     "loadingResult": "Ładowanie wyniku...",
     "failedToLoad": "Nie udało się załadować wyniku",
-    "goHome": "Wróć na stronę główną"
+    "goHome": "Wróć na stronę główną",
+    "sharePdf": "Udostępnij jako PDF",
+    "shareText": "Udostępnij jako tekst",
+    "takeAnother": "Zrób kolejny test"
   },
   "leaderboard": {
     "title": "Rankingi",

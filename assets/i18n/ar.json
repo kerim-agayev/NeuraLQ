@@ -116,7 +116,10 @@
     "testResult": "نتيجة الاختبار",
     "loadingResult": "جارٍ تحميل النتيجة...",
     "failedToLoad": "فشل تحميل النتيجة",
-    "goHome": "العودة للرئيسية"
+    "goHome": "العودة للرئيسية",
+    "sharePdf": "مشاركة كملف PDF",
+    "shareText": "مشاركة كنص",
+    "takeAnother": "إجراء اختبار آخر"
   },
   "leaderboard": {
     "title": "الترتيب",

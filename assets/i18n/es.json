@@ -116,7 +116,10 @@
     "testResult": "Resultado del test",
     "loadingResult": "Cargando resultado...",
     "failedToLoad": "Error al cargar el resultado",
-    "goHome": "Ir al inicio"
+    "goHome": "Ir al inicio",
+    "sharePdf": "Compartir como PDF",
+    "shareText": "Compartir como texto",
+    "takeAnother": "Hacer otro test"
   },
   "leaderboard": {
     "title": "Clasificación",
