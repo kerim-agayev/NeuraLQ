@@ -54,6 +54,8 @@ void showBadgeUnlockModal(BuildContext context, List<Badge> badges) {
                       children: [
                         Text(
                           info.title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: textColor,
@@ -62,6 +64,8 @@ void showBadgeUnlockModal(BuildContext context, List<Badge> badges) {
                         ),
                         Text(
                           info.description,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             color: textColor.withValues(alpha: 0.7),
                             fontSize: 12,

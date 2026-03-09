@@ -53,47 +53,43 @@ class _BadgeCell extends StatelessWidget {
 
     return Opacity(
       opacity: isEarned ? 1.0 : 0.4,
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
-        decoration: BoxDecoration(
-          color: surfaceColor,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: isEarned ? primaryColor : borderColor,
-            width: isEarned ? 2 : 1,
-          ),
-        ),
-        child: Stack(
-          children: [
-            Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(badge.emoji, style: const TextStyle(fontSize: 22)),
-                  const SizedBox(height: 2),
-                  AutoSizeText(
-                    badge.title,
-                    maxLines: 2,
-                    minFontSize: 7,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontWeight:
-                          isEarned ? FontWeight.w600 : FontWeight.normal,
-                      color: isEarned ? textColor : textSecondary,
-                    ),
-                  ),
-                ],
-              ),
+      child: AspectRatio(
+        aspectRatio: 1.0,
+        child: Container(
+          padding: const EdgeInsets.all(4),
+          decoration: BoxDecoration(
+            color: surfaceColor,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: isEarned ? primaryColor : borderColor,
+              width: isEarned ? 2 : 1,
             ),
-            if (!isEarned)
-              Positioned(
-                right: 0,
-                bottom: 0,
-                child: Icon(Icons.lock_rounded,
-                    size: 12, color: textSecondary),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(badge.emoji, style: const TextStyle(fontSize: 20)),
+              const SizedBox(height: 2),
+              Flexible(
+                child: AutoSizeText(
+                  badge.title,
+                  maxLines: 2,
+                  minFontSize: 6,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 9,
+                    fontWeight:
+                        isEarned ? FontWeight.w600 : FontWeight.normal,
+                    color: isEarned ? textColor : textSecondary,
+                  ),
+                ),
               ),
-          ],
+              if (!isEarned)
+                Icon(Icons.lock_rounded,
+                    size: 10, color: textSecondary),
+            ],
+          ),
         ),
       ),
     );
