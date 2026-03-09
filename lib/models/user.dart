@@ -74,7 +74,12 @@ class User {
       createdAt: json['createdAt'],
       updatedAt: json['updatedAt'],
       badges: (json['badges'] as List?)
-              ?.map((b) => Badge.fromJson(b))
+              ?.map((b) => b is Map<String, dynamic>
+                  ? Badge.fromJson(b)
+                  : Badge(
+                      id: b.toString(),
+                      name: b.toString(),
+                      awardedAt: ''))
               .toList() ??
           [],
     );

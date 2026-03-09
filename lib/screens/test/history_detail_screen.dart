@@ -175,7 +175,6 @@ class _HistoryDetailScreenState extends State<HistoryDetailScreen> {
                           spatialPct: _result!.spatialPercentile,
                           logicPct: _result!.logicPercentile,
                           verbalPct: _result!.verbalPercentile,
-                          memoryPct: _result!.memoryPercentile,
                           speedPct: _result!.speedPercentile,
                         ),
                         const SizedBox(height: 24),
@@ -199,7 +198,6 @@ class _HistoryDetailScreenState extends State<HistoryDetailScreen> {
                           spatialPct: _result!.spatialPercentile,
                           logicPct: _result!.logicPercentile,
                           verbalPct: _result!.verbalPercentile,
-                          memoryPct: _result!.memoryPercentile,
                           speedPct: _result!.speedPercentile,
                         ),
 

@@ -88,7 +88,12 @@ class TestResult {
       completedAt: json['completedAt'] ?? '',
       cheatFlagged: json['cheatFlagged'] ?? false,
       newBadges: (json['newBadges'] as List?)
-              ?.map((b) => Badge.fromJson(b))
+              ?.map((b) => b is Map<String, dynamic>
+                  ? Badge.fromJson(b)
+                  : Badge(
+                      id: b.toString(),
+                      name: b.toString(),
+                      awardedAt: ''))
               .toList() ??
           [],
       mode: json['mode'],

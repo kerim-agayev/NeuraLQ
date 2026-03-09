@@ -6,7 +6,6 @@ class SpiderChart extends StatelessWidget {
   final double spatialPct;
   final double logicPct;
   final double? verbalPct;
-  final double memoryPct;
   final double speedPct;
 
   const SpiderChart({
@@ -14,7 +13,6 @@ class SpiderChart extends StatelessWidget {
     required this.spatialPct,
     required this.logicPct,
     this.verbalPct,
-    required this.memoryPct,
     required this.speedPct,
   });
 
@@ -28,12 +26,11 @@ class SpiderChart extends StatelessWidget {
     final textSecondary =
         isDark ? CyberpunkColors.textSecondary : CleanColors.textSecondary;
 
-    final titles = ['Spatial', 'Logic', 'Verbal', 'Memory', 'Speed'];
+    final titles = ['Spatial', 'Logic', 'Verbal', 'Speed'];
     final values = [
       spatialPct,
       logicPct,
       verbalPct ?? 0,
-      memoryPct,
       speedPct,
     ];
 

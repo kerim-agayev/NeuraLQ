@@ -6,7 +6,6 @@ class CategoryBreakdown extends StatelessWidget {
   final double spatialPct;
   final double logicPct;
   final double? verbalPct;
-  final double memoryPct;
   final double speedPct;
 
   const CategoryBreakdown({
@@ -14,7 +13,6 @@ class CategoryBreakdown extends StatelessWidget {
     required this.spatialPct,
     required this.logicPct,
     this.verbalPct,
-    required this.memoryPct,
     required this.speedPct,
   });
 
@@ -34,8 +32,6 @@ class CategoryBreakdown extends StatelessWidget {
         isDark ? CyberpunkColors.secondary : CleanColors.secondary;
     final accentColor =
         isDark ? CyberpunkColors.accent : CleanColors.accent;
-    final warningColor =
-        isDark ? CyberpunkColors.warning : CleanColors.warning;
     final successColor =
         isDark ? CyberpunkColors.success : CleanColors.success;
 
@@ -79,14 +75,6 @@ class CategoryBreakdown extends StatelessWidget {
             label: '\u{1F4DD} Verbal',
             pct: verbalPct,
             color: accentColor,
-            textColor: textSecondary,
-            bgColor: borderColor,
-          ),
-          const SizedBox(height: 10),
-          _Bar(
-            label: '\u{1F9E0} Memory',
-            pct: memoryPct,
-            color: warningColor,
             textColor: textSecondary,
             bgColor: borderColor,
           ),
