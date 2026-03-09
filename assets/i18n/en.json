@@ -83,7 +83,9 @@
     "incompleteTitle": "Incomplete Test",
     "incompleteMessage": "You have an unfinished test session. Would you like to resume or discard it?",
     "resume": "Resume",
-    "discard": "Discard"
+    "discard": "Discard",
+    "modeSubtitle": "Each mode has different question counts and analysis depth",
+    "questionOf": "Question {} of {}"
   },
   "result": {
     "yourIQ": "Your IQ Score",
@@ -119,7 +121,18 @@
     "goHome": "Go Home",
     "sharePdf": "Share as PDF",
     "shareText": "Share as Text",
-    "takeAnother": "Take Another Test"
+    "takeAnother": "Take Another Test",
+    "iqRange": "IQ Range: {}–{}",
+    "extraordinary": "Extraordinary",
+    "genius": "Genius",
+    "gifted": "Gifted",
+    "superior": "Superior",
+    "aboveAverage": "Above Average",
+    "average": "Average",
+    "belowAverage": "Below Average",
+    "low": "Low",
+    "correct": "Correct!",
+    "wrong": "Wrong!"
   },
   "leaderboard": {
     "title": "Rankings",
@@ -188,6 +201,13 @@
     "answeredIncorrectly": "You answered incorrectly",
     "loadingDaily": "Loading daily challenge...",
     "streakBonus": "Streak Bonus"
+  },
+  "errors": {
+    "noInternet": "No internet connection. Please check your WiFi or data.",
+    "connectionTimeout": "Connection timed out. Please try again.",
+    "serverSlow": "Server is taking too long to respond. Please try again.",
+    "tooManyRequests": "Too many requests. Please wait a moment.",
+    "serverDown": "Server is temporarily unavailable. Please try later."
   },
   "history": {
     "notFound": "Result not found"

@@ -83,7 +83,9 @@
     "incompleteTitle": "Niedokończony test",
     "incompleteMessage": "Masz niedokończoną sesję testową. Chcesz kontynuować czy odrzucić?",
     "resume": "Kontynuuj",
-    "discard": "Odrzuć"
+    "discard": "Odrzuć",
+    "modeSubtitle": "Każdy tryb ma inną liczbę pytań i głębokość analizy",
+    "questionOf": "Pytanie {} z {}"
   },
   "result": {
     "yourIQ": "Twój wynik IQ",
@@ -119,7 +121,18 @@
     "goHome": "Wróć na stronę główną",
     "sharePdf": "Udostępnij jako PDF",
     "shareText": "Udostępnij jako tekst",
-    "takeAnother": "Zrób kolejny test"
+    "takeAnother": "Zrób kolejny test",
+    "iqRange": "Zakres IQ: {}–{}",
+    "extraordinary": "Nadzwyczajny",
+    "genius": "Geniusz",
+    "gifted": "Uzdolniony",
+    "superior": "Wybitny",
+    "aboveAverage": "Powyżej średniej",
+    "average": "Średni",
+    "belowAverage": "Poniżej średniej",
+    "low": "Niski",
+    "correct": "Dobrze!",
+    "wrong": "Źle!"
   },
   "leaderboard": {
     "title": "Rankingi",
@@ -188,6 +201,13 @@
     "answeredIncorrectly": "Odpowiedziałeś niepoprawnie",
     "loadingDaily": "Ładowanie dziennego wyzwania...",
     "streakBonus": "Bonus za serię"
+  },
+  "errors": {
+    "noInternet": "Brak połączenia z internetem. Sprawdź WiFi lub dane komórkowe.",
+    "connectionTimeout": "Przekroczono limit czasu połączenia. Spróbuj ponownie.",
+    "serverSlow": "Serwer odpowiada zbyt wolno. Spróbuj ponownie.",
+    "tooManyRequests": "Zbyt wiele żądań. Poczekaj chwilę.",
+    "serverDown": "Serwer tymczasowo niedostępny. Spróbuj później."
   },
   "history": {
     "notFound": "Nie znaleziono wyniku"

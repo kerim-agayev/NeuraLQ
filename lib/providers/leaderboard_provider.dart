@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/leaderboard.dart';
 import '../services/leaderboard_service.dart';
+import '../utils/error_utils.dart';
 
 // ── State ──
 class LeaderboardState {
@@ -62,7 +63,7 @@ class LeaderboardNotifier extends StateNotifier<LeaderboardState> {
     } on DioException catch (e) {
       state = state.copyWith(
         isLoadingGlobal: false,
-        globalError: _extractError(e),
+        globalError: extractDioError(e),
       );
     } catch (e) {
       state = state.copyWith(
@@ -82,7 +83,7 @@ class LeaderboardNotifier extends StateNotifier<LeaderboardState> {
     } on DioException catch (e) {
       state = state.copyWith(
         isLoadingCountry: false,
-        countryError: _extractError(e),
+        countryError: extractDioError(e),
       );
     } catch (e) {
       state = state.copyWith(
@@ -99,13 +100,7 @@ class LeaderboardNotifier extends StateNotifier<LeaderboardState> {
     } catch (_) {}
   }
 
-  String _extractError(DioException e) {
-    final data = e.response?.data;
-    if (data is Map<String, dynamic>) {
-      return data['error'] ?? 'Something went wrong';
-    }
-    return 'Network error';
-  }
+
 }
 
 // ── Provider ──

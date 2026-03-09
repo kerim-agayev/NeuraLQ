@@ -83,7 +83,9 @@
     "incompleteTitle": "Tamamlanmamış Test",
     "incompleteMessage": "Tamamlanmamış test sessiyasınız var. Davam etmək, yoxsa silmək istəyirsiniz?",
     "resume": "Davam Et",
-    "discard": "Sil"
+    "discard": "Sil",
+    "modeSubtitle": "Hər modun fərqli sual sayı və analiz dərinliyi var",
+    "questionOf": "Sual {} / {}"
   },
   "result": {
     "yourIQ": "IQ Balınız",
@@ -119,7 +121,18 @@
     "goHome": "Ana Səhifəyə Qayıt",
     "sharePdf": "PDF olaraq paylaş",
     "shareText": "Mətn olaraq paylaş",
-    "takeAnother": "Başqa test et"
+    "takeAnother": "Başqa test et",
+    "iqRange": "IQ Aralığı: {}–{}",
+    "extraordinary": "Fövqəladə",
+    "genius": "Dahi",
+    "gifted": "İstedadlı",
+    "superior": "Üstün",
+    "aboveAverage": "Ortalamadan Yuxarı",
+    "average": "Ortalama",
+    "belowAverage": "Ortalamadan Aşağı",
+    "low": "Aşağı",
+    "correct": "Doğru!",
+    "wrong": "Yanlış!"
   },
   "leaderboard": {
     "title": "Sıralama",
@@ -188,6 +201,13 @@
     "answeredIncorrectly": "Yanlış cavabladınız",
     "loadingDaily": "Gündəlik yarışma yüklənir...",
     "streakBonus": "Seriya Bonusu"
+  },
+  "errors": {
+    "noInternet": "İnternet bağlantısı yoxdur. WiFi və ya data bağlantınızı yoxlayın.",
+    "connectionTimeout": "Bağlantı vaxtı bitdi. Yenidən cəhd edin.",
+    "serverSlow": "Server çox yavaş cavab verir. Yenidən cəhd edin.",
+    "tooManyRequests": "Həddən artıq sorğu. Bir az gözləyin.",
+    "serverDown": "Server müvəqqəti olaraq əlçatmazdır. Sonra yenidən cəhd edin."
   },
   "history": {
     "notFound": "Nəticə tapılmadı"

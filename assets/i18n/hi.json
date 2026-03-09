@@ -83,7 +83,9 @@
     "incompleteTitle": "अधूरा टेस्ट",
     "incompleteMessage": "आपका एक अधूरा टेस्ट सत्र है। क्या आप इसे जारी रखना या हटाना चाहते हैं?",
     "resume": "जारी रखें",
-    "discard": "हटाएं"
+    "discard": "हटाएं",
+    "modeSubtitle": "प्रत्येक मोड में अलग प्रश्न संख्या और विश्लेषण गहराई है",
+    "questionOf": "प्रश्न {} / {}"
   },
   "result": {
     "yourIQ": "आपका IQ स्कोर",
@@ -119,7 +121,18 @@
     "goHome": "होम पर जाएं",
     "sharePdf": "PDF के रूप में साझा करें",
     "shareText": "टेक्स्ट के रूप में साझा करें",
-    "takeAnother": "एक और टेस्ट लें"
+    "takeAnother": "एक और टेस्ट लें",
+    "iqRange": "IQ सीमा: {}–{}",
+    "extraordinary": "असाधारण",
+    "genius": "प्रतिभाशाली",
+    "gifted": "विलक्षण",
+    "superior": "श्रेष्ठ",
+    "aboveAverage": "औसत से ऊपर",
+    "average": "औसत",
+    "belowAverage": "औसत से नीचे",
+    "low": "कम",
+    "correct": "सही!",
+    "wrong": "गलत!"
   },
   "leaderboard": {
     "title": "रैंकिंग",
@@ -188,6 +201,13 @@
     "answeredIncorrectly": "आपने गलत उत्तर दिया",
     "loadingDaily": "दैनिक चुनौती लोड हो रही है...",
     "streakBonus": "श्रृंखला बोनस"
+  },
+  "errors": {
+    "noInternet": "इंटरनेट कनेक्शन नहीं है। अपना WiFi या डेटा जांचें।",
+    "connectionTimeout": "कनेक्शन का समय समाप्त हो गया। फिर से प्रयास करें।",
+    "serverSlow": "सर्वर बहुत धीमा है। फिर से प्रयास करें।",
+    "tooManyRequests": "बहुत अधिक अनुरोध। कृपया थोड़ा इंतज़ार करें।",
+    "serverDown": "सर्वर अस्थायी रूप से अनुपलब्ध है। बाद में प्रयास करें।"
   },
   "history": {
     "notFound": "परिणाम नहीं मिला"

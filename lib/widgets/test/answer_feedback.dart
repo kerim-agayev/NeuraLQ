@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../config/theme.dart';
 
@@ -30,7 +31,7 @@ class AnswerFeedback extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    isCorrect ? 'Correct!' : 'Wrong!',
+                    isCorrect ? 'result.correct'.tr() : 'result.wrong'.tr(),
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,

@@ -28,11 +28,9 @@ class _MainTabsState extends ConsumerState<MainTabs> {
     if (index == _currentIndex) return;
     setState(() => _currentIndex = index);
 
-    // Refresh user data when switching to any tab
-    ref.read(authProvider.notifier).refreshUser();
-
     if (index == 0) {
-      // Home tab — also refresh daily status
+      // Home tab — refresh user + daily status
+      ref.read(authProvider.notifier).refreshUser();
       ref.read(dailyProvider.notifier).loadToday();
     }
   }

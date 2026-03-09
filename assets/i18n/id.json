@@ -83,7 +83,9 @@
     "incompleteTitle": "Tes belum selesai",
     "incompleteMessage": "Anda memiliki sesi tes yang belum selesai. Apakah Anda ingin melanjutkan atau menghapusnya?",
     "resume": "Lanjutkan",
-    "discard": "Hapus"
+    "discard": "Hapus",
+    "modeSubtitle": "Setiap mode memiliki jumlah soal dan kedalaman analisis yang berbeda",
+    "questionOf": "Soal {} dari {}"
   },
   "result": {
     "yourIQ": "Skor IQ Anda",
@@ -119,7 +121,18 @@
     "goHome": "Kembali ke beranda",
     "sharePdf": "Bagikan sebagai PDF",
     "shareText": "Bagikan sebagai teks",
-    "takeAnother": "Ambil tes lain"
+    "takeAnother": "Ambil tes lain",
+    "iqRange": "Rentang IQ: {}–{}",
+    "extraordinary": "Luar Biasa",
+    "genius": "Jenius",
+    "gifted": "Berbakat",
+    "superior": "Unggul",
+    "aboveAverage": "Di Atas Rata-rata",
+    "average": "Rata-rata",
+    "belowAverage": "Di Bawah Rata-rata",
+    "low": "Rendah",
+    "correct": "Benar!",
+    "wrong": "Salah!"
   },
   "leaderboard": {
     "title": "Peringkat",
@@ -188,6 +201,13 @@
     "answeredIncorrectly": "Anda menjawab salah",
     "loadingDaily": "Memuat tantangan harian...",
     "streakBonus": "Bonus seri"
+  },
+  "errors": {
+    "noInternet": "Tidak ada koneksi internet. Periksa WiFi atau data seluler Anda.",
+    "connectionTimeout": "Koneksi habis waktu. Silakan coba lagi.",
+    "serverSlow": "Server merespons terlalu lambat. Silakan coba lagi.",
+    "tooManyRequests": "Terlalu banyak permintaan. Harap tunggu sebentar.",
+    "serverDown": "Server sedang tidak tersedia. Coba lagi nanti."
   },
   "history": {
     "notFound": "Hasil tidak ditemukan"

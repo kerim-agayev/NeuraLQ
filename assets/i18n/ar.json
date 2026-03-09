@@ -83,7 +83,9 @@
     "incompleteTitle": "اختبار غير مكتمل",
     "incompleteMessage": "لديك جلسة اختبار غير مكتملة. هل تريد استئنافها أم حذفها؟",
     "resume": "استئناف",
-    "discard": "حذف"
+    "discard": "حذف",
+    "modeSubtitle": "كل وضع يحتوي على عدد مختلف من الأسئلة وعمق التحليل",
+    "questionOf": "سؤال {} من {}"
   },
   "result": {
     "yourIQ": "معدل ذكائك",
@@ -119,7 +121,18 @@
     "goHome": "العودة للرئيسية",
     "sharePdf": "مشاركة كملف PDF",
     "shareText": "مشاركة كنص",
-    "takeAnother": "إجراء اختبار آخر"
+    "takeAnother": "إجراء اختبار آخر",
+    "iqRange": "نطاق IQ: {}–{}",
+    "extraordinary": "استثنائي",
+    "genius": "عبقري",
+    "gifted": "موهوب",
+    "superior": "متفوق",
+    "aboveAverage": "فوق المتوسط",
+    "average": "متوسط",
+    "belowAverage": "تحت المتوسط",
+    "low": "منخفض",
+    "correct": "صحيح!",
+    "wrong": "خطأ!"
   },
   "leaderboard": {
     "title": "الترتيب",
@@ -188,6 +201,13 @@
     "answeredIncorrectly": "أجبت بشكل خاطئ",
     "loadingDaily": "جارٍ تحميل التحدي اليومي...",
     "streakBonus": "مكافأة السلسلة"
+  },
+  "errors": {
+    "noInternet": "لا يوجد اتصال بالإنترنت. تحقق من WiFi أو بيانات الهاتف.",
+    "connectionTimeout": "انتهت مهلة الاتصال. حاول مرة أخرى.",
+    "serverSlow": "الخادم بطيء جداً. حاول مرة أخرى.",
+    "tooManyRequests": "طلبات كثيرة جداً. انتظر لحظة.",
+    "serverDown": "الخادم غير متاح مؤقتاً. حاول لاحقاً."
   },
   "history": {
     "notFound": "النتيجة غير موجودة"

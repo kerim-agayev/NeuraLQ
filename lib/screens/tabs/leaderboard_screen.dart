@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -56,7 +57,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
         isDark ? CyberpunkColors.surface : CleanColors.surface;
 
     final leaderboard = ref.watch(leaderboardProvider);
-    final auth = ref.watch(authProvider);
+    final currentUserId = ref.watch(authProvider.select((s) => s.user?.id));
 
     return Column(
       children: [
@@ -106,7 +107,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                 entries: leaderboard.global?.entries,
                 isLoading: leaderboard.isLoadingGlobal,
                 error: leaderboard.globalError,
-                currentUserId: auth.user?.id,
+                currentUserId: currentUserId,
                 onRefresh: () async {
                   await ref.read(leaderboardProvider.notifier).loadGlobal();
                 },
@@ -115,7 +116,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                 entries: leaderboard.country?.entries,
                 isLoading: leaderboard.isLoadingCountry,
                 error: leaderboard.countryError,
-                currentUserId: auth.user?.id,
+                currentUserId: currentUserId,
                 onRefresh: () async {
                   final user = ref.read(authProvider).user;
                   if (user?.country != null) {
@@ -226,6 +227,7 @@ class _LeaderboardTab extends StatelessWidget {
       onRefresh: onRefresh,
       child: ListView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 16),
+        cacheExtent: 500,
         itemCount: entries!.length,
         itemBuilder: (context, index) {
           final entry = entries![index];
@@ -312,7 +314,7 @@ class _EntryTile extends StatelessWidget {
             radius: 18,
             backgroundColor: primaryColor.withValues(alpha: 0.2),
             backgroundImage: entry.avatarUrl != null
-                ? NetworkImage(entry.avatarUrl!)
+                ? CachedNetworkImageProvider(entry.avatarUrl!)
                 : null,
             child: entry.avatarUrl == null
                 ? Text(initial,
@@ -424,15 +426,20 @@ class _UserRankFooter extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Text(
-            'leaderboard.yourRank'.tr(),
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: textColor,
+          Flexible(
+            child: AutoSizeText(
+              'leaderboard.yourRank'.tr(),
+              maxLines: 1,
+              minFontSize: 10,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: textColor,
+              ),
             ),
           ),
-          const Spacer(),
+          const SizedBox(width: 8),
           if (isLoading) ...[
             const SkeletonLoader(height: 28, width: 80, borderRadius: 14),
           ] else ...[

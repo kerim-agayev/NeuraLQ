@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../config/theme.dart';
 
@@ -28,7 +29,7 @@ class ProgressIndicatorBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             AutoSizeText(
-              'Question $current of $total',
+              'test.questionOf'.tr(args: ['$current', '$total']),
               maxLines: 1,
               minFontSize: 10,
               style: TextStyle(

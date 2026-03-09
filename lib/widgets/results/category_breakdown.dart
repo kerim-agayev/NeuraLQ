@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../config/theme.dart';
 
@@ -47,7 +48,7 @@ class CategoryBreakdown extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Category Breakdown',
+            'result.categories'.tr(),
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -56,7 +57,7 @@ class CategoryBreakdown extends StatelessWidget {
           ),
           const SizedBox(height: 14),
           _Bar(
-            label: '\u{1F4D0} Spatial',
+            label: '\u{1F4D0} ${'result.spatial'.tr()}',
             pct: spatialPct,
             color: primaryColor,
             textColor: textSecondary,
@@ -64,7 +65,7 @@ class CategoryBreakdown extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           _Bar(
-            label: '\u{1F9E9} Logic',
+            label: '\u{1F9E9} ${'result.logic'.tr()}',
             pct: logicPct,
             color: secondaryColor,
             textColor: textSecondary,
@@ -72,7 +73,7 @@ class CategoryBreakdown extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           _Bar(
-            label: '\u{1F4DD} Verbal',
+            label: '\u{1F4DD} ${'result.verbal'.tr()}',
             pct: verbalPct,
             color: accentColor,
             textColor: textSecondary,
@@ -80,7 +81,7 @@ class CategoryBreakdown extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           _Bar(
-            label: '\u{26A1} Speed',
+            label: '\u{26A1} ${'result.speed'.tr()}',
             pct: speedPct,
             color: successColor,
             textColor: textSecondary,

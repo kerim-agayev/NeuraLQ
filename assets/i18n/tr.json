@@ -83,7 +83,9 @@
     "incompleteTitle": "Tamamlanmamış Test",
     "incompleteMessage": "Tamamlanmamış bir test oturumunuz var. Devam etmek mi yoksa silmek mi istiyorsunuz?",
     "resume": "Devam Et",
-    "discard": "Sil"
+    "discard": "Sil",
+    "modeSubtitle": "Her modun farklı soru sayısı ve analiz derinliği vardır",
+    "questionOf": "Soru {} / {}"
   },
   "result": {
     "yourIQ": "IQ Puanınız",
@@ -119,7 +121,18 @@
     "goHome": "Ana Sayfaya Dön",
     "sharePdf": "PDF Olarak Paylaş",
     "shareText": "Metin Olarak Paylaş",
-    "takeAnother": "Başka Test Yap"
+    "takeAnother": "Başka Test Yap",
+    "iqRange": "IQ Aralığı: {}–{}",
+    "extraordinary": "Olağanüstü",
+    "genius": "Dahi",
+    "gifted": "Üstün Yetenekli",
+    "superior": "Üstün",
+    "aboveAverage": "Ortanın Üstü",
+    "average": "Ortalama",
+    "belowAverage": "Ortanın Altı",
+    "low": "Düşük",
+    "correct": "Doğru!",
+    "wrong": "Yanlış!"
   },
   "leaderboard": {
     "title": "Sıralama",
@@ -188,6 +201,13 @@
     "answeredIncorrectly": "Yanlış cevapladınız",
     "loadingDaily": "Günlük mücadele yükleniyor...",
     "streakBonus": "Seri Bonusu"
+  },
+  "errors": {
+    "noInternet": "İnternet bağlantısı yok. WiFi veya mobil verinizi kontrol edin.",
+    "connectionTimeout": "Bağlantı zaman aşımına uğradı. Tekrar deneyin.",
+    "serverSlow": "Sunucu çok yavaş yanıt veriyor. Tekrar deneyin.",
+    "tooManyRequests": "Çok fazla istek gönderildi. Lütfen biraz bekleyin.",
+    "serverDown": "Sunucu geçici olarak kullanılamıyor. Daha sonra deneyin."
   },
   "history": {
     "notFound": "Sonuç bulunamadı"

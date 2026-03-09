@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../config/theme.dart';
 
@@ -31,7 +32,7 @@ class CognitiveAgeCard extends StatelessWidget {
           child: _InfoTile(
             emoji: '\u{1F9D1}',
             value: '$cognitiveAge',
-            label: 'Cognitive Age',
+            label: 'result.cognitiveAge'.tr(),
             surfaceColor: surfaceColor,
             borderColor: borderColor,
             textColor: textColor,
@@ -43,7 +44,7 @@ class CognitiveAgeCard extends StatelessWidget {
           child: _InfoTile(
             emoji: '\u{1F30D}',
             value: globalRank != null ? '#$globalRank' : '—',
-            label: 'Global Rank',
+            label: 'result.globalRank'.tr(),
             surfaceColor: surfaceColor,
             borderColor: borderColor,
             textColor: textColor,
@@ -56,7 +57,7 @@ class CognitiveAgeCard extends StatelessWidget {
             child: _InfoTile(
               emoji: '\u{1F3C5}',
               value: '#$countryRank',
-              label: 'Country Rank',
+              label: 'result.countryRank'.tr(),
               surfaceColor: surfaceColor,
               borderColor: borderColor,
               textColor: textColor,

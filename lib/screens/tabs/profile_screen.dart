@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -90,11 +91,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   String _formatDate(String isoDate) {
     try {
       final dt = DateTime.parse(isoDate);
-      const months = [
-        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
-      ];
-      return '${months[dt.month - 1]} ${dt.day}, ${dt.year}';
+      return '${dt.day.toString().padLeft(2, '0')}.${dt.month.toString().padLeft(2, '0')}.${(dt.year % 100).toString().padLeft(2, '0')}';
     } catch (_) {
       return '';
     }
@@ -103,11 +100,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   String _formatJoinDate(String isoDate) {
     try {
       final dt = DateTime.parse(isoDate);
-      const months = [
-        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
-      ];
-      return '${months[dt.month - 1]} ${dt.year}';
+      return '${dt.month.toString().padLeft(2, '0')}.${dt.year}';
     } catch (_) {
       return '';
     }
@@ -196,7 +189,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               radius: 36,
               backgroundColor: primaryColor,
               backgroundImage: user.avatarUrl != null
-                  ? NetworkImage(user.avatarUrl!)
+                  ? CachedNetworkImageProvider(user.avatarUrl!)
                   : null,
               child: user.avatarUrl == null
                   ? Text(initial,
@@ -593,6 +586,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     children: [
                       Text(
                         modeLabel,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,

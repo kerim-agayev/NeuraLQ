@@ -122,9 +122,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final textSecondary =
         isDark ? CyberpunkColors.textSecondary : CleanColors.textSecondary;
 
-    final auth = ref.watch(authProvider);
+    final user = ref.watch(authProvider.select((s) => s.user));
     final daily = ref.watch(dailyProvider);
-    final user = auth.user;
 
     return RefreshIndicator(
       onRefresh: _onRefresh,
@@ -161,7 +160,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               neuralCoins: user?.neuralCoins,
               brainPoints: user?.brainPoints,
               currentStreak: user?.currentStreak,
-              isLoading: auth.isLoading,
+              isLoading: ref.watch(authProvider.select((s) => s.isLoading)),
             ),
             const SizedBox(height: 20),
 

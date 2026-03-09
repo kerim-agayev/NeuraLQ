@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../config/theme.dart';
 import '../../constants/celebrities.dart';
@@ -33,7 +34,7 @@ class CelebrityMatchCard extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            'You think like...',
+            'result.celebrityMatch'.tr(),
             style: TextStyle(fontSize: 14, color: textSecondary),
           ),
           const SizedBox(height: 10),
@@ -51,7 +52,7 @@ class CelebrityMatchCard extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            'IQ Range: ${celebrity.minIq}–${celebrity.maxIq}',
+            'result.iqRange'.tr(args: ['${celebrity.minIq}', '${celebrity.maxIq}']),
             style: TextStyle(fontSize: 12, color: textSecondary),
           ),
         ],

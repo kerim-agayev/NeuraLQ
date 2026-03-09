@@ -66,8 +66,11 @@ class SelectModeScreen extends ConsumerWidget {
           icon: Icon(Icons.arrow_back, color: textColor),
           onPressed: () => context.pop(),
         ),
-        title: Text('test.selectMode'.tr(),
-            style: TextStyle(color: textColor, fontSize: 18)),
+        title: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text('test.selectMode'.tr(),
+              style: TextStyle(color: textColor, fontSize: 18)),
+        ),
         centerTitle: true,
       ),
       body: Stack(
@@ -99,7 +102,7 @@ class SelectModeScreen extends ConsumerWidget {
                   const SizedBox(height: 8),
                   Center(
                     child: AutoSizeText(
-                      'Each mode has different question counts and analysis depth',
+                      'test.modeSubtitle'.tr(),
                       maxLines: 2,
                       minFontSize: 11,
                       textAlign: TextAlign.center,
@@ -116,7 +119,7 @@ class SelectModeScreen extends ConsumerWidget {
                     title: 'test.arcade'.tr(),
                     emoji: '\u{26A1}',
                     description: 'test.arcadeDesc'.tr(),
-                    detail: 'Quick test with core categories',
+                    detail: 'test.arcadeDesc'.tr(),
                     gradient: [primaryColor, secondaryColor],
                     surfaceColor: surfaceColor,
                     borderColor: borderColor,
@@ -131,8 +134,7 @@ class SelectModeScreen extends ConsumerWidget {
                     title: 'test.fullAnalysis'.tr(),
                     emoji: '\u{1F4CA}',
                     description: 'test.fullAnalysisDesc'.tr(),
-                    detail:
-                        'Complete cognitive analysis with all categories',
+                    detail: 'test.fullAnalysisDesc'.tr(),
                     gradient: [secondaryColor, primaryColor],
                     surfaceColor: surfaceColor,
                     borderColor: borderColor,

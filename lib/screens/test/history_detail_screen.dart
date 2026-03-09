@@ -59,11 +59,7 @@ class _HistoryDetailScreenState extends State<HistoryDetailScreen> {
   String _formatDate(String isoDate) {
     try {
       final dt = DateTime.parse(isoDate);
-      const months = [
-        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
-      ];
-      return '${months[dt.month - 1]} ${dt.day}, ${dt.year}';
+      return '${dt.day.toString().padLeft(2, '0')}.${dt.month.toString().padLeft(2, '0')}.${(dt.year % 100).toString().padLeft(2, '0')}';
     } catch (_) {
       return '';
     }
@@ -91,9 +87,12 @@ class _HistoryDetailScreenState extends State<HistoryDetailScreen> {
           icon: Icon(Icons.arrow_back_rounded, color: textColor),
           onPressed: () => context.pop(),
         ),
-        title: Text(
-          'result.testResult'.tr(),
-          style: TextStyle(color: textColor, fontSize: 18),
+        title: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            'result.testResult'.tr(),
+            style: TextStyle(color: textColor, fontSize: 18),
+          ),
         ),
         centerTitle: true,
       ),
@@ -139,14 +138,18 @@ class _HistoryDetailScreenState extends State<HistoryDetailScreen> {
                                   MainAxisAlignment.center,
                               children: [
                                 if (_result!.mode != null) ...[
-                                  Text(
-                                    _result!.mode == 'FULL_ANALYSIS'
-                                        ? '\u{1F9E0} ${'test.fullAnalysis'.tr()}'
-                                        : '\u{26A1} ${'test.arcade'.tr()}',
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w600,
-                                      color: textColor,
+                                  Flexible(
+                                    child: Text(
+                                      _result!.mode == 'FULL_ANALYSIS'
+                                          ? '\u{1F9E0} ${'test.fullAnalysis'.tr()}'
+                                          : '\u{26A1} ${'test.arcade'.tr()}',
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w600,
+                                        color: textColor,
+                                      ),
                                     ),
                                   ),
                                   Text(

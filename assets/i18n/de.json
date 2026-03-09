@@ -83,7 +83,9 @@
     "incompleteTitle": "Unvollständiger Test",
     "incompleteMessage": "Sie haben eine unbeendete Testsitzung. Möchten Sie fortfahren oder verwerfen?",
     "resume": "Fortfahren",
-    "discard": "Verwerfen"
+    "discard": "Verwerfen",
+    "modeSubtitle": "Jeder Modus hat unterschiedliche Fragenanzahl und Analysetiefe",
+    "questionOf": "Frage {} von {}"
   },
   "result": {
     "yourIQ": "Ihr IQ-Wert",
@@ -119,7 +121,18 @@
     "goHome": "Zur Startseite",
     "sharePdf": "Als PDF teilen",
     "shareText": "Als Text teilen",
-    "takeAnother": "Weiteren Test machen"
+    "takeAnother": "Weiteren Test machen",
+    "iqRange": "IQ-Bereich: {}–{}",
+    "extraordinary": "Außergewöhnlich",
+    "genius": "Genie",
+    "gifted": "Hochbegabt",
+    "superior": "Überlegen",
+    "aboveAverage": "Überdurchschnitt",
+    "average": "Durchschnitt",
+    "belowAverage": "Unterdurchschnitt",
+    "low": "Niedrig",
+    "correct": "Richtig!",
+    "wrong": "Falsch!"
   },
   "leaderboard": {
     "title": "Rangliste",
@@ -188,6 +201,13 @@
     "answeredIncorrectly": "Sie haben falsch geantwortet",
     "loadingDaily": "Tägliche Challenge wird geladen...",
     "streakBonus": "Serienbonus"
+  },
+  "errors": {
+    "noInternet": "Keine Internetverbindung. Überprüfen Sie WLAN oder mobile Daten.",
+    "connectionTimeout": "Verbindungszeitüberschreitung. Versuchen Sie es erneut.",
+    "serverSlow": "Server antwortet zu langsam. Versuchen Sie es erneut.",
+    "tooManyRequests": "Zu viele Anfragen. Bitte warten Sie einen Moment.",
+    "serverDown": "Server vorübergehend nicht verfügbar. Versuchen Sie es später."
   },
   "history": {
     "notFound": "Ergebnis nicht gefunden"

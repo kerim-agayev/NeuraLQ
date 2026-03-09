@@ -5,6 +5,7 @@ import '../config/constants.dart';
 import '../models/user.dart';
 import '../services/auth_service.dart';
 import '../services/storage_service.dart';
+import '../utils/error_utils.dart';
 
 // ── State ──
 class AuthState {
@@ -85,7 +86,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     } on DioException catch (e) {
       state = state.copyWith(
         isLoading: false,
-        error: _extractError(e),
+        error: extractDioError(e),
       );
     }
   }
@@ -117,7 +118,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     } on DioException catch (e) {
       state = state.copyWith(
         isLoading: false,
-        error: _extractError(e),
+        error: extractDioError(e),
       );
     }
   }
@@ -151,7 +152,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     } on DioException catch (e) {
       state = state.copyWith(
         isLoading: false,
-        error: _extractError(e),
+        error: extractDioError(e),
       );
     } catch (e) {
       state = state.copyWith(
@@ -187,7 +188,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     } on DioException catch (e) {
       state = state.copyWith(
         isLoading: false,
-        error: _extractError(e),
+        error: extractDioError(e),
       );
     }
   }
@@ -216,13 +217,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     await StorageService.saveRefreshToken(auth.refreshToken);
   }
 
-  String _extractError(DioException e) {
-    final data = e.response?.data;
-    if (data is Map<String, dynamic>) {
-      return data['error'] ?? 'Something went wrong';
-    }
-    return 'Network error';
-  }
+
 }
 
 // ── Provider ──

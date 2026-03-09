@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart' hide Badge;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -135,9 +136,12 @@ class _DailyScreenState extends ConsumerState<DailyScreen> {
           icon: Icon(Icons.arrow_back_rounded, color: textColor),
           onPressed: () => context.pop(),
         ),
-        title: Text(
-          'daily.title'.tr(),
-          style: TextStyle(color: textColor, fontSize: 18),
+        title: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            'daily.title'.tr(),
+            style: TextStyle(color: textColor, fontSize: 18),
+          ),
         ),
         centerTitle: true,
       ),
@@ -359,10 +363,10 @@ class _DailyScreenState extends ConsumerState<DailyScreen> {
                   const SizedBox(height: 16),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12),
-                    child: Image.network(
-                      question.imageUrl!,
+                    child: CachedNetworkImage(
+                      imageUrl: question.imageUrl!,
                       fit: BoxFit.contain,
-                      errorBuilder: (_, _, _) => SizedBox(
+                      errorWidget: (_, _, _) => SizedBox(
                         height: 100,
                         child:
                             Center(child: Text('result.failedToLoad'.tr())),
@@ -599,16 +603,21 @@ class _DailyScreenState extends ConsumerState<DailyScreen> {
                         style: const TextStyle(fontSize: 20),
                       ),
                       const SizedBox(width: 8),
-                      Text(
-                        userAnswer.isCorrect
-                            ? 'daily.answeredCorrectly'.tr()
-                            : 'daily.answeredIncorrectly'.tr(),
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                          color: userAnswer.isCorrect
-                              ? successColor
-                              : errorColor,
+                      Flexible(
+                        child: AutoSizeText(
+                          userAnswer.isCorrect
+                              ? 'daily.answeredCorrectly'.tr()
+                              : 'daily.answeredIncorrectly'.tr(),
+                          maxLines: 1,
+                          minFontSize: 11,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: userAnswer.isCorrect
+                                ? successColor
+                                : errorColor,
+                          ),
                         ),
                       ),
                     ],

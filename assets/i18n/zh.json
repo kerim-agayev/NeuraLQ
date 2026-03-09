@@ -83,7 +83,9 @@
     "incompleteTitle": "未完成的测试",
     "incompleteMessage": "您有一个未完成的测试。是否继续或放弃？",
     "resume": "继续",
-    "discard": "放弃"
+    "discard": "放弃",
+    "modeSubtitle": "每种模式有不同的题目数量和分析深度",
+    "questionOf": "第{}题 / 共{}题"
   },
   "result": {
     "yourIQ": "您的 IQ 分数",
@@ -119,7 +121,18 @@
     "goHome": "返回首页",
     "sharePdf": "分享为PDF",
     "shareText": "分享为文本",
-    "takeAnother": "再做一次测试"
+    "takeAnother": "再做一次测试",
+    "iqRange": "IQ范围：{}–{}",
+    "extraordinary": "卓越",
+    "genius": "天才",
+    "gifted": "超群",
+    "superior": "优秀",
+    "aboveAverage": "中上",
+    "average": "平均",
+    "belowAverage": "中下",
+    "low": "偏低",
+    "correct": "正确！",
+    "wrong": "错误！"
   },
   "leaderboard": {
     "title": "排行榜",
@@ -188,6 +201,13 @@
     "answeredIncorrectly": "回答错误",
     "loadingDaily": "正在加载每日挑战...",
     "streakBonus": "连续奖励"
+  },
+  "errors": {
+    "noInternet": "无网络连接。请检查WiFi或移动数据。",
+    "connectionTimeout": "连接超时。请重试。",
+    "serverSlow": "服务器响应过慢。请重试。",
+    "tooManyRequests": "请求过于频繁。请稍候再试。",
+    "serverDown": "服务器暂时不可用。请稍后再试。"
   },
   "history": {
     "notFound": "未找到结果"

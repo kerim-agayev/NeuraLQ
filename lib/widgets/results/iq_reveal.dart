@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../config/theme.dart';
 
@@ -71,14 +72,14 @@ class _IqRevealState extends State<IqReveal>
   }
 
   String _iqLabel(int iq) {
-    if (iq >= 160) return 'Extraordinary';
-    if (iq >= 140) return 'Genius';
-    if (iq >= 130) return 'Gifted';
-    if (iq >= 120) return 'Superior';
-    if (iq >= 110) return 'Above Average';
-    if (iq >= 90) return 'Average';
-    if (iq >= 80) return 'Below Average';
-    return 'Low';
+    if (iq >= 160) return 'result.extraordinary'.tr();
+    if (iq >= 140) return 'result.genius'.tr();
+    if (iq >= 130) return 'result.gifted'.tr();
+    if (iq >= 120) return 'result.superior'.tr();
+    if (iq >= 110) return 'result.aboveAverage'.tr();
+    if (iq >= 90) return 'result.average'.tr();
+    if (iq >= 80) return 'result.belowAverage'.tr();
+    return 'result.low'.tr();
   }
 
   @override
@@ -100,7 +101,7 @@ class _IqRevealState extends State<IqReveal>
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'Your IQ Score',
+                  'result.yourIQ'.tr(),
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,

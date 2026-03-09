@@ -83,7 +83,9 @@
     "incompleteTitle": "未完了のテスト",
     "incompleteMessage": "未完了のテストセッションがあります。再開しますか、それとも破棄しますか？",
     "resume": "再開",
-    "discard": "破棄"
+    "discard": "破棄",
+    "modeSubtitle": "各モードは異なる問題数と分析深度があります",
+    "questionOf": "問題 {} / {}"
   },
   "result": {
     "yourIQ": "あなたのIQスコア",
@@ -119,7 +121,18 @@
     "goHome": "ホームに戻る",
     "sharePdf": "PDFで共有",
     "shareText": "テキストで共有",
-    "takeAnother": "もう一度テストする"
+    "takeAnother": "もう一度テストする",
+    "iqRange": "IQ範囲：{}–{}",
+    "extraordinary": "異例",
+    "genius": "天才",
+    "gifted": "秀才",
+    "superior": "優秀",
+    "aboveAverage": "平均以上",
+    "average": "平均",
+    "belowAverage": "平均以下",
+    "low": "低い",
+    "correct": "正解！",
+    "wrong": "不正解！"
   },
   "leaderboard": {
     "title": "ランキング",
@@ -188,6 +201,13 @@
     "answeredIncorrectly": "不正解でした",
     "loadingDaily": "デイリーチャレンジを読み込み中...",
     "streakBonus": "連続ボーナス"
+  },
+  "errors": {
+    "noInternet": "インターネット接続がありません。WiFiまたはデータ通信を確認してください。",
+    "connectionTimeout": "接続がタイムアウトしました。もう一度お試しください。",
+    "serverSlow": "サーバーの応答が遅すぎます。もう一度お試しください。",
+    "tooManyRequests": "リクエストが多すぎます。しばらくお待ちください。",
+    "serverDown": "サーバーが一時的に利用できません。後でもう一度お試しください。"
   },
   "history": {
     "notFound": "結果が見つかりません"
