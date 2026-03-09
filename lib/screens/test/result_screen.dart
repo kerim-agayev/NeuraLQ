@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../config/theme.dart';
+import '../../providers/auth_provider.dart';
 import '../../providers/test_provider.dart';
 import '../../widgets/ui/badge_unlock_modal.dart';
 import '../../widgets/results/iq_reveal.dart';
@@ -43,6 +44,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
 
   void _goHome() {
     ref.read(testProvider.notifier).reset();
+    ref.read(authProvider.notifier).refreshUser();
     context.go('/home');
   }
 

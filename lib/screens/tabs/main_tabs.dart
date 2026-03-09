@@ -1,18 +1,21 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../config/theme.dart';
+import '../../providers/auth_provider.dart';
+import '../../providers/daily_provider.dart';
 import 'home_screen.dart';
 import 'leaderboard_screen.dart';
 import 'profile_screen.dart';
 
-class MainTabs extends StatefulWidget {
+class MainTabs extends ConsumerStatefulWidget {
   const MainTabs({super.key});
 
   @override
-  State<MainTabs> createState() => _MainTabsState();
+  ConsumerState<MainTabs> createState() => _MainTabsState();
 }
 
-class _MainTabsState extends State<MainTabs> {
+class _MainTabsState extends ConsumerState<MainTabs> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = const [
@@ -20,6 +23,19 @@ class _MainTabsState extends State<MainTabs> {
     LeaderboardScreen(),
     ProfileScreen(),
   ];
+
+  void _onTabTap(int index) {
+    if (index == _currentIndex) return;
+    setState(() => _currentIndex = index);
+
+    // Refresh user data when switching to any tab
+    ref.read(authProvider.notifier).refreshUser();
+
+    if (index == 0) {
+      // Home tab — also refresh daily status
+      ref.read(dailyProvider.notifier).loadToday();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +78,7 @@ class _MainTabsState extends State<MainTabs> {
                   isSelected: _currentIndex == 0,
                   selectedColor: primaryColor,
                   unselectedColor: unselectedColor,
-                  onTap: () => setState(() => _currentIndex = 0),
+                  onTap: () => _onTabTap(0),
                 ),
                 _NavItem(
                   icon: Icons.leaderboard_rounded,
@@ -70,7 +86,7 @@ class _MainTabsState extends State<MainTabs> {
                   isSelected: _currentIndex == 1,
                   selectedColor: primaryColor,
                   unselectedColor: unselectedColor,
-                  onTap: () => setState(() => _currentIndex = 1),
+                  onTap: () => _onTabTap(1),
                 ),
                 _NavItem(
                   icon: Icons.person_rounded,
@@ -78,7 +94,7 @@ class _MainTabsState extends State<MainTabs> {
                   isSelected: _currentIndex == 2,
                   selectedColor: primaryColor,
                   unselectedColor: unselectedColor,
-                  onTap: () => setState(() => _currentIndex = 2),
+                  onTap: () => _onTabTap(2),
                 ),
               ],
             ),

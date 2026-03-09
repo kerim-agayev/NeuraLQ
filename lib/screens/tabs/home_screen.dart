@@ -30,10 +30,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _loadData();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _loadData();
+    });
   }
 
   Future<void> _loadData() async {
+    ref.read(authProvider.notifier).refreshUser();
     ref.read(dailyProvider.notifier).loadToday();
     _loadHistory();
     _checkTestBackup();
@@ -181,7 +184,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
             // Daily challenge card
             DailyChallengeCard(
-              isLoading: daily.isLoading,
+              isLoading: daily.isLoading ||
+                  daily.status == DailyChallengeStatus.loading,
               alreadyDone:
                   daily.status == DailyChallengeStatus.alreadyDone,
               onTap: () => context.push('/daily'),

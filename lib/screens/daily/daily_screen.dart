@@ -5,6 +5,7 @@ import 'package:flutter/material.dart' hide Badge;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../config/theme.dart';
+import '../../providers/auth_provider.dart';
 import '../../providers/daily_provider.dart';
 import '../../widgets/test/question_options.dart';
 import '../../widgets/test/timer_bar.dart';
@@ -516,7 +517,11 @@ class _DailyScreenState extends ConsumerState<DailyScreen> {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () => context.go('/home'),
+              onPressed: () {
+                ref.read(authProvider.notifier).refreshUser();
+                ref.read(dailyProvider.notifier).loadToday();
+                context.go('/home');
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: primaryColor,
                 foregroundColor: Colors.white,
@@ -651,7 +656,11 @@ class _DailyScreenState extends ConsumerState<DailyScreen> {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () => context.pop(),
+              onPressed: () {
+                ref.read(authProvider.notifier).refreshUser();
+                ref.read(dailyProvider.notifier).loadToday();
+                context.pop();
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: primaryColor,
                 foregroundColor: Colors.white,
