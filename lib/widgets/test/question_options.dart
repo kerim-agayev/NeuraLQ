@@ -143,12 +143,14 @@ class QuestionOptions extends StatelessWidget {
         isDark ? CyberpunkColors.success : CleanColors.success;
     final errorColor = isDark ? CyberpunkColors.error : CleanColors.error;
 
+    final textColor = isDark ? CyberpunkColors.text : CleanColors.text;
+
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 1.0,
+        childAspectRatio: 1.2,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
       ),
@@ -180,29 +182,68 @@ class QuestionOptions extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               border: Border.all(color: border, width: isSelected || isCorrect || isWrong ? 2 : 1),
             ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(11),
-              child: option.imageUrl != null
-                  ? Image.network(
-                      option.imageUrl!,
-                      fit: BoxFit.contain,
-                      errorBuilder: (_, _, _) => Center(
-                        child: AutoSizeText(
-                          option.text,
-                          maxLines: 2,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(fontSize: 14),
-                        ),
-                      ),
-                    )
-                  : Center(
-                      child: AutoSizeText(
-                        option.text,
-                        maxLines: 2,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(fontSize: 14),
-                      ),
+            child: Column(
+              children: [
+                Expanded(
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(11)),
+                    child: option.imageUrl != null
+                        ? Image.network(
+                            option.imageUrl!,
+                            fit: BoxFit.contain,
+                            width: double.infinity,
+                            errorBuilder: (_, _, _) => Center(
+                              child: AutoSizeText(
+                                option.text,
+                                maxLines: 2,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(fontSize: 14),
+                              ),
+                            ),
+                          )
+                        : Center(
+                            child: AutoSizeText(
+                              option.text,
+                              maxLines: 2,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(fontSize: 14),
+                            ),
+                          ),
+                  ),
+                ),
+                // A, B, C, D label
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  decoration: BoxDecoration(
+                    color: isCorrect
+                        ? successColor.withValues(alpha: 0.2)
+                        : isWrong
+                            ? errorColor.withValues(alpha: 0.2)
+                            : isSelected && !showFeedback
+                                ? primaryColor.withValues(alpha: 0.2)
+                                : Colors.transparent,
+                    borderRadius: const BorderRadius.vertical(
+                        bottom: Radius.circular(11)),
+                  ),
+                  child: Text(
+                    String.fromCharCode(65 + index), // A, B, C, D...
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: isCorrect
+                          ? successColor
+                          : isWrong
+                              ? errorColor
+                              : isSelected && !showFeedback
+                                  ? primaryColor
+                                  : textColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
                     ),
+                  ),
+                ),
+              ],
             ),
           ),
         );

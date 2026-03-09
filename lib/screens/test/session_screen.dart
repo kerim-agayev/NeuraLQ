@@ -351,18 +351,24 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
                             ),
                           ),
 
-                          // Question image
+                          // Question image (max 35% of screen height)
                           if (question.imageUrl != null) ...[
                             const SizedBox(height: 16),
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: Image.network(
-                                question.imageUrl!,
-                                fit: BoxFit.contain,
-                                errorBuilder: (_, _, _) => const SizedBox(
-                                  height: 100,
-                                  child: Center(
-                                      child: Text('Image failed to load')),
+                            ConstrainedBox(
+                              constraints: BoxConstraints(
+                                maxHeight:
+                                    MediaQuery.of(context).size.height * 0.35,
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: Image.network(
+                                  question.imageUrl!,
+                                  fit: BoxFit.contain,
+                                  errorBuilder: (_, _, _) => const SizedBox(
+                                    height: 100,
+                                    child: Center(
+                                        child: Text('Image failed to load')),
+                                  ),
                                 ),
                               ),
                             ),
