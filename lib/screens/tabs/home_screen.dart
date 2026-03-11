@@ -183,10 +183,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
             // Daily challenge card
             DailyChallengeCard(
-              isLoading: daily.isLoading ||
-                  daily.status == DailyChallengeStatus.loading,
+              isLoading: daily.isLoading,
               alreadyDone:
                   daily.status == DailyChallengeStatus.alreadyDone,
+              noChallenge:
+                  daily.status == DailyChallengeStatus.noChallenge,
               onTap: () => context.push('/daily'),
             ),
             const SizedBox(height: 12),

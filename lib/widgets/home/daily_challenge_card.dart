@@ -7,12 +7,14 @@ import '../../widgets/ui/skeleton_loader.dart';
 class DailyChallengeCard extends StatelessWidget {
   final bool isLoading;
   final bool alreadyDone;
+  final bool noChallenge;
   final VoidCallback onTap;
 
   const DailyChallengeCard({
     super.key,
     this.isLoading = false,
     this.alreadyDone = false,
+    this.noChallenge = false,
     required this.onTap,
   });
 
@@ -38,9 +40,11 @@ class DailyChallengeCard extends StatelessWidget {
           color: surfaceColor,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: alreadyDone
-                ? successColor.withValues(alpha: 0.5)
-                : warningColor.withValues(alpha: 0.5),
+            color: noChallenge
+                ? textSecondary.withValues(alpha: 0.3)
+                : alreadyDone
+                    ? successColor.withValues(alpha: 0.5)
+                    : warningColor.withValues(alpha: 0.5),
           ),
         ),
         child: isLoading
@@ -66,13 +70,19 @@ class DailyChallengeCard extends StatelessWidget {
                     width: 44,
                     height: 44,
                     decoration: BoxDecoration(
-                      color: (alreadyDone ? successColor : warningColor)
-                          .withValues(alpha: 0.15),
+                      color: noChallenge
+                          ? textSecondary.withValues(alpha: 0.1)
+                          : (alreadyDone ? successColor : warningColor)
+                              .withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Center(
                       child: Text(
-                        alreadyDone ? '\u{2705}' : '\u{26A1}',
+                        noChallenge
+                            ? '\u{1F4A4}'
+                            : alreadyDone
+                                ? '\u{2705}'
+                                : '\u{26A1}',
                         style: const TextStyle(fontSize: 22),
                       ),
                     ),
@@ -94,9 +104,11 @@ class DailyChallengeCard extends StatelessWidget {
                         ),
                         const SizedBox(height: 2),
                         AutoSizeText(
-                          alreadyDone
-                              ? 'daily.completed'.tr()
-                              : 'daily.testBrainDaily'.tr(),
+                          noChallenge
+                              ? 'daily.noChallenge'.tr()
+                              : alreadyDone
+                                  ? 'daily.completed'.tr()
+                                  : 'daily.testBrainDaily'.tr(),
                           maxLines: 1,
                           minFontSize: 10,
                           style: TextStyle(

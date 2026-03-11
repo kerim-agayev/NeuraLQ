@@ -80,6 +80,7 @@ class DailyNotifier extends StateNotifier<DailyState> {
     } on DioException catch (e) {
       state = state.copyWith(
         isLoading: false,
+        status: DailyChallengeStatus.noChallenge,
         error: extractDioError(e),
       );
     }
