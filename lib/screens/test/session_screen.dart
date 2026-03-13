@@ -3,15 +3,15 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import '../../config/theme.dart';
+import '../../models/question.dart';
 import '../../providers/test_provider.dart';
-import '../../widgets/test/answer_feedback.dart';
 import '../../widgets/test/progress_indicator_bar.dart';
 import '../../widgets/test/question_options.dart';
-import '../../widgets/test/streak_counter.dart';
 import '../../widgets/test/timer_bar.dart';
 import '../../widgets/ui/brain_loader.dart';
 
@@ -26,10 +26,7 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
   Timer? _timer;
   int _elapsedMs = 0;
   int _timeLimit = 30;
-  bool _showFeedback = false;
-  bool? _lastAnswerCorrect;
-  int? _correctAnswer;
-  int? _selectedAnswer; // Track locally for immediate UI feedback
+  int? _selectedAnswer;
   bool _isSubmitting = false;
   bool _isCompleting = false;
 
@@ -66,87 +63,57 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
     return 1.0 - (_elapsedMs / (_timeLimit * 1000)).clamp(0.0, 1.0);
   }
 
-  Future<void> _submitAnswer(int? selectedAnswer) async {
-    if (_isSubmitting || _showFeedback) return;
+  void _submitAnswer(int? selectedAnswer) {
+    if (_isSubmitting) return;
     _isSubmitting = true;
     _timer?.cancel();
 
-    // Immediately highlight the selected option
+    final question = ref.read(testProvider).currentQuestion;
+    if (question == null) {
+      _isSubmitting = false;
+      return;
+    }
+
+    // Highlight selected option
     setState(() {
       _selectedAnswer = selectedAnswer;
     });
 
-    await ref.read(testProvider.notifier).submitAnswer(
-          selectedAnswer: selectedAnswer,
-          responseTimeMs: _elapsedMs,
+    // Record answer locally (NO API call)
+    ref.read(testProvider.notifier).recordAnswer(
+          TestAnswer(
+            questionId: question.id,
+            selectedAnswer: selectedAnswer,
+            responseTimeMs: _elapsedMs,
+          ),
         );
 
-    if (!mounted) return;
+    // Haptic feedback
+    HapticFeedback.lightImpact();
 
-    final state = ref.read(testProvider);
-    if (state.error != null) {
-      Fluttertoast.showToast(
-        msg: state.error!,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-      );
-      setState(() {
-        _selectedAnswer = null;
-      });
-      _isSubmitting = false;
-      _startTimer();
-      return;
-    }
+    // 500ms delay then advance
+    Future.delayed(const Duration(milliseconds: 500), () {
+      if (!mounted) return;
 
-    // Get the answer result for the current question
-    final question = state.currentQuestion;
-    final questionId = question?.id ?? '';
-    final isCorrect = state.answerResults[questionId] ?? false;
+      ref.read(testProvider.notifier).nextQuestion();
 
-    setState(() {
-      _showFeedback = true;
-      _lastAnswerCorrect = isCorrect;
-      _correctAnswer = selectedAnswer != null && isCorrect ? selectedAnswer : null;
+      final newState = ref.read(testProvider);
+      if (newState.isTestComplete) {
+        _completeTest();
+      } else {
+        setState(() {
+          _selectedAnswer = null;
+          _isSubmitting = false;
+        });
+        _startTimer();
+      }
     });
-
-    // Show feedback for 800ms
-    await Future.delayed(const Duration(milliseconds: 800));
-
-    if (!mounted) return;
-
-    // Move to next question
-    ref.read(testProvider.notifier).nextQuestion();
-
-    final newState = ref.read(testProvider);
-    if (newState.isTestComplete) {
-      await _completeTest();
-    } else {
-      setState(() {
-        _showFeedback = false;
-        _lastAnswerCorrect = null;
-        _correctAnswer = null;
-        _selectedAnswer = null;
-        _isSubmitting = false;
-      });
-      _startTimer();
-    }
   }
 
   Future<void> _completeTest() async {
     setState(() => _isCompleting = true);
 
-    try {
-      await ref.read(testProvider.notifier).completeTest();
-    } catch (e) {
-      if (!mounted) return;
-      Fluttertoast.showToast(
-        msg: 'Failed to load results: $e',
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-      );
-      setState(() => _isCompleting = false);
-      return;
-    }
+    await ref.read(testProvider.notifier).completeTest();
 
     if (!mounted) return;
 
@@ -157,20 +124,25 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
         backgroundColor: Colors.red,
         textColor: Colors.white,
       );
-      setState(() => _isCompleting = false);
+      setState(() {
+        _isCompleting = false;
+        _isSubmitting = false;
+      });
       return;
     }
 
     if (state.result != null) {
       context.go('/test/result');
     } else {
-      // Result is null but no error — shouldn't happen, navigate anyway
       Fluttertoast.showToast(
         msg: 'result.failedToLoad'.tr(),
         backgroundColor: Colors.red,
         textColor: Colors.white,
       );
-      setState(() => _isCompleting = false);
+      setState(() {
+        _isCompleting = false;
+        _isSubmitting = false;
+      });
     }
   }
 
@@ -275,133 +247,115 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
       child: Scaffold(
         backgroundColor: bgColor,
         body: SafeArea(
-          child: Stack(
+          child: Column(
             children: [
-              Column(
-                children: [
-                  // Top bar
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-                    child: Row(
-                      children: [
-                        IconButton(
-                          icon: Icon(Icons.close, color: textSecondary),
-                          onPressed: _onWillPop,
-                        ),
-                        Expanded(
-                          child: ProgressIndicatorBar(
-                            current: test.currentIndex + 1,
-                            total: test.totalQuestions,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        StreakCounter(streak: test.streak),
-                      ],
+              // Top bar
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                child: Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.close, color: textSecondary),
+                      onPressed: _onWillPop,
                     ),
-                  ),
-                  const SizedBox(height: 8),
-
-                  // Timer bar
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: TimerBar(progress: _timerProgress),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Question content
-                  Expanded(
-                    child: SingleChildScrollView(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // Category badge
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 4),
-                            decoration: BoxDecoration(
-                              color: (isDark
-                                      ? CyberpunkColors.primary
-                                      : CleanColors.primary)
-                                  .withValues(alpha: 0.1),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Text(
-                              categoryLabel,
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                color: isDark
-                                    ? CyberpunkColors.primary
-                                    : CleanColors.primary,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 12),
-
-                          // Question text
-                          AutoSizeText(
-                            question.content,
-                            maxLines: 4,
-                            minFontSize: 14,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                              color: textColor,
-                              height: 1.4,
-                            ),
-                          ),
-
-                          // Question image (max 35% of screen height)
-                          if (question.imageUrl != null) ...[
-                            const SizedBox(height: 16),
-                            ConstrainedBox(
-                              constraints: BoxConstraints(
-                                maxHeight:
-                                    MediaQuery.of(context).size.height * 0.35,
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(12),
-                                child: CachedNetworkImage(
-                                  imageUrl: question.imageUrl!,
-                                  fit: BoxFit.contain,
-                                  errorWidget: (_, _, _) => const SizedBox(
-                                    height: 100,
-                                    child: Center(
-                                        child: Text('Image failed to load')),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                          const SizedBox(height: 20),
-
-                          // Options
-                          QuestionOptions(
-                            options: question.options,
-                            selectedAnswer: _selectedAnswer,
-                            correctAnswer: _correctAnswer,
-                            showFeedback: _showFeedback,
-                            enabled: !_isSubmitting && !_showFeedback,
-                            onSelect: _submitAnswer,
-                          ),
-                          const SizedBox(height: 20),
-                        ],
+                    Expanded(
+                      child: ProgressIndicatorBar(
+                        current: test.currentIndex + 1,
+                        total: test.totalQuestions,
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
+              const SizedBox(height: 8),
 
-              // Feedback overlay
-              if (_showFeedback && _lastAnswerCorrect != null)
-                Positioned.fill(
-                  child: AnimatedOpacity(
-                    opacity: _showFeedback ? 1.0 : 0.0,
-                    duration: const Duration(milliseconds: 200),
-                    child: AnswerFeedback(isCorrect: _lastAnswerCorrect!),
+              // Timer bar
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: TimerBar(progress: _timerProgress),
+              ),
+              const SizedBox(height: 16),
+
+              // Question content
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Category badge
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: (isDark
+                                  ? CyberpunkColors.primary
+                                  : CleanColors.primary)
+                              .withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          categoryLabel,
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            color: isDark
+                                ? CyberpunkColors.primary
+                                : CleanColors.primary,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+
+                      // Question text
+                      AutoSizeText(
+                        question.content,
+                        maxLines: 4,
+                        minFontSize: 14,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: textColor,
+                          height: 1.4,
+                        ),
+                      ),
+
+                      // Question image (max 35% of screen height)
+                      if (question.imageUrl != null) ...[
+                        const SizedBox(height: 16),
+                        ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxHeight:
+                                MediaQuery.of(context).size.height * 0.35,
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: CachedNetworkImage(
+                              imageUrl: question.imageUrl!,
+                              fit: BoxFit.contain,
+                              errorWidget: (_, _, _) => const SizedBox(
+                                height: 100,
+                                child: Center(
+                                    child: Text('Image failed to load')),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                      const SizedBox(height: 20),
+
+                      // Options
+                      QuestionOptions(
+                        options: question.options,
+                        selectedAnswer: _selectedAnswer,
+                        enabled: !_isSubmitting,
+                        onSelect: _submitAnswer,
+                      ),
+                      const SizedBox(height: 20),
+                    ],
                   ),
                 ),
+              ),
             ],
           ),
         ),

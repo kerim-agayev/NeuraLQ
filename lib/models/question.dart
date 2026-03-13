@@ -101,22 +101,28 @@ class StartTestResponse {
   }
 }
 
-class AnswerResponse {
-  final bool isCorrect;
-  final int correctAnswer;
-  final String? explanation;
+class TestAnswer {
+  final String questionId;
+  final int? selectedAnswer;
+  final int responseTimeMs;
 
-  AnswerResponse({
-    required this.isCorrect,
-    required this.correctAnswer,
-    this.explanation,
+  TestAnswer({
+    required this.questionId,
+    required this.selectedAnswer,
+    required this.responseTimeMs,
   });
 
-  factory AnswerResponse.fromJson(Map<String, dynamic> json) {
-    return AnswerResponse(
-      isCorrect: json['isCorrect'],
-      correctAnswer: json['correctAnswer'],
-      explanation: json['explanation'],
+  Map<String, dynamic> toJson() => {
+        'questionId': questionId,
+        'selectedAnswer': selectedAnswer,
+        'responseTimeMs': responseTimeMs,
+      };
+
+  factory TestAnswer.fromJson(Map<String, dynamic> json) {
+    return TestAnswer(
+      questionId: json['questionId'],
+      selectedAnswer: json['selectedAnswer'],
+      responseTimeMs: json['responseTimeMs'],
     );
   }
 }

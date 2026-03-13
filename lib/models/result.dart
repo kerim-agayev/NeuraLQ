@@ -31,6 +31,8 @@ class TestResult {
   final bool cheatFlagged;
   final List<Badge> newBadges;
 
+  final int neuralCoinsEarned;
+
   // History-only fields
   final String? mode;
 
@@ -59,6 +61,7 @@ class TestResult {
     required this.completedAt,
     this.cheatFlagged = false,
     this.newBadges = const [],
+    this.neuralCoinsEarned = 0,
     this.mode,
   });
 
@@ -96,6 +99,7 @@ class TestResult {
                       awardedAt: ''))
               .toList() ??
           [],
+      neuralCoinsEarned: json['neuralCoinsEarned'] ?? 0,
       mode: json['mode'],
     );
   }

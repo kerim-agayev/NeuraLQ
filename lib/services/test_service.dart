@@ -16,24 +16,13 @@ class TestService {
     return StartTestResponse.fromJson(res.data['data']);
   }
 
-  static Future<AnswerResponse> submitAnswer({
-    required String sessionId,
-    required String questionId,
-    int? selectedAnswer,
-    required int responseTimeMs,
-  }) async {
-    final res = await _dio.post('/tests/$sessionId/answer', data: {
-      'questionId': questionId,
-      'selectedAnswer': selectedAnswer,
-      'responseTimeMs': responseTimeMs,
-    });
-    return AnswerResponse.fromJson(res.data['data']);
-  }
-
   static Future<TestResult> completeTest({
     required String sessionId,
+    required List<TestAnswer> answers,
   }) async {
-    final res = await _dio.post('/tests/$sessionId/complete');
+    final res = await _dio.post('/tests/$sessionId/complete', data: {
+      'answers': answers.map((a) => a.toJson()).toList(),
+    });
     return TestResult.fromJson(res.data['data']);
   }
 

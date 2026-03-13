@@ -59,7 +59,7 @@ class QuestionOptions extends StatelessWidget {
         } else if (isWrong) {
           bgColor = errorColor.withValues(alpha: 0.15);
           border = errorColor;
-        } else if (isSelected && !showFeedback) {
+        } else if (isSelected) {
           bgColor = primaryColor.withValues(alpha: 0.15);
           border = primaryColor;
         }
@@ -95,7 +95,7 @@ class QuestionOptions extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        String.fromCharCode(65 + index), // A, B, C, D
+                        String.fromCharCode(65 + index),
                         style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.bold,
@@ -143,7 +143,6 @@ class QuestionOptions extends StatelessWidget {
     final successColor =
         isDark ? CyberpunkColors.success : CleanColors.success;
     final errorColor = isDark ? CyberpunkColors.error : CleanColors.error;
-
     final textColor = isDark ? CyberpunkColors.text : CleanColors.text;
 
     return GridView.builder(
@@ -170,7 +169,7 @@ class QuestionOptions extends StatelessWidget {
         } else if (isWrong) {
           bgColor = errorColor.withValues(alpha: 0.15);
           border = errorColor;
-        } else if (isSelected && !showFeedback) {
+        } else if (isSelected) {
           bgColor = primaryColor.withValues(alpha: 0.15);
           border = primaryColor;
         }
@@ -222,21 +221,21 @@ class QuestionOptions extends StatelessWidget {
                         ? successColor.withValues(alpha: 0.2)
                         : isWrong
                             ? errorColor.withValues(alpha: 0.2)
-                            : isSelected && !showFeedback
+                            : isSelected
                                 ? primaryColor.withValues(alpha: 0.2)
                                 : Colors.transparent,
                     borderRadius: const BorderRadius.vertical(
                         bottom: Radius.circular(11)),
                   ),
                   child: Text(
-                    String.fromCharCode(65 + index), // A, B, C, D...
+                    String.fromCharCode(65 + index),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: isCorrect
                           ? successColor
                           : isWrong
                               ? errorColor
-                              : isSelected && !showFeedback
+                              : isSelected
                                   ? primaryColor
                                   : textColor,
                       fontWeight: FontWeight.bold,
