@@ -36,29 +36,39 @@ class SettingsNotifier extends StateNotifier<SettingsState> {
   SettingsNotifier() : super(const SettingsState());
 
   Future<void> loadSettings() async {
-    final theme = await StorageService.getThemePreference();
-    final language = await StorageService.getLanguage();
-    state = SettingsState(
-      themeMode: theme,
-      language: language,
-      isLoaded: true,
-    );
+    try {
+      final theme = await StorageService.getThemePreference();
+      final language = await StorageService.getLanguage();
+      state = SettingsState(
+        themeMode: theme,
+        language: language,
+        isLoaded: true,
+      );
+    } catch (_) {
+      state = state.copyWith(isLoaded: true);
+    }
   }
 
   Future<void> toggleTheme() async {
     final newTheme = state.isCyberpunk ? 'clean' : 'cyberpunk';
-    await StorageService.setThemePreference(newTheme);
     state = state.copyWith(themeMode: newTheme);
+    try {
+      await StorageService.setThemePreference(newTheme);
+    } catch (_) {}
   }
 
   Future<void> setTheme(String theme) async {
-    await StorageService.setThemePreference(theme);
     state = state.copyWith(themeMode: theme);
+    try {
+      await StorageService.setThemePreference(theme);
+    } catch (_) {}
   }
 
   Future<void> setLanguage(String language) async {
-    await StorageService.setLanguage(language);
     state = state.copyWith(language: language);
+    try {
+      await StorageService.setLanguage(language);
+    } catch (_) {}
   }
 }
 

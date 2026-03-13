@@ -34,11 +34,11 @@ class TestQuestion {
 
   factory TestQuestion.fromJson(Map<String, dynamic> json) {
     return TestQuestion(
-      id: json['id'],
-      category: json['category'],
+      id: json['id'] ?? '',
+      category: json['category'] ?? '',
       content: json['content'] ?? '',
       imageUrl: json['imageUrl'],
-      options: (json['options'] as List).map((o) {
+      options: ((json['options'] as List?) ?? []).map((o) {
         if (o is Map<String, dynamic>) {
           return QuestionOption.fromJson(o);
         }
@@ -66,12 +66,12 @@ class StartTestResponse {
 
   factory StartTestResponse.fromJson(Map<String, dynamic> json) {
     return StartTestResponse(
-      sessionId: json['sessionId'],
-      mode: json['mode'],
+      sessionId: json['sessionId'] ?? '',
+      mode: json['mode'] ?? '',
       verbalSkipped: json['verbalSkipped'] ?? false,
-      totalTime: json['totalTime'],
-      questions: (json['questions'] as List)
-          .map((q) => TestQuestion.fromJson(q))
+      totalTime: json['totalTime'] ?? 0,
+      questions: ((json['questions'] as List?) ?? [])
+          .map((q) => TestQuestion.fromJson(q as Map<String, dynamic>))
           .toList(),
     );
   }
@@ -120,9 +120,9 @@ class TestAnswer {
 
   factory TestAnswer.fromJson(Map<String, dynamic> json) {
     return TestAnswer(
-      questionId: json['questionId'],
+      questionId: json['questionId'] ?? '',
       selectedAnswer: json['selectedAnswer'],
-      responseTimeMs: json['responseTimeMs'],
+      responseTimeMs: json['responseTimeMs'] ?? 0,
     );
   }
 }

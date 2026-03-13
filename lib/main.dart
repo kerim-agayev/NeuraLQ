@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,6 +18,17 @@ void main() async {
 
   // Setup Dio interceptors
   ApiClient.setupInterceptors();
+
+  // Global error handlers - prevent crashes
+  FlutterError.onError = (details) {
+    FlutterError.presentError(details);
+    debugPrint('FlutterError: ${details.exception}');
+  };
+
+  PlatformDispatcher.instance.onError = (error, stack) {
+    debugPrint('Uncaught error: $error');
+    return true; // Handled - don't crash
+  };
 
   runApp(
     EasyLocalization(

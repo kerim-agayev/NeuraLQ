@@ -67,6 +67,14 @@ class AuthNotifier extends StateNotifier<AuthState> {
         clearUser: true,
       );
       return false;
+    } catch (_) {
+      await StorageService.clearTokens();
+      state = state.copyWith(
+        isLoading: false,
+        isAuthenticated: false,
+        clearUser: true,
+      );
+      return false;
     }
   }
 
@@ -87,6 +95,11 @@ class AuthNotifier extends StateNotifier<AuthState> {
       state = state.copyWith(
         isLoading: false,
         error: extractDioError(e),
+      );
+    } catch (_) {
+      state = state.copyWith(
+        isLoading: false,
+        error: 'common.error',
       );
     }
   }
@@ -119,6 +132,11 @@ class AuthNotifier extends StateNotifier<AuthState> {
       state = state.copyWith(
         isLoading: false,
         error: extractDioError(e),
+      );
+    } catch (_) {
+      state = state.copyWith(
+        isLoading: false,
+        error: 'common.error',
       );
     }
   }
@@ -189,6 +207,11 @@ class AuthNotifier extends StateNotifier<AuthState> {
       state = state.copyWith(
         isLoading: false,
         error: extractDioError(e),
+      );
+    } catch (_) {
+      state = state.copyWith(
+        isLoading: false,
+        error: 'common.error',
       );
     }
   }

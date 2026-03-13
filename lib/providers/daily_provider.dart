@@ -83,6 +83,11 @@ class DailyNotifier extends StateNotifier<DailyState> {
         status: DailyChallengeStatus.noChallenge,
         error: extractDioError(e),
       );
+    } catch (_) {
+      state = state.copyWith(
+        isLoading: false,
+        status: DailyChallengeStatus.noChallenge,
+      );
     }
   }
 
@@ -106,6 +111,8 @@ class DailyNotifier extends StateNotifier<DailyState> {
         isLoading: false,
         error: extractDioError(e),
       );
+    } catch (_) {
+      state = state.copyWith(isLoading: false);
     }
   }
 

@@ -41,8 +41,15 @@ class ApiClient {
                 data: {'refreshToken': refreshToken},
               );
 
-              final newAccessToken = res.data['data']['accessToken'];
-              final newRefreshToken = res.data['data']['refreshToken'];
+              final data = res.data is Map ? res.data['data'] : null;
+              if (data == null || data is! Map) {
+                throw Exception('Invalid refresh response');
+              }
+              final newAccessToken = data['accessToken'] as String?;
+              final newRefreshToken = data['refreshToken'] as String?;
+              if (newAccessToken == null || newRefreshToken == null) {
+                throw Exception('Missing tokens in refresh response');
+              }
 
               await _storage.write(
                   key: storageKeyAccessToken, value: newAccessToken);

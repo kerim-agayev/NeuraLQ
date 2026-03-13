@@ -99,9 +99,9 @@ class Badge {
 
   factory Badge.fromJson(Map<String, dynamic> json) {
     return Badge(
-      id: json['id'],
-      name: json['name'],
-      awardedAt: json['awardedAt'],
+      id: json['id'] ?? '',
+      name: json['name'] ?? '',
+      awardedAt: json['awardedAt'] ?? '',
     );
   }
 }

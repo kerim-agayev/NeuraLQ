@@ -87,6 +87,11 @@ class TestNotifier extends StateNotifier<TestState> {
         isLoading: false,
         error: extractDioError(e),
       );
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        error: e.toString(),
+      );
     }
   }
 

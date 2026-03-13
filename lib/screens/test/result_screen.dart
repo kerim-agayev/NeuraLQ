@@ -34,7 +34,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
   }
 
   void _showBadgeModalIfNeeded() {
-    if (_badgeShown) return;
+    if (_badgeShown || !mounted) return;
     final result = ref.read(testProvider).result;
     if (result == null || result.newBadges.isEmpty) return;
 
