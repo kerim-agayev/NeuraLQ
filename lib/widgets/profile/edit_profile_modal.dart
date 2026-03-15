@@ -20,15 +20,15 @@ class EditProfileModal extends ConsumerStatefulWidget {
 }
 
 class _EditProfileModalState extends ConsumerState<EditProfileModal> {
-  late TextEditingController _displayNameController;
+  late TextEditingController _usernameController;
   late TextEditingController _ageController;
   String? _selectedCountryCode;
 
   @override
   void initState() {
     super.initState();
-    _displayNameController = TextEditingController(
-      text: widget.user.displayName ?? widget.user.username,
+    _usernameController = TextEditingController(
+      text: widget.user.username,
     );
     _ageController = TextEditingController(
       text: widget.user.age?.toString() ?? '',
@@ -38,7 +38,7 @@ class _EditProfileModalState extends ConsumerState<EditProfileModal> {
 
   @override
   void dispose() {
-    _displayNameController.dispose();
+    _usernameController.dispose();
     _ageController.dispose();
     super.dispose();
   }
@@ -52,10 +52,10 @@ class _EditProfileModalState extends ConsumerState<EditProfileModal> {
   }
 
   Future<void> _save() async {
-    final name = _displayNameController.text.trim();
+    final name = _usernameController.text.trim();
     if (name.length < 2) {
       Fluttertoast.showToast(
-        msg: 'Display name must be at least 2 characters',
+        msg: 'Username must be at least 2 characters',
         backgroundColor: Colors.red,
         textColor: Colors.white,
       );
@@ -76,7 +76,7 @@ class _EditProfileModalState extends ConsumerState<EditProfileModal> {
     }
 
     await ref.read(authProvider.notifier).updateProfile(
-          displayName: name,
+          username: name,
           country: _selectedCountryCode,
           age: age,
         );
@@ -91,7 +91,8 @@ class _EditProfileModalState extends ConsumerState<EditProfileModal> {
         textColor: Colors.white,
       );
     } else {
-      Navigator.pop(context);
+      await ref.read(authProvider.notifier).refreshUser();
+      if (mounted) Navigator.pop(context);
     }
   }
 
@@ -171,10 +172,10 @@ class _EditProfileModalState extends ConsumerState<EditProfileModal> {
 
             // Display Name
             TextField(
-              controller: _displayNameController,
+              controller: _usernameController,
               style: TextStyle(color: textColor),
               decoration: InputDecoration(
-                labelText: 'profile.displayName'.tr(),
+                labelText: 'auth.username'.tr(),
                 labelStyle: TextStyle(color: textSecondary),
                 filled: true,
                 fillColor: isDark

@@ -167,9 +167,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       return const Center(child: CircularProgressIndicator());
     }
 
-    final displayName = user.displayName ?? user.username;
     final initial =
-        displayName.isNotEmpty ? displayName[0].toUpperCase() : '?';
+        user.username.isNotEmpty ? user.username[0].toUpperCase() : '?';
 
     final currentLang = appLanguages.cast<AppLanguage?>().firstWhere(
           (l) => l!.code == settings.language,
@@ -204,7 +203,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             ),
             const SizedBox(height: 12),
             AutoSizeText(
-              displayName,
+              user.username,
               maxLines: 1,
               minFontSize: 14,
               style: TextStyle(
@@ -213,11 +212,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 color: textColor,
               ),
             ),
-            if (user.displayName != null)
-              Text(
-                '@${user.username}',
-                style: TextStyle(fontSize: 13, color: textSecondary),
-              ),
             Text(
               user.email,
               style: TextStyle(fontSize: 12, color: textSecondary),
