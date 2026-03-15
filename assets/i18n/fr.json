@@ -207,7 +207,8 @@
     "connectionTimeout": "La connexion a expiré. Réessayez.",
     "serverSlow": "Le serveur met trop de temps à répondre. Réessayez.",
     "tooManyRequests": "Trop de requêtes. Veuillez patienter.",
-    "serverDown": "Le serveur est temporairement indisponible. Réessayez plus tard."
+    "serverDown": "Le serveur est temporairement indisponible. Réessayez plus tard.",
+    "sessionExpired": "Session expirée. Veuillez vous reconnecter."
   },
   "history": {
     "notFound": "Résultat introuvable"

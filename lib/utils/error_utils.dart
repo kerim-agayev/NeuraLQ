@@ -22,6 +22,8 @@ String extractDioError(DioException e) {
   final statusCode = e.response?.statusCode;
   if (statusCode != null) {
     switch (statusCode) {
+      case 401:
+        return 'errors.sessionExpired'.tr();
       case 429:
         return 'errors.tooManyRequests'.tr();
       case 500:

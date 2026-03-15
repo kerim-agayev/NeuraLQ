@@ -207,7 +207,8 @@
     "connectionTimeout": "连接超时。请重试。",
     "serverSlow": "服务器响应过慢。请重试。",
     "tooManyRequests": "请求过于频繁。请稍候再试。",
-    "serverDown": "服务器暂时不可用。请稍后再试。"
+    "serverDown": "服务器暂时不可用。请稍后再试。",
+    "sessionExpired": "会话已过期，请重新登录。"
   },
   "history": {
     "notFound": "未找到结果"

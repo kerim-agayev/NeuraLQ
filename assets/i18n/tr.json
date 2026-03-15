@@ -207,7 +207,8 @@
     "connectionTimeout": "Bağlantı zaman aşımına uğradı. Tekrar deneyin.",
     "serverSlow": "Sunucu çok yavaş yanıt veriyor. Tekrar deneyin.",
     "tooManyRequests": "Çok fazla istek gönderildi. Lütfen biraz bekleyin.",
-    "serverDown": "Sunucu geçici olarak kullanılamıyor. Daha sonra deneyin."
+    "serverDown": "Sunucu geçici olarak kullanılamıyor. Daha sonra deneyin.",
+    "sessionExpired": "Oturum süresi doldu. Lütfen tekrar giriş yapın."
   },
   "history": {
     "notFound": "Sonuç bulunamadı"

@@ -207,7 +207,8 @@
     "connectionTimeout": "Verbindungszeitüberschreitung. Versuchen Sie es erneut.",
     "serverSlow": "Server antwortet zu langsam. Versuchen Sie es erneut.",
     "tooManyRequests": "Zu viele Anfragen. Bitte warten Sie einen Moment.",
-    "serverDown": "Server vorübergehend nicht verfügbar. Versuchen Sie es später."
+    "serverDown": "Server vorübergehend nicht verfügbar. Versuchen Sie es später.",
+    "sessionExpired": "Sitzung abgelaufen. Bitte erneut anmelden."
   },
   "history": {
     "notFound": "Ergebnis nicht gefunden"

@@ -207,7 +207,8 @@
     "connectionTimeout": "Koneksi habis waktu. Silakan coba lagi.",
     "serverSlow": "Server merespons terlalu lambat. Silakan coba lagi.",
     "tooManyRequests": "Terlalu banyak permintaan. Harap tunggu sebentar.",
-    "serverDown": "Server sedang tidak tersedia. Coba lagi nanti."
+    "serverDown": "Server sedang tidak tersedia. Coba lagi nanti.",
+    "sessionExpired": "Sesi berakhir. Silakan masuk kembali."
   },
   "history": {
     "notFound": "Hasil tidak ditemukan"

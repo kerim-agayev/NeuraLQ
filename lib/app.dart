@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'config/router.dart';
 import 'config/theme.dart';
+import 'providers/auth_provider.dart';
 import 'providers/settings_provider.dart';
 
 class NeuralQApp extends ConsumerStatefulWidget {
@@ -12,14 +13,33 @@ class NeuralQApp extends ConsumerStatefulWidget {
   ConsumerState<NeuralQApp> createState() => _NeuralQAppState();
 }
 
-class _NeuralQAppState extends ConsumerState<NeuralQApp> {
+class _NeuralQAppState extends ConsumerState<NeuralQApp>
+    with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     // Load settings on app start
     Future.microtask(() {
       ref.read(settingsProvider.notifier).loadSettings();
     });
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      // User came back to app — silently refresh token + wake up backend
+      final auth = ref.read(authProvider);
+      if (auth.user != null) {
+        ref.read(authProvider.notifier).refreshUser();
+      }
+    }
   }
 
   @override

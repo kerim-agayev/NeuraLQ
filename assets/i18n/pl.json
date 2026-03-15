@@ -207,7 +207,8 @@
     "connectionTimeout": "Przekroczono limit czasu połączenia. Spróbuj ponownie.",
     "serverSlow": "Serwer odpowiada zbyt wolno. Spróbuj ponownie.",
     "tooManyRequests": "Zbyt wiele żądań. Poczekaj chwilę.",
-    "serverDown": "Serwer tymczasowo niedostępny. Spróbuj później."
+    "serverDown": "Serwer tymczasowo niedostępny. Spróbuj później.",
+    "sessionExpired": "Sesja wygasła. Zaloguj się ponownie."
   },
   "history": {
     "notFound": "Nie znaleziono wyniku"

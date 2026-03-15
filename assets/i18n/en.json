@@ -207,7 +207,8 @@
     "connectionTimeout": "Connection timed out. Please try again.",
     "serverSlow": "Server is taking too long to respond. Please try again.",
     "tooManyRequests": "Too many requests. Please wait a moment.",
-    "serverDown": "Server is temporarily unavailable. Please try later."
+    "serverDown": "Server is temporarily unavailable. Please try later.",
+    "sessionExpired": "Session expired. Please log in again."
   },
   "history": {
     "notFound": "Result not found"

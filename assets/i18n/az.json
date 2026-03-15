@@ -207,7 +207,8 @@
     "connectionTimeout": "Bağlantı vaxtı bitdi. Yenidən cəhd edin.",
     "serverSlow": "Server çox yavaş cavab verir. Yenidən cəhd edin.",
     "tooManyRequests": "Həddən artıq sorğu. Bir az gözləyin.",
-    "serverDown": "Server müvəqqəti olaraq əlçatmazdır. Sonra yenidən cəhd edin."
+    "serverDown": "Server müvəqqəti olaraq əlçatmazdır. Sonra yenidən cəhd edin.",
+    "sessionExpired": "Sessiya müddəti bitdi. Zəhmət olmasa yenidən daxil olun."
   },
   "history": {
     "notFound": "Nəticə tapılmadı"

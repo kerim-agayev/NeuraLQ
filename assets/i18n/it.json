@@ -207,7 +207,8 @@
     "connectionTimeout": "Connessione scaduta. Riprova.",
     "serverSlow": "Il server risponde troppo lentamente. Riprova.",
     "tooManyRequests": "Troppe richieste. Attendi un momento.",
-    "serverDown": "Server temporaneamente non disponibile. Riprova più tardi."
+    "serverDown": "Server temporaneamente non disponibile. Riprova più tardi.",
+    "sessionExpired": "Sessione scaduta. Effettua nuovamente l'accesso."
   },
   "history": {
     "notFound": "Risultato non trovato"
