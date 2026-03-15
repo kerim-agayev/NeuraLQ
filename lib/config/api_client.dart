@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'constants.dart';
 
@@ -36,7 +37,13 @@ class ApiClient {
             }
 
             try {
-              final res = await Dio().post(
+              // Use longer timeout for refresh — Render cold start can take 60s
+              final refreshDio = Dio(BaseOptions(
+                connectTimeout: const Duration(seconds: 90),
+                receiveTimeout: const Duration(seconds: 90),
+              ));
+
+              final res = await refreshDio.post(
                 '$apiBaseUrl/auth/refresh',
                 data: {'refreshToken': refreshToken},
               );
@@ -60,9 +67,20 @@ class ApiClient {
                   'Bearer $newAccessToken';
               final retryResponse = await _dio.fetch(error.requestOptions);
               return handler.resolve(retryResponse);
-            } catch (_) {
-              await _storage.delete(key: storageKeyAccessToken);
-              await _storage.delete(key: storageKeyRefreshToken);
+            } on DioException catch (e) {
+              // Network/timeout error — backend might be cold starting
+              // DON'T delete tokens, just fail this request
+              if (e.response?.statusCode == 401 ||
+                  e.response?.statusCode == 403) {
+                // Refresh token is invalid/expired → clear tokens (real logout)
+                await _storage.delete(key: storageKeyAccessToken);
+                await _storage.delete(key: storageKeyRefreshToken);
+              }
+              debugPrint('Token refresh failed: ${e.type}');
+              return handler.reject(error);
+            } catch (e) {
+              // Parsing error — don't delete tokens either
+              debugPrint('Token refresh parse error: $e');
               return handler.reject(error);
             }
           }
