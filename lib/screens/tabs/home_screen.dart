@@ -145,7 +145,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
             // Welcome message
             AutoSizeText(
-              'home.welcome'.tr(args: [user?.username ?? 'Explorer']),
+              'home.welcome'.tr(args: [user?.displayName ?? user?.username ?? 'Explorer']),
               maxLines: 1,
               minFontSize: 13,
               style: TextStyle(

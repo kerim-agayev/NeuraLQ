@@ -20,15 +20,15 @@ class EditProfileModal extends ConsumerStatefulWidget {
 }
 
 class _EditProfileModalState extends ConsumerState<EditProfileModal> {
-  late TextEditingController _usernameController;
+  late TextEditingController _displayNameController;
   late TextEditingController _ageController;
   String? _selectedCountryCode;
 
   @override
   void initState() {
     super.initState();
-    _usernameController = TextEditingController(
-      text: widget.user.username,
+    _displayNameController = TextEditingController(
+      text: widget.user.displayName ?? widget.user.username,
     );
     _ageController = TextEditingController(
       text: widget.user.age?.toString() ?? '',
@@ -38,7 +38,7 @@ class _EditProfileModalState extends ConsumerState<EditProfileModal> {
 
   @override
   void dispose() {
-    _usernameController.dispose();
+    _displayNameController.dispose();
     _ageController.dispose();
     super.dispose();
   }
@@ -52,10 +52,10 @@ class _EditProfileModalState extends ConsumerState<EditProfileModal> {
   }
 
   Future<void> _save() async {
-    final name = _usernameController.text.trim();
+    final name = _displayNameController.text.trim();
     if (name.length < 2) {
       Fluttertoast.showToast(
-        msg: 'Username must be at least 2 characters',
+        msg: 'Name must be at least 2 characters',
         backgroundColor: Colors.red,
         textColor: Colors.white,
       );
@@ -76,7 +76,7 @@ class _EditProfileModalState extends ConsumerState<EditProfileModal> {
     }
 
     await ref.read(authProvider.notifier).updateProfile(
-          username: name,
+          displayName: name,
           country: _selectedCountryCode,
           age: age,
         );
@@ -172,10 +172,10 @@ class _EditProfileModalState extends ConsumerState<EditProfileModal> {
 
             // Display Name
             TextField(
-              controller: _usernameController,
+              controller: _displayNameController,
               style: TextStyle(color: textColor),
               decoration: InputDecoration(
-                labelText: 'auth.username'.tr(),
+                labelText: 'profile.displayName'.tr(),
                 labelStyle: TextStyle(color: textSecondary),
                 filled: true,
                 fillColor: isDark

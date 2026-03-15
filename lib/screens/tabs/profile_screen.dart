@@ -167,8 +167,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       return const Center(child: CircularProgressIndicator());
     }
 
+    final profileName = user.displayName ?? user.username;
     final initial =
-        user.username.isNotEmpty ? user.username[0].toUpperCase() : '?';
+        profileName.isNotEmpty ? profileName[0].toUpperCase() : '?';
 
     final currentLang = appLanguages.cast<AppLanguage?>().firstWhere(
           (l) => l!.code == settings.language,
@@ -203,7 +204,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             ),
             const SizedBox(height: 12),
             AutoSizeText(
-              user.username,
+              profileName,
               maxLines: 1,
               minFontSize: 14,
               style: TextStyle(
