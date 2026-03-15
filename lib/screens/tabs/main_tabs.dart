@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../config/theme.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/daily_provider.dart';
+import '../../providers/leaderboard_provider.dart';
 import 'home_screen.dart';
 import 'leaderboard_screen.dart';
 import 'profile_screen.dart';
@@ -32,6 +33,15 @@ class _MainTabsState extends ConsumerState<MainTabs> {
       // Home tab — refresh user + daily status
       ref.read(authProvider.notifier).refreshUser();
       ref.read(dailyProvider.notifier).loadToday();
+    } else if (index == 1) {
+      // Ranks tab — refresh leaderboard data
+      final notifier = ref.read(leaderboardProvider.notifier);
+      notifier.loadGlobal();
+      notifier.loadUserRank();
+      final user = ref.read(authProvider).user;
+      if (user?.country != null) {
+        notifier.loadCountry(user!.country!);
+      }
     }
   }
 

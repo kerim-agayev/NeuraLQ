@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../config/theme.dart';
 import '../../providers/auth_provider.dart';
+import '../../providers/leaderboard_provider.dart';
 import '../../providers/test_provider.dart';
 import '../../widgets/ui/badge_unlock_modal.dart';
 import '../../widgets/results/iq_reveal.dart';
@@ -45,6 +46,14 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
   void _goHome() {
     ref.read(testProvider.notifier).reset();
     ref.read(authProvider.notifier).refreshUser();
+    // Refresh leaderboard so new score appears immediately
+    final lbNotifier = ref.read(leaderboardProvider.notifier);
+    lbNotifier.loadGlobal();
+    lbNotifier.loadUserRank();
+    final user = ref.read(authProvider).user;
+    if (user?.country != null) {
+      lbNotifier.loadCountry(user!.country!);
+    }
     context.go('/home');
   }
 
