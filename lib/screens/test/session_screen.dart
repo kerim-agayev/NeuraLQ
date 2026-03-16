@@ -14,6 +14,7 @@ import '../../widgets/test/progress_indicator_bar.dart';
 import '../../widgets/test/question_options.dart';
 import '../../widgets/test/timer_bar.dart';
 import '../../widgets/ui/brain_loader.dart';
+import '../../widgets/ui/skeleton_loader.dart';
 
 class SessionScreen extends ConsumerStatefulWidget {
   const SessionScreen({super.key});
@@ -36,6 +37,20 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
     _startTimer();
   }
 
+  void _precacheNextImage() {
+    final test = ref.read(testProvider);
+    final nextIndex = test.currentIndex + 1;
+    if (test.session != null && nextIndex < test.totalQuestions) {
+      final nextQ = test.session!.questions[nextIndex];
+      if (nextQ.imageUrl != null) {
+        precacheImage(
+          CachedNetworkImageProvider(nextQ.imageUrl!),
+          context,
+        );
+      }
+    }
+  }
+
   void _startTimer() {
     final question = ref.read(testProvider).currentQuestion;
     if (question == null) return;
@@ -43,6 +58,7 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
     _timeLimit = question.timeLimit;
     _elapsedMs = 0;
     _timer?.cancel();
+    _precacheNextImage();
     _timer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
       if (!mounted) {
         timer.cancel();
@@ -333,6 +349,13 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
                             child: CachedNetworkImage(
                               imageUrl: question.imageUrl!,
                               fit: BoxFit.contain,
+                              placeholder: (_, _) => SizedBox(
+                                height: 200,
+                                child: SkeletonLoader(
+                                  height: 200,
+                                  borderRadius: 12,
+                                ),
+                              ),
                               errorWidget: (_, _, _) => const SizedBox(
                                 height: 100,
                                 child: Center(
