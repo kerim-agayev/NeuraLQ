@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../config/theme.dart';
-import '../../constants/languages.dart';
-import '../../providers/settings_provider.dart';
 import '../../services/storage_service.dart';
 import '../../widgets/ui/neon_button.dart';
 
@@ -19,7 +17,6 @@ class OnboardingScreen extends ConsumerStatefulWidget {
 class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
-  String _selectedLanguage = 'en';
 
   List<_OnboardingSlide> get _slides => [
     _OnboardingSlide(
@@ -33,7 +30,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       description: 'onboarding.slide2Desc'.tr(),
     ),
     _OnboardingSlide(
-      emoji: '\u{1F310}',
+      emoji: '\u{1F680}',
       title: 'onboarding.slide3Title'.tr(),
       description: 'onboarding.slide3Desc'.tr(),
     ),
@@ -53,16 +50,8 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   }
 
   Future<void> _getStarted() async {
-    // Save language & onboarding status
-    await ref.read(settingsProvider.notifier).setLanguage(_selectedLanguage);
     await StorageService.setOnboardingDone(true);
-
     if (!mounted) return;
-
-    // Update app locale
-    final locale = Locale(_selectedLanguage);
-    context.setLocale(locale);
-
     context.go('/login');
   }
 
@@ -96,7 +85,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 itemCount: _slides.length,
                 itemBuilder: (context, index) {
                   final slide = _slides[index];
-                  final isLanguagePage = index == 2;
+                  final isLastPage = index == 2;
 
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 32),
@@ -135,10 +124,10 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                           ),
                         ),
 
-                        // Language grid on last slide
-                        if (isLanguagePage) ...[
-                          const SizedBox(height: 32),
-                          _buildLanguageGrid(
+                        // Feature highlights on last slide
+                        if (isLastPage) ...[
+                          const SizedBox(height: 36),
+                          _buildFeatureHighlights(
                             primaryColor,
                             textColor,
                             isDark,
@@ -210,71 +199,50 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     );
   }
 
-  Widget _buildLanguageGrid(
+  Widget _buildFeatureHighlights(
     Color primaryColor,
     Color textColor,
     bool isDark,
   ) {
-    return Expanded(
-      child: GridView.builder(
-        shrinkWrap: true,
-        padding: const EdgeInsets.only(top: 8),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 4,
-          childAspectRatio: 0.95,
-          crossAxisSpacing: 8,
-          mainAxisSpacing: 8,
-        ),
-        itemCount: appLanguages.length,
-        itemBuilder: (context, index) {
-          final lang = appLanguages[index];
-          final isSelected = _selectedLanguage == lang.code;
+    final features = [
+      _Feature('\u{1F9EA}', 'onboarding.feature1'.tr()),
+      _Feature('\u{1F3C6}', 'onboarding.feature2'.tr()),
+      _Feature('\u{1F4CA}', 'onboarding.feature3'.tr()),
+      _Feature('\u{26A1}', 'onboarding.feature4'.tr()),
+    ];
 
-          return GestureDetector(
-            onTap: () => setState(() => _selectedLanguage = lang.code),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: isSelected
-                    ? primaryColor.withValues(alpha: 0.2)
-                    : isDark
-                        ? CyberpunkColors.surface
-                        : CleanColors.surfaceLight,
-                border: Border.all(
-                  color: isSelected
-                      ? primaryColor
-                      : isDark
-                          ? CyberpunkColors.border
-                          : CleanColors.border,
-                  width: isSelected ? 2 : 1,
+    return Column(
+      children: features.map((f) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 6),
+          child: Row(
+            children: [
+              Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: primaryColor.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Center(
+                  child: Text(f.emoji, style: const TextStyle(fontSize: 22)),
                 ),
               ),
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 6),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(lang.flag, style: const TextStyle(fontSize: 20)),
-                      const SizedBox(height: 2),
-                      Text(
-                        lang.code.toUpperCase(),
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontWeight:
-                              isSelected ? FontWeight.bold : FontWeight.normal,
-                          color: isSelected ? primaryColor : textColor,
-                        ),
-                      ),
-                    ],
+              const SizedBox(width: 14),
+              Expanded(
+                child: Text(
+                  f.label,
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: textColor,
                   ),
                 ),
               ),
-            ),
-          );
-        },
-      ),
+            ],
+          ),
+        );
+      }).toList(),
     );
   }
 }
@@ -289,4 +257,11 @@ class _OnboardingSlide {
     required this.title,
     required this.description,
   });
+}
+
+class _Feature {
+  final String emoji;
+  final String label;
+
+  const _Feature(this.emoji, this.label);
 }

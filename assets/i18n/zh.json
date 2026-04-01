@@ -42,9 +42,13 @@
     "slide1Desc": "参加科学设计的测试，发掘您的认知潜力",
     "slide2Title": "全球竞技",
     "slide2Desc": "在全球数百万人中排名，向朋友发起挑战",
-    "slide3Title": "选择语言",
-    "slide3Desc": "选择您偏好的语言以开始使用",
-    "getStarted": "开始"
+    "slide3Title": "准备好了吗？",
+    "slide3Desc": "创建账户，探索你真正的认知潜力",
+    "getStarted": "开始",
+    "feature1": "科学设计的测试",
+    "feature2": "全球排名与排行榜",
+    "feature3": "详细的认知分析",
+    "feature4": "每日挑战"
   },
   "home": {
     "welcome": "欢迎回来，{}",

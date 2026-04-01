@@ -42,9 +42,13 @@
     "slide1Desc": "과학적으로 설계된 테스트로 인지 잠재력을 확인하세요",
     "slide2Title": "전 세계와 경쟁하세요",
     "slide2Desc": "전 세계 수백만 명과 순위를 겨루고 친구에게 도전하세요",
-    "slide3Title": "언어를 선택하세요",
-    "slide3Desc": "원하는 언어를 선택하고 시작하세요",
-    "getStarted": "시작하기"
+    "slide3Title": "시작할 준비가 되셨나요?",
+    "slide3Desc": "계정을 만들고 진정한 인지 잠재력을 발견하세요",
+    "getStarted": "시작하기",
+    "feature1": "과학적으로 설계된 테스트",
+    "feature2": "글로벌 랭킹 및 리더보드",
+    "feature3": "상세한 인지 분석",
+    "feature4": "일일 챌린지"
   },
   "home": {
     "welcome": "다시 오신 걸 환영합니다, {}",

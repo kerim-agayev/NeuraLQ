@@ -42,9 +42,13 @@
     "slide1Desc": "Rozwiąż naukowo zaprojektowany test i odkryj swój potencjał poznawczy",
     "slide2Title": "Rywalizuj globalnie",
     "slide2Desc": "Zajmuj pozycje wśród milionów ludzi na całym świecie i wyzywaj znajomych",
-    "slide3Title": "Wybierz język",
-    "slide3Desc": "Wybierz preferowany język, aby rozpocząć",
-    "getStarted": "Rozpocznij"
+    "slide3Title": "Gotowy, aby zacząć?",
+    "slide3Desc": "Utwórz konto i odkryj swój prawdziwy potencjał poznawczy",
+    "getStarted": "Rozpocznij",
+    "feature1": "Naukowo zaprojektowane testy",
+    "feature2": "Globalne rankingi i tabele wyników",
+    "feature3": "Szczegółowa analiza poznawcza",
+    "feature4": "Codzienne wyzwania"
   },
   "home": {
     "welcome": "Witaj ponownie, {}",

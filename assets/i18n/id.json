@@ -42,9 +42,13 @@
     "slide1Desc": "Ikuti tes yang dirancang secara ilmiah dan ungkap potensi kognitif Anda",
     "slide2Title": "Bersaing secara global",
     "slide2Desc": "Raih peringkat di antara jutaan orang di seluruh dunia dan tantang teman Anda",
-    "slide3Title": "Pilih bahasa Anda",
-    "slide3Desc": "Pilih bahasa yang Anda inginkan untuk memulai",
-    "getStarted": "Mulai"
+    "slide3Title": "Siap untuk memulai?",
+    "slide3Desc": "Buat akun dan temukan potensi kognitif sejatimu",
+    "getStarted": "Mulai",
+    "feature1": "Tes yang dirancang secara ilmiah",
+    "feature2": "Peringkat dan papan skor global",
+    "feature3": "Analisis kognitif terperinci",
+    "feature4": "Tantangan harian"
   },
   "home": {
     "welcome": "Selamat datang kembali, {}",

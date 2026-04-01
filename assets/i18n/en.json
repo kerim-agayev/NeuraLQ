@@ -37,9 +37,13 @@
     "slide1Desc": "Take a scientifically designed test and uncover your cognitive potential",
     "slide2Title": "Compete Globally",
     "slide2Desc": "Rank among millions worldwide and challenge your friends",
-    "slide3Title": "Choose Your Language",
-    "slide3Desc": "Select your preferred language to get started",
-    "getStarted": "Get Started"
+    "slide3Title": "Ready to Begin?",
+    "slide3Desc": "Create your account and discover your true cognitive potential",
+    "getStarted": "Get Started",
+    "feature1": "Scientifically designed tests",
+    "feature2": "Global rankings & leaderboards",
+    "feature3": "Detailed cognitive analysis",
+    "feature4": "Daily challenges"
   },
   "nav": {
     "home": "Home",

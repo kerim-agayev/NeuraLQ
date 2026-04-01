@@ -42,9 +42,13 @@
     "slide1Desc": "Realiza un test diseñado científicamente y descubre tu potencial cognitivo",
     "slide2Title": "Compite a nivel global",
     "slide2Desc": "Clasifícate entre millones en todo el mundo y desafía a tus amigos",
-    "slide3Title": "Elige tu idioma",
-    "slide3Desc": "Selecciona tu idioma preferido para comenzar",
-    "getStarted": "Comenzar"
+    "slide3Title": "¿Listo para empezar?",
+    "slide3Desc": "Crea tu cuenta y descubre tu verdadero potencial cognitivo",
+    "getStarted": "Comenzar",
+    "feature1": "Tests diseñados científicamente",
+    "feature2": "Rankings y clasificaciones globales",
+    "feature3": "Análisis cognitivo detallado",
+    "feature4": "Desafíos diarios"
   },
   "home": {
     "welcome": "Bienvenido de nuevo, {}",

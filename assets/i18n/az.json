@@ -42,9 +42,13 @@
     "slide1Desc": "Elmi əsaslarla hazırlanmış test verin və koqnitiv potensialınızı üzə çıxarın",
     "slide2Title": "Qlobal Yarışın",
     "slide2Desc": "Dünya üzrə milyonlarla insan arasında sıralanın və dostlarınıza meydan oxuyun",
-    "slide3Title": "Dilinizi Seçin",
-    "slide3Desc": "Başlamaq üçün tercih etdiyiniz dili seçin",
-    "getStarted": "Başla"
+    "slide3Title": "Başlamağa hazırsan?",
+    "slide3Desc": "Hesabını yarat və əsl koqnitiv potensialını kəşf et",
+    "getStarted": "Başla",
+    "feature1": "Elmi əsaslarla hazırlanmış testlər",
+    "feature2": "Qlobal reytinqlər və lider cədvəli",
+    "feature3": "Ətraflı koqnitiv təhlil",
+    "feature4": "Gündəlik çağırışlar"
   },
   "home": {
     "welcome": "Xoş gəldiniz, {}",

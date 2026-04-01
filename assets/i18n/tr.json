@@ -42,9 +42,13 @@
     "slide1Desc": "Bilimsel olarak tasarlanmış bir test yapın ve bilişsel potansiyelinizi ortaya çıkarın",
     "slide2Title": "Küresel Yarışın",
     "slide2Desc": "Dünya genelinde milyonlarca kişi arasında sıralanın ve arkadaşlarınıza meydan okuyun",
-    "slide3Title": "Dilinizi Seçin",
-    "slide3Desc": "Başlamak için tercih ettiğiniz dili seçin",
-    "getStarted": "Başla"
+    "slide3Title": "Başlamaya Hazır mısın?",
+    "slide3Desc": "Hesabını oluştur ve gerçek bilişsel potansiyelini keşfet",
+    "getStarted": "Başla",
+    "feature1": "Bilimsel olarak tasarlanmış testler",
+    "feature2": "Küresel sıralamalar ve liderlik tablosu",
+    "feature3": "Detaylı bilişsel analiz",
+    "feature4": "Günlük meydan okumalar"
   },
   "home": {
     "welcome": "Tekrar hoş geldin, {}",

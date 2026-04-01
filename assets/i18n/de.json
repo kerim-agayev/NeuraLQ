@@ -42,9 +42,13 @@
     "slide1Desc": "Machen Sie einen wissenschaftlich gestalteten Test und entdecken Sie Ihr kognitives Potenzial",
     "slide2Title": "Weltweit konkurrieren",
     "slide2Desc": "Messen Sie sich mit Millionen weltweit und fordern Sie Ihre Freunde heraus",
-    "slide3Title": "Wählen Sie Ihre Sprache",
-    "slide3Desc": "Wählen Sie Ihre bevorzugte Sprache, um zu beginnen",
-    "getStarted": "Loslegen"
+    "slide3Title": "Bereit anzufangen?",
+    "slide3Desc": "Erstelle dein Konto und entdecke dein kognitives Potenzial",
+    "getStarted": "Loslegen",
+    "feature1": "Wissenschaftlich konzipierte Tests",
+    "feature2": "Globale Ranglisten & Bestenlisten",
+    "feature3": "Detaillierte kognitive Analyse",
+    "feature4": "Tägliche Herausforderungen"
   },
   "home": {
     "welcome": "Willkommen zurück, {}",
