@@ -1,8 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../config/theme.dart';
 import '../../models/question.dart';
+import '../ui/network_image.dart';
 
 class QuestionOptions extends StatelessWidget {
   final List<QuestionOption> options;
@@ -189,8 +189,8 @@ class QuestionOptions extends StatelessWidget {
                     borderRadius: const BorderRadius.vertical(
                         top: Radius.circular(11)),
                     child: option.imageUrl != null
-                        ? CachedNetworkImage(
-                            imageUrl: option.imageUrl!,
+                        ? networkImage(
+                            option.imageUrl!,
                             fit: BoxFit.contain,
                             width: double.infinity,
                             errorWidget: (_, _, _) => Center(

@@ -14,6 +14,7 @@ import '../../widgets/test/progress_indicator_bar.dart';
 import '../../widgets/test/question_options.dart';
 import '../../widgets/test/timer_bar.dart';
 import '../../widgets/ui/brain_loader.dart';
+import '../../widgets/ui/network_image.dart';
 import '../../widgets/ui/skeleton_loader.dart';
 
 class SessionScreen extends ConsumerStatefulWidget {
@@ -42,7 +43,7 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
     final nextIndex = test.currentIndex + 1;
     if (test.session != null && nextIndex < test.totalQuestions) {
       final nextQ = test.session!.questions[nextIndex];
-      if (nextQ.imageUrl != null) {
+      if (nextQ.imageUrl != null && !isSvgUrl(nextQ.imageUrl!)) {
         precacheImage(
           CachedNetworkImageProvider(nextQ.imageUrl!),
           context,
@@ -346,8 +347,8 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(12),
-                            child: CachedNetworkImage(
-                              imageUrl: question.imageUrl!,
+                            child: networkImage(
+                              question.imageUrl!,
                               fit: BoxFit.contain,
                               placeholder: (_, _) => SizedBox(
                                 height: 200,

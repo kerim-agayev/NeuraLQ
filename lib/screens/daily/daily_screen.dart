@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart' hide Badge;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,6 +11,7 @@ import '../../widgets/test/question_options.dart';
 import '../../widgets/test/timer_bar.dart';
 import '../../widgets/ui/badge_unlock_modal.dart';
 import '../../widgets/ui/brain_loader.dart';
+import '../../widgets/ui/network_image.dart';
 
 class DailyScreen extends ConsumerStatefulWidget {
   const DailyScreen({super.key});
@@ -363,8 +363,8 @@ class _DailyScreenState extends ConsumerState<DailyScreen> {
                   const SizedBox(height: 16),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12),
-                    child: CachedNetworkImage(
-                      imageUrl: question.imageUrl!,
+                    child: networkImage(
+                      question.imageUrl!,
                       fit: BoxFit.contain,
                       errorWidget: (_, _, _) => SizedBox(
                         height: 100,
