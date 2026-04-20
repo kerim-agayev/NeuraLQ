@@ -1,4 +1,4 @@
-const String apiBaseUrl = 'https://neuralq-api.onrender.com/api';
+const String apiBaseUrl = 'https://api-iq.mycustomcursor.com/api';
 const Duration apiTimeout = Duration(seconds: 60);
 const String googleWebClientId =
     '790107378278-eoa9v5o8biuffc7ks4i5dge305v86nho.apps.googleusercontent.com';
