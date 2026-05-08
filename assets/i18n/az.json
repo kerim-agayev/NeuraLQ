@@ -173,7 +173,8 @@
     "noTests": "Hələ test yoxdur",
     "noDailyStats": "Hələ gündəlik statistika yoxdur",
     "selectLanguage": "Dil Seçin",
-    "searchLanguage": "Dil axtar..."
+    "searchLanguage": "Dil axtar...",
+    "privacyPolicy": "Məxfilik Siyasəti"
   },
   "badges": {
     "title": "Nişanlar",

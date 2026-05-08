@@ -173,7 +173,8 @@
     "noTests": "Henüz test yok",
     "noDailyStats": "Henüz günlük istatistik yok",
     "selectLanguage": "Dil Seçin",
-    "searchLanguage": "Dil ara..."
+    "searchLanguage": "Dil ara...",
+    "privacyPolicy": "Gizlilik Politikası"
   },
   "badges": {
     "title": "Rozetler",

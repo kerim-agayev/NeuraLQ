@@ -173,7 +173,8 @@
     "noTests": "Тестов пока нет",
     "noDailyStats": "Ежедневная статистика пока отсутствует",
     "selectLanguage": "Выберите язык",
-    "searchLanguage": "Поиск языка..."
+    "searchLanguage": "Поиск языка...",
+    "privacyPolicy": "Политика конфиденциальности"
   },
   "badges": {
     "title": "Значки",

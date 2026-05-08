@@ -173,7 +173,8 @@
     "noTests": "아직 테스트가 없습니다",
     "noDailyStats": "아직 일일 통계가 없습니다",
     "selectLanguage": "언어 선택",
-    "searchLanguage": "언어 검색..."
+    "searchLanguage": "언어 검색...",
+    "privacyPolicy": "개인정보처리방침"
   },
   "badges": {
     "title": "배지",

@@ -173,7 +173,8 @@
     "noTests": "لا توجد اختبارات بعد",
     "noDailyStats": "لا توجد إحصائيات يومية بعد",
     "selectLanguage": "اختر اللغة",
-    "searchLanguage": "البحث عن لغة..."
+    "searchLanguage": "البحث عن لغة...",
+    "privacyPolicy": "سياسة الخصوصية"
   },
   "badges": {
     "title": "الشارات",

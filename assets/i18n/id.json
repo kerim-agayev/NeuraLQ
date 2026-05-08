@@ -173,7 +173,8 @@
     "noTests": "Belum ada tes",
     "noDailyStats": "Belum ada statistik harian",
     "selectLanguage": "Pilih bahasa",
-    "searchLanguage": "Cari bahasa..."
+    "searchLanguage": "Cari bahasa...",
+    "privacyPolicy": "Kebijakan Privasi"
   },
   "badges": {
     "title": "Lencana",

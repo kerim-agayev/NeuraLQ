@@ -173,7 +173,8 @@
     "noTests": "Aucun test encore",
     "noDailyStats": "Aucune statistique quotidienne",
     "selectLanguage": "Sélectionner la langue",
-    "searchLanguage": "Rechercher une langue..."
+    "searchLanguage": "Rechercher une langue...",
+    "privacyPolicy": "Politique de Confidentialité"
   },
   "badges": {
     "title": "Badges",

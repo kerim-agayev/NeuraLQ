@@ -4,6 +4,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../../config/constants.dart';
 import '../../config/theme.dart';
 import '../../constants/celebrities.dart';
 import '../../constants/countries.dart';
@@ -388,6 +390,31 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                         selectedCode: settings.language,
                       ),
                     ),
+                  ),
+                  Divider(color: borderColor, height: 1),
+
+                  // Privacy Policy
+                  _SettingsTile(
+                    leading: Icon(Icons.privacy_tip_outlined, color: textSecondary),
+                    title: 'profile.privacyPolicy'.tr(),
+                    titleColor: textColor,
+                    trailing: Icon(Icons.open_in_new_rounded, color: textSecondary, size: 18),
+                    borderColor: borderColor,
+                    onTap: () async {
+                      final uri = Uri.parse(privacyPolicyUrl);
+                      if (await canLaunchUrl(uri)) {
+                        await launchUrl(uri, mode: LaunchMode.externalApplication);
+                      }
+                    },
+                  ),
+                  Divider(color: borderColor, height: 1),
+
+                  // App version
+                  _SettingsTile(
+                    leading: Icon(Icons.info_outline_rounded, color: textSecondary),
+                    title: 'v$appVersion',
+                    titleColor: textSecondary,
+                    borderColor: borderColor,
                   ),
                   Divider(color: borderColor, height: 1),
 

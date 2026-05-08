@@ -173,7 +173,8 @@
     "noTests": "まだテストがありません",
     "noDailyStats": "まだデイリー統計がありません",
     "selectLanguage": "言語を選択",
-    "searchLanguage": "言語を検索..."
+    "searchLanguage": "言語を検索...",
+    "privacyPolicy": "プライバシーポリシー"
   },
   "badges": {
     "title": "バッジ",

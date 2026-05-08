@@ -173,7 +173,8 @@
     "noTests": "暂无测试",
     "noDailyStats": "暂无每日统计",
     "selectLanguage": "选择语言",
-    "searchLanguage": "搜索语言..."
+    "searchLanguage": "搜索语言...",
+    "privacyPolicy": "隐私政策"
   },
   "badges": {
     "title": "徽章",

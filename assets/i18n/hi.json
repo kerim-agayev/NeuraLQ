@@ -173,7 +173,8 @@
     "noTests": "अभी तक कोई टेस्ट नहीं",
     "noDailyStats": "अभी तक कोई दैनिक आंकड़े नहीं",
     "selectLanguage": "भाषा चुनें",
-    "searchLanguage": "भाषा खोजें..."
+    "searchLanguage": "भाषा खोजें...",
+    "privacyPolicy": "गोपनीयता नीति"
   },
   "badges": {
     "title": "बैज",
