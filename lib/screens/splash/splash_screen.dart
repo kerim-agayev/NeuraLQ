@@ -18,6 +18,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _fadeController;
   late Animation<double> _fadeAnimation;
+  bool _navigated = false;
 
   @override
   void initState() {
@@ -32,7 +33,28 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
     );
     _fadeController.forward();
 
+    // Hard safety net: even if _bootstrap() somehow fails to navigate
+    // (compounded timeouts, unhandled error, framework hiccup) this guarantees
+    // the splash leaves after 10s. Per-step timeouts below sum to ≤9s, so
+    // the normal flow always wins; this only fires if something pathological
+    // happens.
+    Future.delayed(const Duration(seconds: 10), _safetyNavigate);
+
     _bootstrap();
+  }
+
+  void _safetyNavigate() {
+    if (!mounted || _navigated) return;
+    debugPrint('Splash safety timer firing — forcing navigation');
+    final auth = ref.read(authProvider);
+    _navigateTo(auth.isAuthenticated ? '/home' : '/onboarding');
+  }
+
+  void _navigateTo(String route) {
+    if (!mounted || _navigated) return;
+    _navigated = true;
+    debugPrint('Splash navigating to $route');
+    context.go(route);
   }
 
   Future<void> _bootstrap() async {
@@ -46,7 +68,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
       await ref
           .read(settingsProvider.notifier)
           .loadSettings()
-          .timeout(const Duration(seconds: 5), onTimeout: () {});
+          .timeout(const Duration(seconds: 3), onTimeout: () {});
     } catch (e) {
       debugPrint('Splash loadSettings failed: $e');
     }
@@ -57,7 +79,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
         ref
             .read(authProvider.notifier)
             .loadUser()
-            .timeout(const Duration(seconds: 5), onTimeout: () => false),
+            .timeout(const Duration(seconds: 4), onTimeout: () => false),
       ]);
       isLoggedIn = results[1];
     } catch (e) {
@@ -67,18 +89,16 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
     if (!isLoggedIn) {
       try {
         onboardingDone = await StorageService.isOnboardingDone()
-            .timeout(const Duration(seconds: 3), onTimeout: () => false);
+            .timeout(const Duration(seconds: 2), onTimeout: () => false);
       } catch (e) {
         debugPrint('Splash onboarding check failed: $e');
       }
     }
 
-    if (!mounted) return;
-
     if (isLoggedIn) {
-      context.go('/home');
+      _navigateTo('/home');
     } else {
-      context.go(onboardingDone ? '/login' : '/onboarding');
+      _navigateTo(onboardingDone ? '/login' : '/onboarding');
     }
   }
 

@@ -48,12 +48,23 @@ class SettingsNotifier extends StateNotifier<SettingsState> {
       if (stored != null) {
         language = stored;
       } else {
-        // First launch: sync stored preference with the device locale so the
-        // profile UI and IQ-test API requests match what easy_localization picks.
-        final deviceCode =
-            WidgetsBinding.instance.platformDispatcher.locale.languageCode;
-        language =
-            _supportedLanguageCodes.contains(deviceCode) ? deviceCode : 'en';
+        // First launch: walk the device's preferred locale list (in priority
+        // order) and pick the first one we support. Iterating `locales`
+        // (plural) is more reliable than `locale` (single) — on some devices
+        // the singular value can be the framework default before the OS has
+        // reported its actual preference.
+        final locales = WidgetsBinding.instance.platformDispatcher.locales;
+        String? detected;
+        for (final locale in locales) {
+          if (_supportedLanguageCodes.contains(locale.languageCode)) {
+            detected = locale.languageCode;
+            break;
+          }
+        }
+        language = detected ?? 'en';
+        debugPrint(
+          'Settings first-launch: detected language=$language from $locales',
+        );
         await StorageService.setLanguage(language);
       }
       state = SettingsState(
@@ -61,7 +72,8 @@ class SettingsNotifier extends StateNotifier<SettingsState> {
         language: language,
         isLoaded: true,
       );
-    } catch (_) {
+    } catch (e) {
+      debugPrint('loadSettings failed: $e');
       state = state.copyWith(isLoaded: true);
     }
   }
