@@ -51,9 +51,9 @@ class StorageService {
     await prefs.setString(storageKeyLanguage, language);
   }
 
-  static Future<String> getLanguage() async {
+  static Future<String?> getLanguage() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString(storageKeyLanguage) ?? 'en';
+    return prefs.getString(storageKeyLanguage);
   }
 
   // ── Test Backup ──

@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../services/storage_service.dart';
 
+const _supportedLanguageCodes = {
+  'en', 'tr', 'de', 'fr', 'es', 'it', 'pt', 'ru',
+  'ar', 'zh', 'ja', 'ko', 'hi', 'az', 'pl', 'id',
+};
+
 // ── State ──
 class SettingsState {
   final String themeMode; // 'cyberpunk' | 'clean'
@@ -38,7 +43,19 @@ class SettingsNotifier extends StateNotifier<SettingsState> {
   Future<void> loadSettings() async {
     try {
       final theme = await StorageService.getThemePreference();
-      final language = await StorageService.getLanguage();
+      final stored = await StorageService.getLanguage();
+      final String language;
+      if (stored != null) {
+        language = stored;
+      } else {
+        // First launch: sync stored preference with the device locale so the
+        // profile UI and IQ-test API requests match what easy_localization picks.
+        final deviceCode =
+            WidgetsBinding.instance.platformDispatcher.locale.languageCode;
+        language =
+            _supportedLanguageCodes.contains(deviceCode) ? deviceCode : 'en';
+        await StorageService.setLanguage(language);
+      }
       state = SettingsState(
         themeMode: theme,
         language: language,

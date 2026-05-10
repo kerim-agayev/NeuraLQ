@@ -36,24 +36,48 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
   }
 
   Future<void> _bootstrap() async {
-    // Load settings first
-    await ref.read(settingsProvider.notifier).loadSettings();
+    // Defensive bootstrap: any hang or thrown error must not block navigation.
+    // Secure storage / network calls on a fresh Play Store install can stall —
+    // wrap each step with a timeout and treat failures as logged-out.
+    bool isLoggedIn = false;
+    bool onboardingDone = false;
 
-    // Run minimum delay and auth check in parallel
-    final results = await Future.wait([
-      Future.delayed(const Duration(milliseconds: 1500), () => true),
-      ref.read(authProvider.notifier).loadUser(),
-    ]);
+    try {
+      await ref
+          .read(settingsProvider.notifier)
+          .loadSettings()
+          .timeout(const Duration(seconds: 5), onTimeout: () {});
+    } catch (e) {
+      debugPrint('Splash loadSettings failed: $e');
+    }
+
+    try {
+      final results = await Future.wait([
+        Future<bool>.delayed(const Duration(milliseconds: 1500), () => true),
+        ref
+            .read(authProvider.notifier)
+            .loadUser()
+            .timeout(const Duration(seconds: 5), onTimeout: () => false),
+      ]);
+      isLoggedIn = results[1];
+    } catch (e) {
+      debugPrint('Splash auth check failed: $e');
+    }
+
+    if (!isLoggedIn) {
+      try {
+        onboardingDone = await StorageService.isOnboardingDone()
+            .timeout(const Duration(seconds: 3), onTimeout: () => false);
+      } catch (e) {
+        debugPrint('Splash onboarding check failed: $e');
+      }
+    }
 
     if (!mounted) return;
-
-    final isLoggedIn = results[1];
 
     if (isLoggedIn) {
       context.go('/home');
     } else {
-      final onboardingDone = await StorageService.isOnboardingDone();
-      if (!mounted) return;
       context.go(onboardingDone ? '/login' : '/onboarding');
     }
   }
