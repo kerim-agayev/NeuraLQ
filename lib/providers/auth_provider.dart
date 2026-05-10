@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../config/constants.dart';
@@ -144,13 +147,21 @@ class AuthNotifier extends StateNotifier<AuthState> {
   Future<void> googleAuth() async {
     state = state.copyWith(isLoading: true, clearError: true);
     try {
-      final account = await _googleSignIn.signIn();
+      // signIn() opens the Google account picker. On a fresh Play-signed
+      // install it can hang indefinitely while Play Services initialises —
+      // 45s is generous enough for a real user (account picker + selection)
+      // but bounded so the UI never freezes forever.
+      final account = await _googleSignIn.signIn().timeout(
+        const Duration(seconds: 45),
+      );
       if (account == null) {
         state = state.copyWith(isLoading: false);
         return;
       }
 
-      final googleAuth = await account.authentication;
+      final googleAuth = await account.authentication.timeout(
+        const Duration(seconds: 15),
+      );
       final idToken = googleAuth.idToken;
       if (idToken == null) {
         state = state.copyWith(
@@ -167,12 +178,25 @@ class AuthNotifier extends StateNotifier<AuthState> {
         isAuthenticated: true,
         isLoading: false,
       );
+    } on TimeoutException {
+      // Try to clear any stuck state in the SDK so the next tap starts fresh.
+      // Without this, the corrupt state often persists and the user has to
+      // clear app data to retry.
+      try {
+        await _googleSignIn.signOut().timeout(const Duration(seconds: 3));
+      } catch (_) {}
+      debugPrint('Google sign-in timed out');
+      state = state.copyWith(
+        isLoading: false,
+        error: 'Sign-in timed out. Please try again.',
+      );
     } on DioException catch (e) {
       state = state.copyWith(
         isLoading: false,
         error: extractDioError(e),
       );
     } catch (e) {
+      debugPrint('Google sign-in failed: $e');
       state = state.copyWith(
         isLoading: false,
         error: 'Google sign-in failed',
@@ -236,8 +260,19 @@ class AuthNotifier extends StateNotifier<AuthState> {
   }
 
   Future<void> _saveTokens(AuthResponse auth) async {
-    await StorageService.saveAccessToken(auth.accessToken);
-    await StorageService.saveRefreshToken(auth.refreshToken);
+    // FlutterSecureStorage's first write on a fresh install can stall while
+    // the Android Keystore platform channel initialises. Bound it so the
+    // login flow can't hang on persistence — if it times out, the caller's
+    // outer catch block will surface an error and keep the UI responsive.
+    await Future.wait([
+      StorageService.saveAccessToken(auth.accessToken),
+      StorageService.saveRefreshToken(auth.refreshToken),
+    ]).timeout(
+      const Duration(seconds: 10),
+      onTimeout: () {
+        throw TimeoutException('Failed to save credentials');
+      },
+    );
   }
 
 
