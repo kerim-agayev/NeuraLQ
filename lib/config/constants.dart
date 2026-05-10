@@ -1,7 +1,7 @@
 const String apiBaseUrl = 'https://api-iq.mycustomcursor.com/api';
 const Duration apiTimeout = Duration(seconds: 60);
 const String privacyPolicyUrl = 'https://api-iq.mycustomcursor.com/privacy';
-const String appVersion = '1.0.4';
+const String appVersion = '1.0.5';
 const String googleWebClientId =
     '790107378278-eoa9v5o8biuffc7ks4i5dge305v86nho.apps.googleusercontent.com';
 
