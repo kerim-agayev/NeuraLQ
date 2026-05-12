@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "715960921563",
+    "project_id": "neuralq-da04a",
+    "storage_bucket": "neuralq-da04a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:715960921563:android:65efa854d8ff8c515b8bfe",
+        "android_client_info": {
+          "package_name": "com.tapylabs.neuralq"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAM6caTDcUyFEYJ7b-PYHJ-fx0cHLmqRQk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
